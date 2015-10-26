@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/g1">
+
+        <item
+            android:icon="@drawable/ic_home_black_18dp"
+            android:title="@string/home"
+            android:id="@+id/item1">
+        </item>
+
+
+        <item
+            android:icon="@drawable/ic_people_black_18dp"
+            android:title="@string/member_heading"
+            android:id="@+id/item2">
+
+        </item>
+        <item
+            android:icon="@drawable/ic_account_box_black_18dp"
+            android:title="@string/staff_heading"
+            android:id="@+id/item3">
+
+        </item>
+
+        <item
+            android:icon="@drawable/ic_receipt_black_18dp"
+            android:title="@string/bills_heading"
+            android:id="@+id/item4">
+        </item>
+        <item
+            android:icon="@drawable/ic_account_balance_black_18dp"
+            android:title="@string/balance_heading"
+            android:id="@+id/item5">
+
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/g3">
+        <item
+            android:icon="@drawable/ic_help_black_18dp"
+            android:title="@string/help_heading"
+            android:id="@+id/item6">
+
+        </item>
+        <item
+            android:icon="@drawable/ic_developer_mode_black_18dp"
+            android:title="@string/about_heading"
+            android:id="@+id/item7">
+
+        </item>
+    </group>
+</menu>

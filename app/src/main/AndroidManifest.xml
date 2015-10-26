@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.login" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".first_page"
+            android:label="@string/title_activity_first_page" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"
+                    />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Signup"
+            android:label="Sign Up" >
+        </activity>
+        <activity
+            android:name=".homepage"
+            android:label="@string/title_activity_homepage" >
+        </activity>
+        <activity
+            android:name=".Members"
+            android:label="@string/title_activity_members" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Bills"
+            android:label="@string/title_activity_bills" >
+        </activity>
+        <activity
+            android:name=".Staff"
+            android:label="@string/title_activity_staff" >
+        </activity>
+        <activity
+            android:name=".Balance"
+            android:label="@string/title_activity_balance" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".Help"
+            android:label="@string/title_activity_help" >
+        </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name=".CreateMember"
+            android:label="@string/title_activity_create_member"
+            android:parentActivityName=".Members" >
+        </activity>
+        <activity
+            android:name=".CreateStaff"
+            android:label="@string/title_activity_create_staff" >
+        </activity>
+        <activity
+            android:name=".CreateBill"
+            android:label="@string/title_activity_create_bill" >
+        </activity>
+    </application>
+
+</manifest>
