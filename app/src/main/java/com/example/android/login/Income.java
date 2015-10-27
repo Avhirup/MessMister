@@ -5,15 +5,8 @@ import java.util.Set;
 /**
  * Created by medha on 27/10/15.
  */
-public class Income {
 
-
-
-
-    /**
-     *
-     */
-
+    public class Income {
 
 
         public Income() {
@@ -101,4 +94,3 @@ public class Income {
         }
 
     }
-
