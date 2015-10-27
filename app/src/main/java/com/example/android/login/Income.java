@@ -26,6 +26,7 @@ import java.util.Set;
         /**
          * @return
          */
+
         public Integer getIncomeId() {
             // TODO implement here
             return null;
