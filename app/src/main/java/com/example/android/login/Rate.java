@@ -5,12 +5,23 @@ package com.example.android.login;
  */
 public class Rate {
 
-    public Rate() {
-    }
     //Declarations
     private String category;
     private int duration;
     private int rate_id;
+
+
+    //Constructors
+
+    public Rate() {
+        this.category="";
+        duration="";
+    }
+    public Rate(String category,int duration)
+    {
+        this.duration=duration;
+        this.category=category;
+    }
     //Methods
     public String getCategory() {
         return category;
