@@ -62,10 +62,6 @@ public class Owner {
         // TODO implement here
     }
 
-    public void snoozeMember(MessMember member) {
-        // TODO implement here
-    }
-
     public void setSnoozePeriod(Integer period) {
         // TODO implement here
     }
