@@ -66,7 +66,7 @@ public class MessMember {
         }
 
         /**
-         * @return
+         * @return.
          */
         public String getStartDate() {
             // TODO implement here
