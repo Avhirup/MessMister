@@ -11,6 +11,11 @@ public class Expense{
     private int amount;
 
     //Methods
+
+    public int getExpId()
+    {
+        return expense_id;
+    }
     public void setExpName(String name) {
         expense_name=name;
     }
