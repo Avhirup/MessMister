@@ -6,12 +6,11 @@ package com.example.android.login;
 public class Expense{
 
     //Declarations
-    private int expense_id;
+    private static int expense_id;
     private String date;
     private String expense_name;
     private int amount;
     //Constructors
-
     public Expense()
     {
         expense_name="";
@@ -22,6 +21,7 @@ public class Expense{
         this.expense_name=expense_name;
         this.amount=amount;
     }
+
     //Methods
 
     public int getExpId()

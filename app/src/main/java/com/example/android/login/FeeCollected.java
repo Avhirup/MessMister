@@ -15,6 +15,14 @@ public class FeeCollected {
     private float amount;
 
 
+
+
+    public FeeCollected(String fee_name, float amount)
+    {
+        this.fee_name = fee_name;
+        this.amount = amount;
+    }
+
     public int getFeeId()
     {
         return fee_id;

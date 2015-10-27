@@ -33,6 +33,7 @@ public class income {
         /**
          * @return
          */
+
         public Integer getIncomeId() {
             // TODO implement here
             return null;
