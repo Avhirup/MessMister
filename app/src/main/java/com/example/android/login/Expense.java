@@ -7,6 +7,7 @@ public class Expense{
 
     //Declarations
     private int expense_id;
+    private String date;
     private String expense_name;
     private int amount;
     //Constructors
@@ -45,6 +46,15 @@ public class Expense{
 
     public int getAmount() {
         return amount;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
+    public void setDate()
+    {
+
     }
 
 }
