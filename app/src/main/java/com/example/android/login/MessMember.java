@@ -22,7 +22,7 @@ public class MessMember {
         private String start_date;
         private String startof_month;
         private Boolean is_active;
-        private int group_id;
+        private Vector<Integer> group_id;
         private int rate_id;
         private Boolean has_paid;
         private Boolean is_late;
@@ -86,7 +86,7 @@ public class MessMember {
          * @return
          */
         public void setGroup(Vector<Integer> groups) {
-            // TODO implement h
+            // TODO implement
         }
 
         public Vector<Integer> groupsgetGroup() {
