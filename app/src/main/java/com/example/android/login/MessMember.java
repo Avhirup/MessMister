@@ -22,13 +22,30 @@ public class MessMember {
         private String start_date;
         private String startof_month;
         private Boolean is_active;
-        private int group_id;
+        private Vector<Integer>group_id;
         private int rate_id;
         private Boolean has_paid;
         private Boolean is_late;
-        private float due_amount;
+        private int due_amount;
         private String phone;
 
+
+
+
+
+    public MessMember(String name, String start_date,String startof_month, Boolean is_active,Vector<Integer> group_id, int rate_id, Boolean has_paid,Boolean is_late, int due_amount, String phone )
+        {
+                this.name = name;
+                this.start_date = start_date;
+                this.startof_month = startof_month;
+                this.is_active = is_active;
+                this.group_id = group_id;
+                this.rate_id = rate_id;
+                this.has_paid = has_paid;
+                this.is_late = is_late;
+                this.due_amount = due_amount;
+                this.phone = phone;
+        }
 
 
         /**
@@ -143,5 +160,49 @@ public class MessMember {
         {
 
         }
+
+
+        public void setGroup_id(Vector<Integer> group_id)
+
+        {
+            this.group_id = group_id;
+        }
+
+        public void setStart_date(String start_date)
+        {
+            this.start_date = start_date;
+        }
+
+        public void setStartof_month(String startof_month)
+        {
+            this.startof_month = startof_month;
+        }
+
+        public void setIs_active(Boolean is_active)
+        {
+            this.is_active = is_active;
+        }
+
+        public void setHas_paid(Boolean has_paid)
+        {
+            this.has_paid = has_paid;
+        }
+
+        public void setRate_id(int rate_id)
+        {
+            this.rate_id = rate_id;
+        }
+
+        public void setIs_late(Boolean is_late)
+        {
+            this.is_late = is_late;
+        }
+
+        public void setDue_amount(int due_amount)
+        {
+            this.due_amount = due_amount;
+        }
     }
+
+
 

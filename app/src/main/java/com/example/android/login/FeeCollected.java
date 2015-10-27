@@ -14,9 +14,6 @@ public class FeeCollected {
     private String fee_name;
     private float amount;
 
-
-
-
     public FeeCollected(String fee_name, float amount)
     {
         this.fee_name = fee_name;

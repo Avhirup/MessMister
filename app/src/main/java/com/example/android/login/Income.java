@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Created by medha on 27/10/15.
  */
-public class income {
+public class Income {
 
 
 
@@ -13,7 +13,7 @@ public class income {
     /**
      *
      */
-    public class Income {
+
 
 
         public Income() {
@@ -101,4 +101,4 @@ public class income {
         }
 
     }
-}
+
