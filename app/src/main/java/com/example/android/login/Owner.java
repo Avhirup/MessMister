@@ -10,6 +10,11 @@ public class Owner {
     private Income earns;
 
     //Methods
+    public Owner(String owner_name)
+    {
+        this.owner_name=owner_name;
+        Income earns=new Income();
+    }
     public void collectFees(MessMember member) {
         // TODO implement here
     }
@@ -54,10 +59,6 @@ public class Owner {
     }
 
     public void addExpense() {
-        // TODO implement here
-    }
-
-    public void snoozeMember(MessMember member) {
         // TODO implement here
     }
 

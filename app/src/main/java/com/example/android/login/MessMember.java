@@ -89,6 +89,11 @@ public class MessMember {
             // TODO implement h
         }
 
+        public Vector<Integer> groupsgetGroup() {
+        // TODO implement h
+            return  null;
+        }
+
         /**
          * @return
          */
@@ -129,5 +134,14 @@ public class MessMember {
             return member_id;
         }
 
+        public String getPhone()
+        {
+            return phone;
+        }
+
+        public void setPhone(String phone)
+        {
+
+        }
     }
 

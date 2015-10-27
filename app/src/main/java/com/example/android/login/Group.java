@@ -7,13 +7,22 @@ package com.example.android.login;
 //hello
 public class Group {
 
-    public Group() {
-    }
     //Declarations
     private int group_id;
     private String group_name;
     //Method Implementation
 
+    //Constructor
+    public Group() {
+        this.group_name="";
+    }
+
+    public Group(String group_name)
+    {
+        this.group_name=group_name;
+    }
+
+    //getters & setters
     public int getGroupID() {
         return group_id;
     }

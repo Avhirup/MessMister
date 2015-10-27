@@ -5,12 +5,24 @@ package com.example.android.login;
  */
 public class Rate {
 
-    public Rate() {
-    }
     //Declarations
     private String category;
-    private int duration;
+    private int amount;
     private int rate_id;
+
+
+    //Constructors
+
+    public Rate() {
+        this.category="";
+        amount=0;
+    }
+    public Rate(String category,int duration)
+    {
+        this.amount=duration;
+        this.category=category;
+    }
+
     //Methods
     public String getCategory() {
         return category;
@@ -20,30 +32,16 @@ public class Rate {
         this.category=category;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setDuration(int duration) {
-        this.duration=duration;
+    public void setAmount(int amount) {
+        this.amount=amount;
     }
 
-    public int getRate() {
+    public int getRateid()
+    {
         return rate_id;
-    }
-
-    /**
-     * @param rate
-     */
-    public void setRate(int rate) {
-        // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public Integer getRateId() {
-        // TODO implement here
-        return null;
     }
 }

@@ -7,8 +7,20 @@ public class Expense{
 
     //Declarations
     private static int expense_id;
+    private String date;
     private String expense_name;
     private int amount;
+    //Constructors
+    public Expense()
+    {
+        expense_name="";
+        amount=0;
+    }
+    public Expense(String expense_name,int amount)
+    {
+        this.expense_name=expense_name;
+        this.amount=amount;
+    }
 
     //Methods
 
@@ -34,6 +46,15 @@ public class Expense{
 
     public int getAmount() {
         return amount;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
+    public void setDate()
+    {
+
     }
 
 }
