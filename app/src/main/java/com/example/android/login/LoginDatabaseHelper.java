@@ -12,23 +12,27 @@ import android.util.Log;
 public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
 
-    private static final String TABLE_MessMember = "MessMember";
-    public static final String MessMember_member_id= "member_id";
-    public static final String MessMember_name = "name";
-    public static final String MessMember_start_date = "start_date";
-    public static final String MessMember_startof_month = "startof_month";
-    public static final String MessMember_is_active = "is_active";
-    public static final String MessMember_rate_id = "rate_id";
-    public static final String MessMember_due_amt = "due_amt";
-    public static final String MessMember_has_paid = "has_paid";
-    public static final String MessMember_is_late = "is_late";
-    public static final String MessMember_phone = "phone";
+    public final String TABLE_MessMember = "MessMember";
+    public final String MessMember_member_id= "member_id";
+    public final String MessMember_name = "name";
+    public final String MessMember_start_date = "start_date";
+    public final String MessMember_startof_month = "startof_month";
+    public final String MessMember_is_active = "is_active";
+    public final String MessMember_rate_id = "rate_id";
+    public final String MessMember_due_amt = "due_amt";
+    public final String MessMember_has_paid = "has_paid";
+    public final String MessMember_is_late = "is_late";
+    public final String MessMember_phone = "phone";
 
 
-    public static final String TABLE_Rate = "Rate";
-    public static final String Rate_rate_id = "rate_id";
-    public static final String Rate_category = "category";
-    public static final String Rate_amount = "amount";
+    public final String TABLE_Rate = "Rate";
+    public final String Rate_rate_id = "rate_id";
+    public final String Rate_category = "category";
+    public final String Rate_amount = "amount";
+
+    public final String TABLE_Group = "Group";
+    public final String Group_groupid = "group_id";
+    public final String Group_groupName = "group_name";
 
 
 
@@ -52,10 +56,17 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ( " +
                 Rate_rate_id + " INTEGER primary key AUTOINCREMENT, " +
                 Rate_category + " TEXT, " +
-                Rate_amount + " REAL " +
+                Rate_amount + " INTEGER " +
                 " ); ";
 
         db.execSQL(query1);
+
+        String query3 = " create table " + TABLE_Group +
+                " ( " +
+                Group_groupid + " INTEGER primary key AUTOINCREMENT, "+
+                Group_groupName + " TEXT  " +
+                " ); ";
+        db.execSQL(query3);
 
         String query2 = " create table " +  TABLE_MessMember +
                 " ( " +
@@ -65,7 +76,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 MessMember_startof_month + " INTEGER, " +
                 MessMember_is_active + " INTEGER, " +
                 MessMember_rate_id + " INTEGER, " +
-                MessMember_due_amt + " REAL, " +
+                MessMember_due_amt + " INTEGER, " +
                 MessMember_has_paid + " INTEGER, " +
                 MessMember_is_late + " INTEGER, " +
                 MessMember_phone + " Text, " +

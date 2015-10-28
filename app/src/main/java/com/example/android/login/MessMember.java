@@ -21,7 +21,7 @@ public class MessMember {
         private int rate_id;
         private Boolean has_paid;
         private Boolean is_late;
-        private float due_amount;
+        private int due_amount;
         private String phone;
 
         public String getStart_date() {
@@ -88,11 +88,11 @@ public class MessMember {
                 this.is_late = is_late;
         }
 
-        public float getDue_amount() {
+        public int getDue_amount() {
                 return due_amount;
         }
 
-        public void setDue_amount(float due_amount) {
+        public void setDue_amount(int due_amount) {
                 this.due_amount = due_amount;
         }
 
