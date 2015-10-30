@@ -34,6 +34,21 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Group_groupid = "group_id";
     public final String Group_groupName = "group_name";
 
+    public final String TABLE_Expense= "Expense";
+    public final String Expense_expense_id= "expense_id";
+    public final String Expense_expense_name ="expense_name";
+    public final String Expense_amount= "amount";
+
+    public final String TABLE_Income= "Income";
+    public final String Income_income_id="income_id";
+    public final String Income_month="month";
+    public final String Income_year="year";
+    public final String Income_expense="expenses";
+    public final String Income_amountlost="amountlost";
+    public final String Income_amountearned="amountearned";
+    public final String Income_profit="profit";
+
+    public final String TABLE_Expense
 
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -84,6 +99,28 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ); ";
 
         db.execSQL(query2);
+
+        String query5="create table "+ TABLE_Expense +" ( "+
+                Expense_expense_id + " INTEGER primary key AUTOINCREMENT, "+
+                Expense_expense_name + " TEXT not null, " +
+                Expense_amount + "INTEGER ,"+
+                ");";
+
+        db.execSQL(query5);
+
+
+        String query4=" create table "+ TABLE_Income +" ( "+
+                Income_income_id + " INTEGER primary key AUTOINCREMENT, "+
+                Income_month + " INTEGER, "+
+                Income_year + " INTEGER, "+
+                Income_amountearned +" INTEGER, "+
+                Income_amountlost +" INTEGER, "+
+                " )";
+
+        db.execSQL(query4);
+
+        String query6=
+
 
 
 
