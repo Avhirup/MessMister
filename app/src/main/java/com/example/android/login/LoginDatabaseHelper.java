@@ -43,13 +43,12 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Income_income_id="income_id";
     public final String Income_month="month";
     public final String Income_year="year";
-    public final String Income_expense="expenses";
     public final String Income_amountlost="amountlost";
     public final String Income_amountearned="amountearned";
-    public final String Income_profit="profit";
 
-    public final String TABLE_Expense
-
+    public final String TABLE_Expense_Income ="ExpenseIncome";
+    public final String Expense_Income_expense_id= "expense_id";
+    public final String Expense_Income_income_id= "income_id";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -119,8 +118,13 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(query4);
 
-        String query6=
+        String query6=" create table "+ TABLE_Expense_Income+ " ( "+
+                Expense_Income_expense_id + " INTEGER "+
+                Expense_Income_income_id + " INTEGER "+
+                " foreign key " + "(" +  Expense_expense_id  + ")" + " references " + TABLE_Expense +" , "+
+                " foreign key " + "(" +  Expense_Income_income_id  + ")" + " references " + TABLE_Income + " );";
 
+        db.execSQL(query6);
 
 
 
