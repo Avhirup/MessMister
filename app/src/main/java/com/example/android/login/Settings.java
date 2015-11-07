@@ -32,6 +32,7 @@ public class Settings extends AppCompatActivity {
     GroupDatabase groupDatabase;
     RateDataBase rateDataBase;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

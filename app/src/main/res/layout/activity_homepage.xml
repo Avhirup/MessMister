@@ -80,7 +80,8 @@
                     android:layout_height="wrap_content"
                     fab:fab_colorNormal="@color/accentPink"
                     fab:fab_title="Add Member fee   "
-                    fab:fab_colorPressed="@color/pink_pressed"/>
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    android:onClick="addFee"/>
 
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>

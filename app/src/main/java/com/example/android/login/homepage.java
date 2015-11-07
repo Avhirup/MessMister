@@ -1,13 +1,16 @@
 package com.example.android.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +21,16 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     ActionBarDrawerToggle drawerToggle;
     NavigationView navigationView;
     private int selectionId;
+    AlertDialog.Builder alert;
+    LayoutInflater factory;
+    com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        factory = LayoutInflater.from(this);
+        alert = new AlertDialog.Builder(this);
         toolbar = (Toolbar)findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
         d = (DrawerLayout) findViewById(R.id.d_lay);
@@ -120,5 +128,26 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             d.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
+    }
+
+    public void addFee(View view)
+    {
+        floatingActionsMenu = (com.getbase.floatingactionbutton.FloatingActionsMenu)findViewById(R.id.multiple_actions);
+        floatingActionsMenu.toggle();
+        final View textEntryView = factory.inflate(R.layout.edittext3, null);
+        alert.setView(textEntryView);
+        alert.setTitle("Add New Member Fee");
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
     }
 }
