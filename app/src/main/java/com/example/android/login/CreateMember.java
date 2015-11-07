@@ -1,6 +1,7 @@
 package com.example.android.login;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,8 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +42,7 @@ public class CreateMember extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        setRateSpinner();
 
     }
 
@@ -123,5 +127,27 @@ public class CreateMember extends AppCompatActivity {
             return null;
         }
     }
+
+
+    public  void setRateSpinner()
+    {
+        ArrayList<String> my_array = new ArrayList<String>();
+        my_array = getTableValues();
+        Spinner My_spinner = (Spinner) findViewById(R.id.rate_spinner);
+        ArrayAdapter my_Adapter = new ArrayAdapter(this, R.layout.rate_spinner_row,
+                my_array);
+        My_spinner.setAdapter(my_Adapter);
+
+    }
+
+
+    public ArrayList<String> getTableValues() {
+
+        ArrayList<String> my_array = new ArrayList<String>();
+        my_array.add("rate1");
+        my_array.add("rate2");
+        return my_array;
+    }
+
 }
 

@@ -155,11 +155,11 @@
                 android:layout_column="1" />
 
             <Spinner
+                android:id="@+id/rate_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:minWidth="120dp"
-                android:entries="@array/genderItems"
                 android:spinnerMode="dropdown"
                 android:layout_column="2"
                 android:layout_marginRight="32dp"
