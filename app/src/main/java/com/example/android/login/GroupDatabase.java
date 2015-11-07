@@ -18,7 +18,7 @@ public class GroupDatabase extends LoginDatabaseHelper {
         db = this.getWritableDatabase();
     }
 
-    public  void add(Group group)
+    public  void add(MemberGroup group)
     {
         ContentValues values = new ContentValues();
         values.put(this.Group_groupName, group.getGroupName());
@@ -39,7 +39,7 @@ public class GroupDatabase extends LoginDatabaseHelper {
         return  check;
     }
 
-    public boolean edit(Group group)
+    public boolean edit(MemberGroup group)
     {
 
         boolean check;

@@ -1,15 +1,9 @@
 package com.example.android.login;
 
-import android.database.Cursor;
-
-import java.util.Vector;
-
 /**
- * Created by avhirup on 10/27/2015.
+ * Created by manjush on 08-11-2015.
  */
-
-//hello
-public class Group {
+public class MemberGroup {
 
     //Declarations
     private int group_id;
@@ -17,12 +11,12 @@ public class Group {
     //Method Implementation
 
     //Constructor
-    public Group() {
-        this.group_name="";
+    public MemberGroup() {
+        //this.group_name="";
 
     }
 
-    public Group(String group_name)
+    public MemberGroup(String group_name)
     {
         this.group_name=group_name;
     }
@@ -38,6 +32,12 @@ public class Group {
 
     public void setGroupName(String group_name){
         this.group_name=group_name;
+    }
+
+
+
+    public void setGroup_id(int group_id) {
+        this.group_id = group_id;
     }
 
 }

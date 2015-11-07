@@ -12,6 +12,8 @@ import android.util.Log;
 public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
 
+
+
     public final static String TABLE_MessMember = "MessMember";
     public final String MessMember_member_id= "member_id";
     public final String MessMember_name = "name";
@@ -30,9 +32,10 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Rate_category = "category";
     public final String Rate_amount = "amount";
 
-    public final static String TABLE_Group = "Group";
+    public final static String TABLE_Group = "MemberGroup";
     public final String Group_groupid = "group_id";
     public final String Group_groupName = "group_name";
+
 
     public final static String TABLE_Expense= "Expense";
     public final String Expense_expense_id= "expense_id";
@@ -69,7 +72,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table login(_id integer primary key autoincrement, " +
                 "name text, password text);");
 
-
+        Log.e("helper", "Create rate called");
         String query1 = " create table " + TABLE_Rate +
                 " ( " +
                 Rate_rate_id + " INTEGER primary key AUTOINCREMENT, " +
@@ -78,15 +81,15 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ); ";
 
         db.execSQL(query1);
-        /*
+      Log.e("helper", "Create group called");
         String query3 = " create table " + TABLE_Group +
                 " ( " +
-                Group_groupid + " INTEGER primary key AUTOINCREMENT, "+
+                Group_groupid + " INTEGER primary key AUTOINCREMENT, " +
                 Group_groupName + " TEXT  " +
                 " ); ";
         db.execSQL(query3);
-        */
-        db.execSQL("create table Group ( group_id integer primary key AUTOINCREMENT, group_name text);");
+        Log.e("helper", "Create member called");
+        //db.execSQL("create table Group ( group_id integer primary key AUTOINCREMENT, group_name text);");
         String query2 = " create table " +  TABLE_MessMember +
                 " ( " +
                 MessMember_member_id + " INTEGER primary key AUTOINCREMENT, " +

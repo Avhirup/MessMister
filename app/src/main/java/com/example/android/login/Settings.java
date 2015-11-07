@@ -77,7 +77,7 @@ public class Settings extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         groupDatabase=new GroupDatabase(getBaseContext());
                         String group_name=input.toString();
-                        Group group=new Group(group_name);
+                        MemberGroup group=new MemberGroup(group_name);
                         groupDatabase.add(group);
                     }
                 });
