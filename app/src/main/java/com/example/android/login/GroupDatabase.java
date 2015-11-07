@@ -2,6 +2,7 @@ package com.example.android.login;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -20,9 +21,8 @@ public class GroupDatabase extends LoginDatabaseHelper {
     public  void add(Group group)
     {
         ContentValues values = new ContentValues();
-        values.put(this.Group_groupName,group.getGroupName());
+        values.put(this.Group_groupName, group.getGroupName());
         db.insert(this.TABLE_Group,null,values);
-
     }
 
     public boolean delete(int id)
@@ -57,5 +57,15 @@ public class GroupDatabase extends LoginDatabaseHelper {
             check = false;
         }
         return  check;
+    }
+
+    public Cursor findMembers(String group_name)
+    {
+        String query="select "+MessMember_name+" from "+TABLE_MessMember_Group+" join "+TABLE_MessMember+" join "+TABLE_Group+
+                " where "+TABLE_Group+"."+Group_groupName+" = "+group_name+";";
+
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor;
+
     }
 }

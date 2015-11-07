@@ -17,7 +17,6 @@ public class MessMember {
         private String start_date;
         private String startof_month;
         private Boolean is_active;
-        private Vector<Integer> group_id;
         private int rate_id;
         private Boolean has_paid;
         private Boolean is_late;
@@ -104,13 +103,7 @@ public class MessMember {
                 this.phone = phone;
         }
 
-        public Vector<Integer> getGroup_id() {
-                return group_id;
-        }
 
-        public void setGroup_id(Vector<Integer> group_id) {
-                this.group_id = group_id;
-        }
 
 }
 

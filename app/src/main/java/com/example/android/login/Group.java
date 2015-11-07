@@ -1,5 +1,9 @@
 package com.example.android.login;
 
+import android.database.Cursor;
+
+import java.util.Vector;
+
 /**
  * Created by avhirup on 10/27/2015.
  */
@@ -15,6 +19,7 @@ public class Group {
     //Constructor
     public Group() {
         this.group_name="";
+
     }
 
     public Group(String group_name)
@@ -34,4 +39,5 @@ public class Group {
     public void setGroupName(String group_name){
         this.group_name=group_name;
     }
+
 }

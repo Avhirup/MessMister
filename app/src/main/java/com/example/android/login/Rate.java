@@ -17,9 +17,9 @@ public class Rate {
         this.category="";
         amount=0;
     }
-    public Rate(String category,int duration)
+    public Rate(String category,int amount)
     {
-        this.amount=duration;
+        this.amount=amount;
         this.category=category;
     }
 

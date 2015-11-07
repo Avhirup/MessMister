@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,8 +29,8 @@ public class Settings extends AppCompatActivity {
     ListView listView;
     AlertDialog.Builder alert;
     LayoutInflater factory;
-
-
+    GroupDatabase groupDatabase;
+    RateDataBase rateDataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +74,16 @@ public class Settings extends AppCompatActivity {
                 alert.setTitle("Create New Group");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
+                        groupDatabase=new GroupDatabase(getBaseContext());
+                        String group_name=input.toString();
+                        Group group=new Group(group_name);
+                        groupDatabase.add(group);
                     }
                 });
 
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+
                         dialog.cancel();
                     }
                 });
@@ -91,6 +96,16 @@ public class Settings extends AppCompatActivity {
                 alert.setTitle("Create New Rate");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        AutoCompleteTextView rate_name=(AutoCompleteTextView)findViewById(R.id.rate_name);
+                        AutoCompleteTextView amount=(AutoCompleteTextView)findViewById(R.id.amount);
+
+                        String category=rate_name.getText().toString();
+                        int amnt=Integer.parseInt(amount.getText().toString());
+                        Rate rate=new Rate(category,amnt);
+
+                        rateDataBase=new RateDataBase(getBaseContext());
+                        rateDataBase.add(rate);
+
 
                     }
                 });

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
@@ -27,7 +28,8 @@ public class CreateMember extends AppCompatActivity {
 
     Toolbar toolbar;
     public int year, day, month;
-
+    LoginDatabaseHelper loginDatabaseHelper;
+    static SQLiteDatabase sqLiteDatabase=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class CreateMember extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setRateSpinner();
 
+        loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
+        sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
     }
 
     @Override
@@ -102,7 +106,7 @@ public class CreateMember extends AppCompatActivity {
                     .setMultiChoiceItems(getCursor(), "item", "item", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
+                               //
                         }
                     })
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -124,7 +128,9 @@ public class CreateMember extends AppCompatActivity {
 
         public Cursor getCursor()
         {
-            return null;
+            String query="select * from "+LoginDatabaseHelper.TABLE_Group+" ;";
+            Cursor cursor=sqLiteDatabase.rawQuery(query,null);
+            return cursor;
         }
     }
 
