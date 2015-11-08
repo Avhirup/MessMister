@@ -15,7 +15,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
 
     public final static String TABLE_MessMember = "MessMember";
-    public final String MessMember_member_id= "member_id";
+    public final String MessMember_member_id= "_id";
     public final String MessMember_name = "name";
     public final String MessMember_start_date = "start_date";
     public final String MessMember_startof_month = "startof_month";
@@ -28,34 +28,34 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
 
     public final String TABLE_Rate = "Rate";
-    public final String Rate_rate_id = "rate_id";
+    public final String Rate_rate_id = "_id";
     public final String Rate_category = "category";
     public final String Rate_amount = "amount";
 
     public final static String TABLE_Group = "MemberGroup";
-    public final String Group_groupid = "group_id";
+    public final String Group_groupid = "_id";
     public final String Group_groupName = "group_name";
 
 
     public final static String TABLE_Expense= "Expense";
-    public final String Expense_expense_id= "expense_id";
+    public final String Expense_expense_id= "_id";
     public final String Expense_expense_name ="expense_name";
     public final String Expense_amount= "amount";
 
     public final static String TABLE_Income= "Income";
-    public final String Income_income_id="income_id";
+    public final String Income_income_id="_id";
     public final String Income_month="month";
     public final String Income_year="year";
     public final String Income_amountlost="amountlost";
     public final String Income_amountearned="amountearned";
 
     public final static String TABLE_Expense_Income ="ExpenseIncome";
-    public final String Expense_Income_expense_id= "expense_id";
-    public final String Expense_Income_income_id= "income_id";
+    public final String Expense_Income_expense_id= "_id";
+    public final String Expense_Income_income_id= "_id";
 
     public final static String TABLE_MessMember_Group="MessMemberGroup";
-    public final String MessMember_Group_messmember_id="member_id";
-    public final String MessMember_Group_group_id="group_id";
+    public final String MessMember_Group_messmember_id="_id";
+    public final String MessMember_Group_group_id="_id";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -68,11 +68,11 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         //write your tables here - medha
 
-        Log.e("helper", "onCreate called");
+        //Log.e("helper", "onCreate called");
         db.execSQL("create table login(_id integer primary key autoincrement, " +
                 "name text, password text);");
 
-        Log.e("helper", "Create rate called");
+        //Log.e("helper", "Create rate called");
         String query1 = " create table " + TABLE_Rate +
                 " ( " +
                 Rate_rate_id + " INTEGER primary key AUTOINCREMENT, " +
@@ -81,7 +81,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ); ";
 
         db.execSQL(query1);
-      Log.e("helper", "Create group called");
+      //Log.e("helper", "Create group called");
         String query3 = " create table " + TABLE_Group +
                 " ( " +
                 Group_groupid + " INTEGER primary key AUTOINCREMENT, " +

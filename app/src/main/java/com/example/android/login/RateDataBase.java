@@ -1,28 +1,33 @@
 package com.example.android.login;
 
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by medha on 27/10/15.
  */
-public class RateDataBase extends LoginDatabaseHelper {
+public class RateDataBase {
 
-
+    LoginDatabaseHelper loginDatabaseHelper;
     SQLiteDatabase db;
-    public RateDataBase(Context context) {
-        super(context,null,null,0);
-        db = this.getWritableDatabase();
+
+    public RateDataBase(Context context){
+        loginDatabaseHelper=new LoginDatabaseHelper(context,"LOGIN_DB",null,1);
+        db = loginDatabaseHelper.getWritableDatabase();
     }
 
 
     public void add(Rate rate) {
+        Log.e("helper", "in add");
         ContentValues values = new ContentValues();
-        values.put(this.Rate_category,rate.getCategory());
-        values.put(this.Rate_amount,rate.getAmount());
+        values.put(loginDatabaseHelper.Rate_category,rate.getCategory());
+        values.put(loginDatabaseHelper.Rate_amount,rate.getAmount());
 
-        db.insert(this.TABLE_Rate,null,values);
+        db.insert(loginDatabaseHelper.TABLE_Rate,null,values);
 
     }
 
@@ -30,7 +35,7 @@ public class RateDataBase extends LoginDatabaseHelper {
     public boolean delete(Integer rateId) {
         boolean check;
         try {
-            String query = " delete from" + this.TABLE_Rate + " where " + this.Rate_rate_id+ " = " + rateId ;
+            String query = " delete from" + loginDatabaseHelper.TABLE_Rate + " where " + loginDatabaseHelper.Rate_rate_id+ " = " + rateId ;
             db.execSQL(query);
             check = true;
         }
@@ -44,11 +49,11 @@ public class RateDataBase extends LoginDatabaseHelper {
     public Boolean edit(Rate rate) {
         boolean check;
         try {
-            String query = " update " + this.TABLE_Rate +
+            String query = " update " + loginDatabaseHelper.TABLE_Rate +
                     " set " +
-                    this.Rate_category + " = " + "\"" + rate.getCategory() + "\"," +
-                    this.Rate_amount + " = " +  rate.getAmount()  +
-                    " where " + this.Rate_rate_id + " = " + rate.getRateid() + ";";
+                    loginDatabaseHelper.Rate_category + " = " + "\"" + rate.getCategory() + "\"," +
+                    loginDatabaseHelper.Rate_amount + " = " +  rate.getAmount()  +
+                    " where " + loginDatabaseHelper.Rate_rate_id + " = " + rate.getRateid() + ";";
             db.execSQL(query);
             check = true;
         }
@@ -59,6 +64,20 @@ public class RateDataBase extends LoginDatabaseHelper {
         return  check;
     }
 
+    public Cursor getAmount(String category)
+    {
+        String query="select "+loginDatabaseHelper.Rate_amount+" from "+loginDatabaseHelper.TABLE_Rate+
+                " where "+loginDatabaseHelper.TABLE_Rate+"."+loginDatabaseHelper.Rate_category+" = "+category+";";
 
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor getRateTable()
+    {
+        String query="select * from "+loginDatabaseHelper.TABLE_Rate+" ;";
+        Cursor cursor=db.rawQuery(query,null);
+        return  cursor;
+    }
 
 }

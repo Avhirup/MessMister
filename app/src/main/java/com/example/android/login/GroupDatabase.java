@@ -4,32 +4,35 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by medha on 27/10/15.
  */
-public class GroupDatabase extends LoginDatabaseHelper {
+public class GroupDatabase {
 
-   
+    LoginDatabaseHelper loginDatabaseHelper;
     SQLiteDatabase db;
 
     public GroupDatabase(Context context) {
-        super(context,null,null,0);
-        db = this.getWritableDatabase();
+        loginDatabaseHelper=new LoginDatabaseHelper(context,"LOGIN_DB",null,1);
+        //super(context,null,null,0);
+        db = loginDatabaseHelper.getWritableDatabase();
     }
 
     public  void add(MemberGroup group)
     {
+        Log.e("helper", "In add");
         ContentValues values = new ContentValues();
-        values.put(this.Group_groupName, group.getGroupName());
-        db.insert(this.TABLE_Group,null,values);
+        values.put(loginDatabaseHelper.Group_groupName, group.getGroupName());
+        db.insert(loginDatabaseHelper.TABLE_Group, null, values);
     }
 
     public boolean delete(int id)
     {
         boolean check;
         try {
-            String query = " delete from" + this.TABLE_Group + " where " + this.Group_groupid + " = " + id ;
+            String query = " delete from" + loginDatabaseHelper.TABLE_Group + " where " + loginDatabaseHelper.Group_groupid + " = " + id ;
             db.execSQL(query);
             check = true;
         }
@@ -44,11 +47,11 @@ public class GroupDatabase extends LoginDatabaseHelper {
 
         boolean check;
         try {
-            String query = " update " + this.TABLE_Group +
+            String query = " update " + loginDatabaseHelper.TABLE_Group +
                     " set " +
-                    this.Group_groupName+ " = " + "\"" + group.getGroupName() + "\"" +
+                    loginDatabaseHelper.Group_groupName+ " = " + "\"" + group.getGroupName() + "\"" +
 
-                    " where " + this.Group_groupid + " = " + group.getGroupID() + ";";
+                    " where " + loginDatabaseHelper.Group_groupid + " = " + group.getGroupID() + ";";
             db.execSQL(query);
             check = true;
         }
@@ -61,11 +64,14 @@ public class GroupDatabase extends LoginDatabaseHelper {
 
     public Cursor findMembers(String group_name)
     {
-        String query="select "+MessMember_name+" from "+TABLE_MessMember_Group+" join "+TABLE_MessMember+" join "+TABLE_Group+
-                " where "+TABLE_Group+"."+Group_groupName+" = "+group_name+";";
+        String query="select "+loginDatabaseHelper.MessMember_name+" from "+loginDatabaseHelper.TABLE_MessMember_Group+" join "+loginDatabaseHelper.TABLE_MessMember+" join "
+                +loginDatabaseHelper.TABLE_Group+
+                " where "+loginDatabaseHelper.TABLE_Group+"."+loginDatabaseHelper.Group_groupName+" = "+group_name+";";
 
         Cursor cursor=db.rawQuery(query,null);
         return cursor;
 
     }
+
+
 }

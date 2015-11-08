@@ -9,32 +9,32 @@ import android.util.Log;
 /**
  * Created by medha on 27/10/15.
  */
-public class MemberDatabase extends LoginDatabaseHelper {
+public class MemberDatabase  {
 
-   
+    LoginDatabaseHelper loginDatabaseHelper;
     SQLiteDatabase db;
 
     public MemberDatabase(Context context)
     {
 
-       super(context,null,null,0);
-        db = this.getWritableDatabase();
+        loginDatabaseHelper=new LoginDatabaseHelper(context,"LOGIN_DB",null,1);
+        db = loginDatabaseHelper.getWritableDatabase();
 
     }
 
     public void add(MessMember member) {
         ContentValues value = new ContentValues();
-        value.put(this.MessMember_name,member.getName());
-        value.put(this.MessMember_start_date,member.getStart_date());
-        value.put(this.MessMember_startof_month,member.getStartof_month());
-        value.put(this.MessMember_is_active,member.getIs_active());
-        value.put(this.MessMember_rate_id,member.getRate_id());
-        value.put(this.MessMember_due_amt,member.getDue_amount());
-        value.put(this.MessMember_has_paid,member.getHas_paid());
-        value.put(this.MessMember_is_late,member.getIs_late());
-        value.put(this.MessMember_phone,member.getPhone());
+        value.put(loginDatabaseHelper.MessMember_name,member.getName());
+        value.put(loginDatabaseHelper.MessMember_start_date,member.getStart_date());
+        value.put(loginDatabaseHelper.MessMember_startof_month,member.getStartof_month());
+        value.put(loginDatabaseHelper.MessMember_is_active,member.getIs_active());
+        value.put(loginDatabaseHelper.MessMember_rate_id,member.getRate_id());
+        value.put(loginDatabaseHelper.MessMember_due_amt,member.getDue_amount());
+        value.put(loginDatabaseHelper.MessMember_has_paid,member.getHas_paid());
+        value.put(loginDatabaseHelper.MessMember_is_late,member.getIs_late());
+        value.put(loginDatabaseHelper.MessMember_phone,member.getPhone());
 
-        db.insert(this.TABLE_MessMember,null,value);
+        db.insert(loginDatabaseHelper.TABLE_MessMember,null,value);
 
     }
 
@@ -74,7 +74,7 @@ public class MemberDatabase extends LoginDatabaseHelper {
     {
         boolean check;
         try {
-            String query = " delete from" + this.TABLE_MessMember + " where " + this.MessMember_member_id + " = " + id ;
+            String query = " delete from" + loginDatabaseHelper.TABLE_MessMember + " where " + loginDatabaseHelper.MessMember_member_id + " = " + id ;
             db.execSQL(query);
             check = true;
         }
@@ -88,18 +88,18 @@ public class MemberDatabase extends LoginDatabaseHelper {
     public Boolean edit(MessMember member) {
         boolean check;
         try {
-            String query = " update  " + this.TABLE_MessMember +
+            String query = " update  " + loginDatabaseHelper.TABLE_MessMember +
                     " set " +
-                    this.MessMember_name + " = " + "\"" + member.getName() + "\", " +
-                    this.MessMember_start_date + " = " +  member.getStart_date() + ", " +
-                    this.MessMember_startof_month + " = " + member.getStartof_month() + ", " +
-                    this.MessMember_is_active + " = " +  member.getIs_active() + ", " +
-                    this.MessMember_rate_id + " = " +  member.getRate_id() + ", " +
-                    this.MessMember_due_amt + " = " +  member.getDue_amount() + ", " +
-                    this.MessMember_has_paid + " = " +  member.getHas_paid() + ", " +
-                    this.MessMember_is_late + " = " + member.getIs_late() + ", " +
-                    this.MessMember_phone + " = " + "\"" + member.getPhone() + "\" " +
-                    " where " + this.MessMember_member_id + " = " + member.getMember_id() + ";";
+                    loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\", " +
+                    loginDatabaseHelper.MessMember_start_date + " = " +  member.getStart_date() + ", " +
+                    loginDatabaseHelper.MessMember_startof_month + " = " + member.getStartof_month() + ", " +
+                    loginDatabaseHelper.MessMember_is_active + " = " +  member.getIs_active() + ", " +
+                    loginDatabaseHelper.MessMember_rate_id + " = " +  member.getRate_id() + ", " +
+                    loginDatabaseHelper.MessMember_due_amt + " = " +  member.getDue_amount() + ", " +
+                    loginDatabaseHelper.MessMember_has_paid + " = " +  member.getHas_paid() + ", " +
+                    loginDatabaseHelper.MessMember_is_late + " = " + member.getIs_late() + ", " +
+                    loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\" " +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + member.getMember_id() + ";";
 
                    db.execSQL(query);
                     check = true;
@@ -110,5 +110,8 @@ public class MemberDatabase extends LoginDatabaseHelper {
         }
         return  check;
     }
+
+
+
 
 }

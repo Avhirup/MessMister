@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class CreateMember extends AppCompatActivity {
     public int year, day, month;
     LoginDatabaseHelper loginDatabaseHelper;
     static SQLiteDatabase sqLiteDatabase=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,10 +105,11 @@ public class CreateMember extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
             AlertDialog.Builder builder1 = builder.setTitle("Groups")
-                    .setMultiChoiceItems(getCursor(), "item", "item", new DialogInterface.OnMultiChoiceClickListener() {
+                    .setMultiChoiceItems(getCursor(),"group_name", "group_name", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                //
+
                         }
                     })
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -129,6 +132,7 @@ public class CreateMember extends AppCompatActivity {
         public Cursor getCursor()
         {
             String query="select * from "+LoginDatabaseHelper.TABLE_Group+" ;";
+            Log.e("helper",query);
             Cursor cursor=sqLiteDatabase.rawQuery(query,null);
             return cursor;
         }
@@ -148,10 +152,20 @@ public class CreateMember extends AppCompatActivity {
 
 
     public ArrayList<String> getTableValues() {
+        Log.e("he","in array gettabel");
+        ArrayList<String> my_array = new ArrayList<>();
+        Cursor cursor=new RateDataBase(this).getRateTable();
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
 
-        ArrayList<String> my_array = new ArrayList<String>();
-        my_array.add("rate1");
-        my_array.add("rate2");
+            String rate=cursor.getString(1)+" : "+cursor.getString(2);
+
+            my_array.add(rate);
+            cursor.moveToNext();
+        }
         return my_array;
     }
 

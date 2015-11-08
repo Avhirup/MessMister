@@ -75,9 +75,10 @@ public class Settings extends AppCompatActivity {
                 alert.setTitle("Create New Group");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        groupDatabase=new GroupDatabase(getBaseContext());
-                        String group_name=input.toString();
-                        MemberGroup group=new MemberGroup(group_name);
+                        groupDatabase = new GroupDatabase(getBaseContext());
+                        String group_name = input.getEditText().getText().toString();
+                        Log.e("helper",group_name);
+                        MemberGroup group = new MemberGroup(group_name);
                         groupDatabase.add(group);
                     }
                 });
@@ -97,15 +98,14 @@ public class Settings extends AppCompatActivity {
                 alert.setTitle("Create New Rate");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        AutoCompleteTextView rate_name=(AutoCompleteTextView)findViewById(R.id.rate_name);
-                        AutoCompleteTextView amount=(AutoCompleteTextView)findViewById(R.id.amount);
-
-                        String category=rate_name.getText().toString();
-                        int amnt=Integer.parseInt(amount.getText().toString());
+                        TextInputLayout rate_name=(TextInputLayout)textEntryView.findViewById(R.id.rate_layout_name);
+                        TextInputLayout amount=(TextInputLayout)textEntryView.findViewById(R.id.rate_layout2);
+                        String category=rate_name.getEditText().getText().toString();
+                        int amnt=Integer.parseInt(amount.getEditText().getText().toString());
                         Rate rate=new Rate(category,amnt);
-
                         rateDataBase=new RateDataBase(getBaseContext());
                         rateDataBase.add(rate);
+
 
 
                     }
