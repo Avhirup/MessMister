@@ -50,12 +50,12 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Income_amountearned="amountearned";
 
     public final static String TABLE_Expense_Income ="ExpenseIncome";
-    public final String Expense_Income_expense_id= "_id";
-    public final String Expense_Income_income_id= "_id";
+    public final String Expense_Income_expense_id= "expense_id";
+    public final String Expense_Income_income_id= "income_id";
 
     public final static String TABLE_MessMember_Group="MessMemberGroup";
-    public final String MessMember_Group_messmember_id="_id";
-    public final String MessMember_Group_group_id="_id";
+    public final String MessMember_Group_messmember_id="member_id";
+    public final String MessMember_Group_group_id="group_id";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -128,7 +128,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query4);
 
 
-        String query6=" create table "+ TABLE_Expense_Income+ " ( "+
+       /* String query6=" create table "+ TABLE_Expense_Income+ " ( "+
                 Expense_Income_expense_id + " INTEGER, "+
                 Expense_Income_income_id + " INTEGER, "+
                 " foreign key " + "(" +  Expense_expense_id  + ")" + " references " + TABLE_Expense +" , "+
@@ -136,7 +136,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(query6);
 
-        /*
+        
         String query7=" create table "+TABLE_MessMember_Group+ " ( "+
                 MessMember_Group_messmember_id +" INTEGER, "+
                 MessMember_Group_group_id + "INTEGER, "+
