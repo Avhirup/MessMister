@@ -107,6 +107,7 @@ public class CreateMember extends AppCompatActivity {
             AlertDialog.Builder builder1 = builder.setTitle("Groups")
                     .setMultiChoiceItems(getCursor(),"group_name", "group_name", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
+
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                //
 
@@ -131,9 +132,11 @@ public class CreateMember extends AppCompatActivity {
 
         public Cursor getCursor()
         {
+
             String query="select * from "+LoginDatabaseHelper.TABLE_Group+" ;";
-            Log.e("helper",query);
+
             Cursor cursor=sqLiteDatabase.rawQuery(query,null);
+
             return cursor;
         }
     }
