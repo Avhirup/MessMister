@@ -46,7 +46,7 @@ public class CreateMember extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-        setRateSpinner();
+       // setRateSpinner();
 
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
@@ -67,6 +67,7 @@ public class CreateMember extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_done) {
+            Log.e("kk","jj");
             NavUtils.navigateUpFromSameTask(this);
         }
 
@@ -78,10 +79,7 @@ public class CreateMember extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
+
 
     public void displayDate()
     {
@@ -93,6 +91,12 @@ public class CreateMember extends AppCompatActivity {
     {
         Groupdialog groupdialog = new Groupdialog();
         groupdialog.show(this.getSupportFragmentManager(), "hello");
+    }
+
+    public void addRate(View view)
+    {
+        Ratedialog ratedialog= new Ratedialog();
+        ratedialog.show(this.getSupportFragmentManager(), "hello");
     }
 
 
@@ -141,8 +145,48 @@ public class CreateMember extends AppCompatActivity {
         }
     }
 
+    public static class Ratedialog extends DialogFragment {
+        int pos;
 
-    public  void setRateSpinner()
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // Set the dialog title
+            AlertDialog.Builder builder1 = builder.setTitle("Groups")
+                    .setSingleChoiceItems(getCursor(),pos,"category", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK, so save the mSelectedItems results somewhere
+                            // or return them to the component that opened the dialog
+
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+
+            return builder.create();
+        }
+
+        public Cursor getCursor()
+        {
+            Cursor cursor=new RateDataBase(getContext()).getRateTable();
+            return cursor;
+        }
+    }
+
+
+
+   /* public  void setRateSpinner()
     {
         ArrayList<String> my_array ;
         my_array = getTableValues();
@@ -151,7 +195,7 @@ public class CreateMember extends AppCompatActivity {
                 my_array);
         My_spinner.setAdapter(my_Adapter);
 
-    }
+    }*/
 
 
     public ArrayList<String> getTableValues() {
