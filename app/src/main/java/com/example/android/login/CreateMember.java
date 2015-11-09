@@ -141,7 +141,7 @@ public class CreateMember extends AppCompatActivity {
 
     public  void setRateSpinner()
     {
-        ArrayList<String> my_array = new ArrayList<String>();
+        ArrayList<String> my_array ;
         my_array = getTableValues();
         Spinner My_spinner = (Spinner) findViewById(R.id.rate_spinner);
         ArrayAdapter my_Adapter = new ArrayAdapter(this, R.layout.rate_spinner_row,
@@ -160,9 +160,7 @@ public class CreateMember extends AppCompatActivity {
         cursor.moveToFirst();
         while(!cursor.isAfterLast())
         {
-
             String rate=cursor.getString(1)+" : "+cursor.getString(2);
-
             my_array.add(rate);
             cursor.moveToNext();
         }
