@@ -22,6 +22,7 @@ public class MessMember {
         private Boolean is_late;
         private int due_amount;
         private String phone;
+        private int img_id;
 
         public String getStart_date() {
                 return start_date;
@@ -103,7 +104,12 @@ public class MessMember {
                 this.phone = phone;
         }
 
+        public int getImg_id() {
+                return img_id;
+        }
 
-
+        public void setImg_id(int img_id) {
+                this.img_id = img_id;
+        }
 }
 

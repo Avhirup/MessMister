@@ -63,7 +63,7 @@
                 >
 
                 <AutoCompleteTextView
-                    android:id="@+id/username"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/phone"
                     android:layout_margin="8dp"
                     android:hint="phone"/>
 
