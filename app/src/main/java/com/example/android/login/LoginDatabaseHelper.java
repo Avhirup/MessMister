@@ -25,6 +25,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String MessMember_has_paid = "has_paid";
     public final String MessMember_is_late = "is_late";
     public final String MessMember_phone = "phone";
+    public final String MessMember_img_id = "img_id";
 
 
     public final String TABLE_Rate = "Rate";
@@ -95,14 +96,15 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ( " +
                 MessMember_member_id + " INTEGER primary key AUTOINCREMENT, " +
                 MessMember_name + " TEXT not NULL, " +
-                MessMember_start_date + " INTEGER, " +
-                MessMember_startof_month + " INTEGER, " +
+                MessMember_start_date + " TEXT, " +
+                MessMember_startof_month + " TEXT, " +
                 MessMember_is_active + " INTEGER, " +
                 MessMember_rate_id + " INTEGER, " +
                 MessMember_due_amt + " INTEGER, " +
                 MessMember_has_paid + " INTEGER, " +
                 MessMember_is_late + " INTEGER, " +
                 MessMember_phone + " Text, " +
+                MessMember_img_id + " INTEGER, "+
                 " foreign key " + "( " +  MessMember_rate_id  + " )" + " references " + TABLE_Rate +
                 " ); ";
 
@@ -134,16 +136,15 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " foreign key " + "(" +  Expense_expense_id  + ")" + " references " + TABLE_Expense +" , "+
                 " foreign key " + "(" +  Expense_Income_income_id  + ")" + " references " + TABLE_Income + " );";
 
-        db.execSQL(query6);
+        db.execSQL(query6);*/
 
-        
+
         String query7=" create table "+TABLE_MessMember_Group+ " ( "+
                 MessMember_Group_messmember_id +" INTEGER, "+
-                MessMember_Group_group_id + "INTEGER, "+
-                " foreign key " + "(" +  MessMember_Group_messmember_id  + ")" + " references " + TABLE_MessMember +" , "+
-                " foreign key " + "(" +  MessMember_Group_group_id  + ")" + " references " + TABLE_Group + " );";
+                MessMember_Group_group_id + " INTEGER, "+
+                " foreign key " + "(" +  MessMember_Group_messmember_id  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+" , "+
+                " foreign key " + "(" +  MessMember_Group_group_id  + ")" + " references " + TABLE_Group +"("+Group_groupid+")"+");";
         db.execSQL(query7);
-        */
     }
 
     @Override

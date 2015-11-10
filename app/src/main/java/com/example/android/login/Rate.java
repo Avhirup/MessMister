@@ -23,13 +23,12 @@ public class Rate {
         this.category=category;
     }
 
-    //Methods
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
-        this.category=category;
+        this.category = category;
     }
 
     public int getAmount() {
@@ -37,11 +36,14 @@ public class Rate {
     }
 
     public void setAmount(int amount) {
-        this.amount=amount;
+        this.amount = amount;
     }
 
-    public int getRateid()
-    {
+    public int getRate_id() {
         return rate_id;
+    }
+
+    public void setRate_id(int rate_id) {
+        this.rate_id = rate_id;
     }
 }
