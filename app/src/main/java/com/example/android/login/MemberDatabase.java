@@ -104,6 +104,12 @@ public class MemberDatabase  {
         return  check;
     }
 
+    public Cursor getMemberCursor()
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";
+        Cursor cursor = db.rawQuery(query,null);
+        return  cursor;
+    }
 
 
 

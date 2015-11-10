@@ -96,6 +96,11 @@ public class CreateMember extends AppCompatActivity {
             m = new MessMember();
             m.setName(mname);
             m.setStart_date(start_date);
+            m.setStartof_month(start_date);
+            m.setDue_amount(0);
+            m.setHas_paid(true);
+            m.setIs_active(true);
+            m.setIs_late(false);
             m.setPhone(mphone);
             m.setRate_id(rate_id);
 
@@ -126,8 +131,8 @@ public class CreateMember extends AppCompatActivity {
             while(!cursor.isAfterLast())
             {
 
-                String tuple=cursor.getString(0)+" "+cursor.getString(1)+"  "+cursor.getString(2) + cursor.getString(3)+"  "+cursor.getString(4)+"  "+
-                        cursor.getString(5)+"  "+cursor.getString(6)+"  "+cursor.getString(7)+"  "+cursor.getString(8)+"  "+cursor.getString(9);
+                String tuple=cursor.getString(0)+" "+cursor.getString(1)+"  "+cursor.getString(2) +" "+ cursor.getString(3)+"  "+cursor.getString(4)+"  "+
+                        cursor.getString(5)+"  "+cursor.getString(6)+"  "+cursor.getString(7)+"  "+cursor.getString(8)+"  "+cursor.getString(9) +" "+cursor.getString(10);
 
                 Log.e("Member table",tuple);
                 cursor.moveToNext();
