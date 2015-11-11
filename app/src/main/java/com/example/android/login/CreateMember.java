@@ -57,7 +57,11 @@ public class CreateMember extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-       // setRateSpinner();
+        if(selectedItms!=null)
+        {
+            if(selectedItms.size()!=0)
+                selectedItms.clear();
+        }
 
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
@@ -195,11 +199,13 @@ public class CreateMember extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
             final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
+
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
                     .setMultiChoiceItems(getCursor(),"group_name", "group_name", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
 
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
                             if (isChecked) {
                                 // If the user checked the item, add it to the selected items
                                 // Log.d("value of which", Integer.toString(which));

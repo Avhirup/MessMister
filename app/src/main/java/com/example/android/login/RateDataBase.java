@@ -80,4 +80,26 @@ public class RateDataBase {
         return  cursor;
     }
 
+    public int getamt(int rate_id)
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
+                " where "+ loginDatabaseHelper.Rate_rate_id+"="+rate_id+";";
+        Cursor cursor = db.rawQuery(query,null);
+
+
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(2);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
+
 }

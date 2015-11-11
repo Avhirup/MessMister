@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by medha on 27/10/15.
  */
@@ -33,7 +35,7 @@ public class MemberDatabase  {
         value.put(loginDatabaseHelper.MessMember_has_paid,member.getHas_paid());
         value.put(loginDatabaseHelper.MessMember_is_late,member.getIs_late());
         value.put(loginDatabaseHelper.MessMember_phone,member.getPhone());
-        value.put(loginDatabaseHelper.MessMember_img_id,member.getImg_id());
+        value.put(loginDatabaseHelper.MessMember_img_id, member.getImg_id());
 
         db.insert(loginDatabaseHelper.TABLE_MessMember,null,value);
 
@@ -41,10 +43,8 @@ public class MemberDatabase  {
 
     public int getMemberId(MessMember member)
     {
-        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember + " where " +
-                loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\"" + " and " +
-
-                loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\"";
+        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\";" ;
 
         Cursor cursor = db.rawQuery(query,null);
         int a =0;
@@ -104,13 +104,101 @@ public class MemberDatabase  {
         return  check;
     }
 
-    public Cursor getMemberCursor()
+    public Cursor getMemberTable()
     {
         String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";
         Cursor cursor = db.rawQuery(query,null);
         return  cursor;
     }
 
+    public ArrayList<String> getAllMembers()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
+    }
+
+    public ArrayList<String> getlateMembers()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where " +loginDatabaseHelper.MessMember_is_late + " = 1"+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
+    }
+
+    public ArrayList<String> getDueMembers()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query ="(select * from " + loginDatabaseHelper.TABLE_MessMember + ")"+
+                " NOT IN "+ "(select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where " +loginDatabaseHelper.MessMember_due_amt + " = 0)"+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
+    }
+
+    public int getrate_id(int _id)
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where "+ loginDatabaseHelper.MessMember_member_id+"="+_id+";";
+        Cursor cursor = db.rawQuery(query,null);
 
 
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(5);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+
+    }
+
+    public void setDueamt(int mid,int amt)
+    {
+
+        String query =  " update  " + loginDatabaseHelper.TABLE_MessMember +
+                " set " +
+                loginDatabaseHelper.MessMember_due_amt + " = " + amt  +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid + ";";
+
+        db.execSQL(query);
+    }
 }

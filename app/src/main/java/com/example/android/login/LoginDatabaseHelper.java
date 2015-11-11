@@ -95,7 +95,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         String query2 = " create table " +  TABLE_MessMember +
                 " ( " +
                 MessMember_member_id + " INTEGER primary key AUTOINCREMENT, " +
-                MessMember_name + " TEXT not NULL, " +
+                MessMember_name + " TEXT UNIQUE not NULL, " +
                 MessMember_start_date + " TEXT, " +
                 MessMember_startof_month + " TEXT, " +
                 MessMember_is_active + " INTEGER, " +

@@ -2,6 +2,7 @@ package com.example.android.login;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -28,4 +29,13 @@ public class MessMemberGroupDatabase {
         db.insert(loginDatabaseHelper.TABLE_MessMember_Group,null,value);
 
     }
+
+    public Cursor getMemberGroupTable()
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember_Group +";";
+        Cursor cursor = db.rawQuery(query,null);
+        return  cursor;
+    }
+
+
 }

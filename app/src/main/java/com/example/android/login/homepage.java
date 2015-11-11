@@ -2,6 +2,7 @@ package com.example.android.login;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +27,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     AlertDialog.Builder alert;
     LayoutInflater factory;
     com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
-    AutoCompleteTextView member_name;
+
+
+
+    LoginDatabaseHelper loginDatabaseHelper;
+    static SQLiteDatabase sqLiteDatabase=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             selectionId = R.id.item1;
         else
             selectionId = savedInstanceState.getInt("selection");
-        member_name = (AutoCompleteTextView)findViewById(R.id.member_fee_name);
+
+
+
+        loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
+        sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
     }
 
     @Override
@@ -137,20 +147,60 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     {
         floatingActionsMenu = (com.getbase.floatingactionbutton.FloatingActionsMenu)findViewById(R.id.multiple_actions);
         floatingActionsMenu.toggle();
-        final View textEntryView = factory.inflate(R.layout.edittext3, null);
+        final View textEntryView = factory.inflate(R.layout.edittext3,null);
         alert.setView(textEntryView);
         alert.setTitle("Add New Member Fee");
+        final MemberDatabase memberDatabase = new MemberDatabase(this);
+        final RateDataBase rateDataBase = new RateDataBase(this);
+
+         final AutoCompleteTextView member_fee_name = (AutoCompleteTextView)textEntryView.findViewById(R.id.member_fee_name);
+         final AutoCompleteTextView amount_paid = (AutoCompleteTextView)textEntryView.findViewById(R.id.amount_paid);
+
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                try {
 
+
+                    MessMember m = new MessMember();
+
+
+                    Log.e("name", "inside");
+                    int mid, rid, amt, dueamt;
+                    String name = member_fee_name.getText().toString();
+                    Log.e("name", name);
+                    String amount =amount_paid.getText().toString();
+                    Log.e("amount", amount);
+                    int paidamt = Integer.parseInt(amount);
+                    m.setName(name);
+
+                    mid = memberDatabase.getMemberId(m);
+                    Log.d("mid",Integer.toString(mid));
+                    rid = memberDatabase.getrate_id(mid);
+                    Log.d("rid",Integer.toString(rid));
+
+                    amt = rateDataBase.getamt(rid);
+                    Log.d("amt",Integer.toString(amt));
+
+                    dueamt = amt - paidamt;
+                    Log.d("Damt",Integer.toString(dueamt));
+                    memberDatabase.setDueamt(mid, dueamt);}
+                catch (Exception e)
+                {}
+
+                }
             }
-        });
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+            );
+
+            alert.setNegativeButton("Cancel",new DialogInterface.OnClickListener()
+
+            {
+                public void onClick (DialogInterface dialog,int whichButton){
                 dialog.cancel();
             }
-        });
-        alert.show();
+            }
+
+            );
+            alert.show();
+        }
     }
-}

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by medha on 27/10/15.
  */
@@ -73,5 +75,29 @@ public class GroupDatabase {
 
     }
 
+    public Cursor getGroupTable()
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_Group +";";
+        Cursor cursor = db.rawQuery(query,null);
+        return  cursor;
+    }
+
+    public ArrayList<String> getGroupNames()
+    {
+        ArrayList<String> grouplist = new ArrayList<String>();
+        String query ="(select * from " + loginDatabaseHelper.TABLE_Group + ";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            grouplist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return grouplist;
+    }
 
 }
