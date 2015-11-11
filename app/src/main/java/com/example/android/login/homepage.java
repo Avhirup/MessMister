@@ -1,5 +1,6 @@
 package com.example.android.login;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar toolbar;
@@ -153,8 +155,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         final MemberDatabase memberDatabase = new MemberDatabase(this);
         final RateDataBase rateDataBase = new RateDataBase(this);
 
-         final AutoCompleteTextView member_fee_name = (AutoCompleteTextView)textEntryView.findViewById(R.id.member_fee_name);
-         final AutoCompleteTextView amount_paid = (AutoCompleteTextView)textEntryView.findViewById(R.id.amount_paid);
+        final AutoCompleteTextView member_fee_name = (AutoCompleteTextView)textEntryView.findViewById(R.id.member_fee_name);
+        final AutoCompleteTextView amount_paid = (AutoCompleteTextView)textEntryView.findViewById(R.id.amount_paid);
+
+        Context context = getApplicationContext();
+        CharSequence text = "already paid";
+        int duration = Toast.LENGTH_SHORT;
+
+        final Toast toast = Toast.makeText(context,text,duration);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
@@ -164,43 +172,47 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
                     MessMember m = new MessMember();
 
 
-                    Log.e("name", "inside");
-                    int mid, rid, amt, dueamt;
+                    int mid, rid, amt, dueamt, mdueamt;
                     String name = member_fee_name.getText().toString();
-                    Log.e("name", name);
-                    String amount =amount_paid.getText().toString();
-                    Log.e("amount", amount);
+                    String amount = amount_paid.getText().toString();
+
                     int paidamt = Integer.parseInt(amount);
                     m.setName(name);
 
                     mid = memberDatabase.getMemberId(m);
-                    Log.d("mid",Integer.toString(mid));
                     rid = memberDatabase.getrate_id(mid);
-                    Log.d("rid",Integer.toString(rid));
+
 
                     amt = rateDataBase.getamt(rid);
-                    Log.d("amt",Integer.toString(amt));
+                    mdueamt = memberDatabase.getdue_amt(mid);
+                    if (mdueamt != 0)
+                    {
+                        dueamt = mdueamt - paidamt;
+                        memberDatabase.setDueamt(mid, dueamt);
+                    }
+                    else
+                    {
+                        toast.show();
+                    }
 
-                    dueamt = amt - paidamt;
-                    Log.d("Damt",Integer.toString(dueamt));
-                    memberDatabase.setDueamt(mid, dueamt);}
-                catch (Exception e)
-                {}
+            }
 
+            catch(Exception e) {}
+
+        }
+    }
+
+        );
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+
+                {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
                 }
-            }
 
-            );
-
-            alert.setNegativeButton("Cancel",new DialogInterface.OnClickListener()
-
-            {
-                public void onClick (DialogInterface dialog,int whichButton){
-                dialog.cancel();
-            }
-            }
-
-            );
+        );
             alert.show();
         }
     }
