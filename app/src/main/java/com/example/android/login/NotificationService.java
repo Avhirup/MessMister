@@ -26,7 +26,7 @@ public class NotificationService extends IntentService {
         cursor.moveToFirst();
         Log.e("In Notification","Notification Cursor");
         while (!cursor.isAfterLast()) {
-
+            int memberid=Integer.parseInt(cursor.getString(0));
             String membername = cursor.getString(1);
             String dueamount = cursor.getString(6);
 
@@ -41,6 +41,7 @@ public class NotificationService extends IntentService {
 
             Intent intent = new Intent();
             intent.setAction("SNOOZE");
+            intent.putExtra("memberid",memberid);
             PendingIntent snoozeIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             notification.addAction(new NotificationCompat.Action(R.drawable.alarm16, "Snooze", snoozeIntent));
 
