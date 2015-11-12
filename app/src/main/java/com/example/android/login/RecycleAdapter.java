@@ -41,7 +41,11 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     @Override
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.listitem, parent,false);
+        View view;
+        if(position == 4)
+            view = inflater.inflate(R.layout.group_fragment, parent,false);
+        else
+            view = inflater.inflate(R.layout.listitem, parent,false);
         viewHolder vHolder = new viewHolder(view);
         return vHolder;
     }
@@ -118,6 +122,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
 
         public viewHolder(View itemView) {
+
 
             super(itemView);
             textView = (TextView)itemView.findViewById(R.id.member_name);
