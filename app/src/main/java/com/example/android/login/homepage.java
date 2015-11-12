@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar toolbar;
@@ -163,6 +164,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         int duration = Toast.LENGTH_SHORT;
 
         final Toast toast = Toast.makeText(context,text,duration);
+
+
+        member_fee_name.setThreshold(0);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, new MemberDatabase(this).getAllMembers());
+
+        member_fee_name.setAdapter(adapter);
+
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
