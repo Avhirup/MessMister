@@ -107,8 +107,8 @@ public class MemberDatabase  {
     public Cursor getMemberTable()
     {
         String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";
-        Cursor cursor = db.rawQuery(query,null);
-        return  cursor;
+        return db.rawQuery(query,null);
+
     }
 
     public ArrayList<String> getAllMembers()
@@ -128,8 +128,14 @@ public class MemberDatabase  {
         cursor.close();
         return memberlist;
     }
-
-    public ArrayList<String> getlateMembers()
+    //test method
+    public Cursor getMember()
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";
+        Cursor cursor = db.rawQuery(query,null);
+        return cursor;
+    }
+    public Cursor getlateMembers()
     {
         ArrayList<String> memberlist = new ArrayList<String>();
         String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +
@@ -145,10 +151,10 @@ public class MemberDatabase  {
             cursor.moveToNext();
         }
         cursor.close();
-        return memberlist;
+        return cursor;
     }
 
-    public ArrayList<String> getDueMembers()
+    public Cursor getDueMembers()
     {
         ArrayList<String> memberlist = new ArrayList<String>();
         String query ="(select * from " + loginDatabaseHelper.TABLE_MessMember + ")"+
@@ -164,8 +170,8 @@ public class MemberDatabase  {
             memberlist.add(cursor.getString(1));
             cursor.moveToNext();
         }
-        cursor.close();
-        return memberlist;
+
+        return cursor;
     }
 
     public int getrate_id(int _id)
