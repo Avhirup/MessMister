@@ -77,6 +77,7 @@
             android:label="@string/title_activity_create_bill" >
         </activity>
 
+
         <receiver
             android:name=".NotificationReceiver"
             android:enabled="true"
@@ -99,6 +100,9 @@
                 <action android:name="SNOOZE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".MemberDescription" >
+        </activity>
     </application>
 
 </manifest>

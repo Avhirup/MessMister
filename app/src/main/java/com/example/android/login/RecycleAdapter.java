@@ -5,6 +5,8 @@ package com.example.android.login;
  */
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -102,10 +104,8 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         }
         else if (position == 4)
         {
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("item1"));
+            this.list = new  MemberDatabase(context1).getAllMembers();
+
         }
 
     }
@@ -124,7 +124,10 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context1,textView.getText(),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context1,textView.getText(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context1, MemberDescription.class);
+                    context1.startActivity(intent);
+
                 }
             });
             imageButton=(ImageButton)itemView.findViewById(R.id.menu_button);

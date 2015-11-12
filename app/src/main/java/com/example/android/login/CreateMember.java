@@ -156,6 +156,7 @@ public class CreateMember extends AppCompatActivity {
                 Log.e("Membergroup table",tuple);
                 cursor1.moveToNext();
             }
+            cursor.close();
 
             Log.e("done","done");
             NavUtils.navigateUpFromSameTask(this);

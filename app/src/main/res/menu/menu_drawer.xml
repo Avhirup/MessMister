@@ -7,32 +7,32 @@
 
         <item
             android:icon="@drawable/ic_home_black_18dp"
-            android:title="@string/home"
+            android:title="HOME"
             android:id="@+id/item1">
         </item>
 
 
         <item
             android:icon="@drawable/ic_people_black_18dp"
-            android:title="@string/member_heading"
+            android:title="MEMBERS"
             android:id="@+id/item2">
 
         </item>
         <item
             android:icon="@drawable/ic_account_box_black_18dp"
-            android:title="@string/staff_heading"
+            android:title="STAFF"
             android:id="@+id/item3">
 
         </item>
 
         <item
             android:icon="@drawable/ic_receipt_black_18dp"
-            android:title="@string/bills_heading"
+            android:title="BILLS"
             android:id="@+id/item4">
         </item>
         <item
             android:icon="@drawable/ic_account_balance_black_18dp"
-            android:title="@string/balance_heading"
+            android:title="BALANCE SHEET"
             android:id="@+id/item5">
 
         </item>
@@ -42,13 +42,13 @@
         android:id="@+id/g3">
         <item
             android:icon="@drawable/ic_help_black_18dp"
-            android:title="@string/help_heading"
+            android:title="HELP"
             android:id="@+id/item6">
 
         </item>
         <item
             android:icon="@drawable/ic_developer_mode_black_18dp"
-            android:title="@string/about_heading"
+            android:title="ABOUT"
             android:id="@+id/item7">
 
         </item>

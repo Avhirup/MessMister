@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/search"
-        android:title="Extend Period"/>
+        android:id="@+id/mark"
+        android:title="Mark as paid"/>
     <item
-        android:id="@+id/add"
+        android:id="@+id/call_late"
         android:title="Call"/>
     <item
-        android:id="@+id/edit"
+        android:id="@+id/add_fees_late"
         android:title="Add Fees">
+
     </item>
 
 </menu>

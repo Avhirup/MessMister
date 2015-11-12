@@ -201,4 +201,27 @@ public class MemberDatabase  {
 
         db.execSQL(query);
     }
+
+    public int getdue_amt(int _id)
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where "+ loginDatabaseHelper.MessMember_member_id+"="+_id+";";
+        Cursor cursor = db.rawQuery(query,null);
+
+
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(6);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+
+    }
 }

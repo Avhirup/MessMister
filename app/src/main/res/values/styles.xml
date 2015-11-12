@@ -29,4 +29,11 @@
         <item name="android:background">@drawable/fab_label_background</item>
         <item name="android:textColor">#ffffff</item>
     </style>
+
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/background_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>
