@@ -37,10 +37,22 @@ public class NotificationDatabase {
                         " set " +
                         loginDatabaseHelper.Notification_notifyOn  + " = " + "\"" + notification.getNotifyOn()+"\"" +
                         " where " +
-                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() +
+                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + "and" +
                         loginDatabaseHelper.Notification_mid + " = " + notification.getMember_id() +
                         ";";
         db.execSQL(query);
+    }
+
+    public void updateNotification(Notification notification)
+    {
+        String query = " update " + loginDatabaseHelper.TABLE_Notification +
+                " set " +
+                loginDatabaseHelper.Notification_notifyOn  + " = " + "\"" + notification.getNotifyOn()+"\"" +","+
+                loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + "," +
+                loginDatabaseHelper.Notification_mid + " = " + notification.getMember_id() +
+                ";";
+        db.execSQL(query);
+
     }
 
     public void  delete(int nid)
