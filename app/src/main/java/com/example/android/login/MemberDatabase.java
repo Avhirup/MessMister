@@ -224,4 +224,25 @@ public class MemberDatabase  {
         return a;
 
     }
+
+    public String getMembername(int member_id)
+    {
+        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        String a = null;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getString(1);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
 }

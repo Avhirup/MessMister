@@ -28,7 +28,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String MessMember_img_id = "img_id";
 
 
-    public final String TABLE_Rate = "Rate";
+    public final static String TABLE_Rate = "Rate";
     public final String Rate_rate_id = "_id";
     public final String Rate_category = "category";
     public final String Rate_amount = "amount";
@@ -57,6 +57,11 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final static String TABLE_MessMember_Group="MessMemberGroup";
     public final String MessMember_Group_messmember_id="member_id";
     public final String MessMember_Group_group_id="group_id";
+
+    public final static String TABLE_Notification = "Notification";
+    public final String Notification_id = "_nid";
+    public final String Notification_mid = "_mid";
+    public final String Notification_notifyOn = "notifyOn";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -145,6 +150,15 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " foreign key " + "(" +  MessMember_Group_messmember_id  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+" , "+
                 " foreign key " + "(" +  MessMember_Group_group_id  + ")" + " references " + TABLE_Group +"("+Group_groupid+")"+");";
         db.execSQL(query7);
+
+        String query8 = " create table " + TABLE_Notification + " ( "+
+                Notification_id + " INTEGER primary key AUTOINCREMENT, "+
+                Notification_mid + " INTEGER, "+
+                Notification_notifyOn + " TEXT, " +
+                " foreign key " + "(" + Notification_mid  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+
+                ");";
+        db.execSQL(query8);
+
     }
 
     @Override
