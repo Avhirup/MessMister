@@ -102,7 +102,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         String query5="create table "+ TABLE_Expense +" ( "+
                 Expense_expense_id + " INTEGER primary key AUTOINCREMENT, "+
                 Expense_expense_name + " TEXT not null, " +
-                Expense_amount + "INTEGER ,"+
+                Expense_amount + "INTEGER "+
                 ");";
 
         db.execSQL(query5);
@@ -113,8 +113,8 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 Income_month + " INTEGER, "+
                 Income_year + " INTEGER, "+
                 Income_amountearned +" INTEGER, "+
-                Income_amountlost +" INTEGER, "+
-                " )";
+                Income_amountlost +" INTEGER "+
+                " );";
 
         db.execSQL(query4);
 
