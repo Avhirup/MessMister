@@ -86,7 +86,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ); ";
         db.execSQL(query3);
         */
-        db.execSQL("create table Group ( group_id integer primary key auto increment, group_name text);");
+        db.execSQL("create table Group ( group_id integer primary key autoincrement, group_name text);");
         String query2 = " create table " +  TABLE_MessMember +
                 " ( " +
                 MessMember_member_id + " INTEGER primary key AUTOINCREMENT, " +
