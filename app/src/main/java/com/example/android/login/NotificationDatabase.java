@@ -111,6 +111,7 @@ public class NotificationDatabase {
 
     }
 
+
     public Cursor getNotificationTable()
     {
         String query="select * from "+ LoginDatabaseHelper.TABLE_Notification +" ;";

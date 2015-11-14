@@ -37,12 +37,12 @@ public class SnoozeReceiver extends BroadcastReceiver {
         int member_id=intent.getExtras().getInt("memberid");
         Log.e("helper",member_id+"");
         notificationDatabase=new NotificationDatabase(context);
-        int notification_id=0;//i needmethod to mid -> nid
+        int notification_id=notificationDatabase.getNotificationId(member_id);//i needmethod to mid -> nid
         String notifyOn=notificationDatabase.getNotifyOn(member_id);
         Log.e("helper",notifyOn+"");
         String newNotifyOn=incrementNotifyOn(notifyOn);
 
         Notification notification=new Notification(notification_id,member_id,newNotifyOn);
-        //notificationDatabase.updateNotifyOn(notification);
+        notificationDatabase.updateNotifyOn(notification);
     }
 }
