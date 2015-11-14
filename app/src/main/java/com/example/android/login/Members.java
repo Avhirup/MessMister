@@ -1,5 +1,6 @@
 package com.example.android.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -14,13 +15,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Members extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,6 +41,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     private int selectionId;
     TabLayout tabLayout;
     ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setTabsFromPagerAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
@@ -155,7 +167,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         public Fragment getItem(int position) {
-            return MemberFragment.newInstance(position);
+            return  new MemberFragment();
         }
 
         @Override
@@ -176,39 +188,11 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    static public class MemberFragment extends Fragment
-    {
-        public static final java.lang.String ARG = "position";
-        int position;
-
-        public MemberFragment()
-        {
-
-        }
-
-        public static MemberFragment newInstance(int pos)
-        {
-            MemberFragment m = new MemberFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(ARG, pos);
-            m.setArguments(bundle);
-            return m;
-        }
 
 
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            Bundle arguments = getArguments();
-            position = arguments.getInt(ARG);
-            TextView textview = new TextView(getActivity());
-            textview.setText("hello " + position);
-            return textview;
-        }
-
-
-    }
 
 }
+
+
 

@@ -1,3 +1,6 @@
+
+
+
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +9,10 @@
     android:layout_height="match_parent"
     android:background="#fff"
     tools:context="com.example.android.navigationview.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,10 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_columnSpan="4"
-                android:layout_column="0"
-                android:layout_row="1"
                 android:layout_marginRight="16dp"
-                android:layout_gravity="fill_horizontal"
+                android:layout_row="1"
+                android:layout_column="0"
                 >
 
                 <AutoCompleteTextView
@@ -108,12 +114,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginRight="16dp"
                 android:backgroundTint="@color/primaryDark"
-                android:src="@drawable/ic_label_outline_black_24dp"
+                android:src="@drawable/ic_event_black_18dp"
                 android:layout_row="4"
                 android:layout_column="0" />
 
@@ -132,12 +138,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginRight="16dp"
                 android:backgroundTint="@color/primaryDark"
-                android:src="@drawable/ic_label_outline_black_24dp"
+                android:src="@drawable/ic_attach_money_black_18dp"
                 android:layout_row="5"
                 android:layout_column="0" />
 
@@ -147,37 +153,42 @@
                 android:text="Rate:"
                 android:id="@+id/rate"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="32dp"
                 android:layout_columnSpan="1"
                 android:layout_row="5"
                 android:layout_column="1" />
 
-            <Spinner
-                android:id="@+id/rate_spinner"
+
+            <Button
+                android:text="ADD RATE     "
+                android:layout_column="2"
+                android:textStyle="normal"
+                android:textAllCaps="false"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:minWidth="120dp"
-                android:spinnerMode="dropdown"
-                android:layout_column="2"
-                android:layout_marginRight="32dp"
-                android:layout_marginLeft="16dp"
-                android:layout_columnSpan="2"
-                android:layout_row="5" />
+                android:layout_marginTop="8dp"
+                android:drawablePadding="6dp"
+                android:layout_gravity="fill_horizontal"
+                android:layout_row="5"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="addRate"/>
 
 
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="16dp"
                 android:backgroundTint="@color/primaryDark"
-                android:src="@drawable/ic_label_outline_black_24dp"
+                android:src="@drawable/ic_people_black_18dp"
                 android:layout_row="6"
                 android:layout_column="0" />
 
@@ -197,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:minWidth="120dp"
+                android:minWidth="134dp"
                 android:entries="@array/days"
                 android:spinnerMode="dropdown"
                 android:layout_column="2"
@@ -211,8 +222,7 @@
                 android:text=" Add Groups"
                 android:layout_column="2"
                 android:textStyle="normal"
-                android:textAllCaps="false"
-                android:textSize="14sp"
+                android:textAllCaps="true"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
@@ -236,5 +246,6 @@
 
 
     </LinearLayout>
+    </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>
