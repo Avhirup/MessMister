@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar toolbar;
@@ -24,6 +25,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     AlertDialog.Builder alert;
     LayoutInflater factory;
     com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
+    AutoCompleteTextView member_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             selectionId = R.id.item1;
         else
             selectionId = savedInstanceState.getInt("selection");
+        member_name = (AutoCompleteTextView)findViewById(R.id.member_fee_name);
     }
 
     @Override

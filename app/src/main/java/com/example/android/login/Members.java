@@ -1,16 +1,26 @@
 package com.example.android.login;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class Members extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,6 +29,8 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
     private int selectionId;
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +48,12 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
             selectionId = R.id.item1;
         else
             selectionId = savedInstanceState.getInt("selection");
+        tabLayout = (TabLayout)findViewById(R.id.t_layout);
+        viewPager = (ViewPager)findViewById(R.id.pager);
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setTabsFromPagerAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -115,9 +133,82 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
             super.onBackPressed();
     }
 
+
+
+
+
     public void create(View view)
     {
         Intent intent = new Intent(this, CreateMember.class);
         startActivity(intent);
     }
+
+
+    public class PagerAdapter extends FragmentStatePagerAdapter
+    {
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+
+
+        @Override
+        public Fragment getItem(int position) {
+            return MemberFragment.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if(position == 0)
+                return "LATE";
+            else if(position == 1)
+                return "DUE";
+            else if(position == 2)
+                return "ALL";
+            else
+                return "GROUPS";
+        }
+    }
+
+    static public class MemberFragment extends Fragment
+    {
+        public static final java.lang.String ARG = "position";
+        int position;
+
+        public MemberFragment()
+        {
+
+        }
+
+        public static MemberFragment newInstance(int pos)
+        {
+            MemberFragment m = new MemberFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(ARG, pos);
+            m.setArguments(bundle);
+            return m;
+        }
+
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            Bundle arguments = getArguments();
+            position = arguments.getInt(ARG);
+            TextView textview = new TextView(getActivity());
+            textview.setText("hello " + position);
+            return textview;
+        }
+
+
+    }
+
 }
+
