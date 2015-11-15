@@ -43,8 +43,8 @@ public class MemberFragment extends Fragment
         //textview.setText("hello " + position);
         View view = inflater.inflate(R.layout.member_list, container, false);
         recycleAdapter = new RecycleAdapter(getContext());
-        Bundle b = getArguments();
-        position = b.getInt(ARG_SECTION_NUMBER);
+
+        position = getArguments().getInt(ARG_SECTION_NUMBER);
         Log.e("CreateView", position +"");
         recycleAdapter.setPosition(position);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_list);

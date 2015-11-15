@@ -60,7 +60,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         setList();
-        Log.e("pos", position +"");
+        Log.e("pos", position + "");
         super.onAttachedToRecyclerView(recyclerView);
     }
 
@@ -70,16 +70,43 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
     public void setList()
     {
-        this.list.add(new String("Medha Naik"));
-        this.list.add(new String("Ambika Kale"));
-        this.list.add(new String("Manjusha Pednekar"));
-        this.list.add(new String("Tanmayee Chinchlikar"));
-        this.list.add(new String("Isha Gulavani"));
-        this.list.add(new String("Tejal Sarda"));
-        this.list.add(new String("Ambika Kale"));
-        this.list.add(new String("Manjusha Pednekar"));
-        this.list.add(new String("Tanmayee Chinchlikar"));
-        this.list.add(new String("item1"));
+        if(position == 1) {
+            this.list.add(new String("Medha Naik"));
+            this.list.add(new String("Ambika Kale"));
+            this.list.add(new String("Manjusha Pednekar"));
+            this.list.add(new String("Tanmayee Chinchlikar"));
+            this.list.add(new String("Isha Gulavani"));
+            this.list.add(new String("Tejal Sarda"));
+            this.list.add(new String("Ambika Kale"));
+            this.list.add(new String("Manjusha Pednekar"));
+            this.list.add(new String("Tanmayee Chinchlikar"));
+            this.list.add(new String("item1"));
+        }
+        else if(position == 2)
+        {
+            this.list.add(new String("Isha Gulavani"));
+            this.list.add(new String("Tejal Sarda"));
+            this.list.add(new String("Ambika Kale"));
+            this.list.add(new String("Manjusha Pednekar"));
+            this.list.add(new String("Tanmayee Chinchlikar"));
+            this.list.add(new String("item1"));
+        }
+        else if(position == 3)
+        {
+
+            this.list.add(new String("Tejal Sarda"));
+            this.list.add(new String("Ambika Kale"));
+            this.list.add(new String("Manjusha Pednekar"));
+            this.list.add(new String("Tanmayee Chinchlikar"));
+            this.list.add(new String("item1"));
+        }
+        else if (position == 4)
+        {
+            this.list.add(new String("Ambika Kale"));
+            this.list.add(new String("Manjusha Pednekar"));
+            this.list.add(new String("Tanmayee Chinchlikar"));
+            this.list.add(new String("item1"));
+        }
 
     }
 
@@ -94,6 +121,12 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
             super(itemView);
             textView = (TextView)itemView.findViewById(R.id.member_name);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context1,textView.getText(),Toast.LENGTH_SHORT).show();
+                }
+            });
             imageButton=(ImageButton)itemView.findViewById(R.id.menu_button);
             imageButton.setOnClickListener(this);
 
@@ -101,11 +134,12 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
         @Override
         public void onClick(View v) {
-            Log.e("click","button");
-            PopupMenu popupMenu = new PopupMenu(context1,imageButton);
-            popupMenu.inflate(R.menu.all_member_menu);
-            popupMenu.show();
-
+            Log.e("click", "button");
+            if(position == 1) {
+                PopupMenu popupMenu = new PopupMenu(context1, imageButton);
+                popupMenu.inflate(R.menu.all_member_menu);
+                popupMenu.show();
+            }
         }
     }
 
