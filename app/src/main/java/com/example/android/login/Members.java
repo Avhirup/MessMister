@@ -167,7 +167,12 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         public Fragment getItem(int position) {
-            return  new MemberFragment();
+            MemberFragment memberFragment;
+            if(getPageTitle(position).toString().equals("LATE"))
+                memberFragment = MemberFragment.newInstance(12);
+            else
+                memberFragment = MemberFragment.newInstance(position);
+            return  memberFragment;
         }
 
         @Override

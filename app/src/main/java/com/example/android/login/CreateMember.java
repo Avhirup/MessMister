@@ -108,7 +108,7 @@ public class CreateMember extends AppCompatActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
-            AlertDialog.Builder builder1 = builder.setTitle("Groups")
+            AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
                     .setMultiChoiceItems(getCursor(),"group_name", "group_name", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -150,7 +150,7 @@ public class CreateMember extends AppCompatActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
-            AlertDialog.Builder builder1 = builder.setTitle("Groups")
+            AlertDialog.Builder builder1 = builder.setTitle("Set Rate")
                     .setSingleChoiceItems(getCursor(),pos,"category", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

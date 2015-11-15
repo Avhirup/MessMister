@@ -26,22 +26,11 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
     public Context context1;
     List<String> list = new ArrayList<>();
+    int position;
 
     LayoutInflater inflater;
     public RecycleAdapter(Context context)
     {
-        this.list.add(new String("Medha Naik"));
-        this.list.add(new String("Ambika Kale"));
-        this.list.add(new String("Manjusha Pednekar"));
-        this.list.add(new String("Tanmayee Chinchlikar"));
-        this.list.add(new String("Isha Gulavani"));
-        this.list.add(new String("Tejal Sarda"));
-        this.list.add(new String("Ambika Kale"));
-        this.list.add(new String("Manjusha Pednekar"));
-        this.list.add(new String("Tanmayee Chinchlikar"));
-        this.list.add(new String("item1"));
-
-
         context1 = context;
         inflater = LayoutInflater.from(context);
     }
@@ -58,6 +47,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
 
+
         holder.textView.setText(list.get(position));
         holder.imageButton.isShown();
     }
@@ -69,7 +59,28 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        setList();
+        Log.e("pos", position +"");
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public void setList()
+    {
+        this.list.add(new String("Medha Naik"));
+        this.list.add(new String("Ambika Kale"));
+        this.list.add(new String("Manjusha Pednekar"));
+        this.list.add(new String("Tanmayee Chinchlikar"));
+        this.list.add(new String("Isha Gulavani"));
+        this.list.add(new String("Tejal Sarda"));
+        this.list.add(new String("Ambika Kale"));
+        this.list.add(new String("Manjusha Pednekar"));
+        this.list.add(new String("Tanmayee Chinchlikar"));
+        this.list.add(new String("item1"));
+
     }
 
     class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -77,12 +88,11 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
         TextView textView;
         ImageButton imageButton;
-        PopupMenu popupMenu;
+
 
         public viewHolder(View itemView) {
 
             super(itemView);
-            Log.e("holder", "created");
             textView = (TextView)itemView.findViewById(R.id.member_name);
             imageButton=(ImageButton)itemView.findViewById(R.id.menu_button);
             imageButton.setOnClickListener(this);
@@ -92,8 +102,13 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         @Override
         public void onClick(View v) {
             Log.e("click","button");
-            Toast.makeText(context1, "hello", Toast.LENGTH_SHORT).show();
+            PopupMenu popupMenu = new PopupMenu(context1,imageButton);
+            popupMenu.inflate(R.menu.all_member_menu);
+            popupMenu.show();
 
         }
     }
+
+
+
 }

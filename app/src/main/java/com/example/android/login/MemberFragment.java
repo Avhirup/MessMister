@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,13 @@ public class MemberFragment extends Fragment
 
     }
 
-
+    public static MemberFragment newInstance(int position)
+    {
+        MemberFragment memberFragment = new MemberFragment();
+        memberFragment.position = position;
+        Log.e("memberfrag created", position + "");
+        return memberFragment;
+    }
 
     @Nullable
     @Override
@@ -35,6 +42,8 @@ public class MemberFragment extends Fragment
         //textview.setText("hello " + position);
         View view = inflater.inflate(R.layout.member_list, container, false);
         recycleAdapter = new RecycleAdapter(getContext());
+        Log.e("CreateView", position +"");
+        recycleAdapter.setPosition(position);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(recycleAdapter);
