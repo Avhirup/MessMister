@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,6 +33,16 @@ public class CreateMember extends AppCompatActivity {
     LoginDatabaseHelper loginDatabaseHelper;
     static SQLiteDatabase sqLiteDatabase=null;
 
+    MemberDatabase memberDatabase;
+    MessMemberGroupDatabase memberGroupDatabase;
+    AutoCompleteTextView name;
+    AutoCompleteTextView phone;
+    Spinner dayspin;
+    MessMember m;
+    MessMemberGroup memberGroup;
+    public static ArrayList<Integer> selectedItms;
+    Button rate;
+    public static int rate_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +78,77 @@ public class CreateMember extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_done) {
-            Log.e("kk","jj");
+           // Log.e("kk","jj");
+            memberDatabase = new MemberDatabase(this);
+            memberGroupDatabase = new MessMemberGroupDatabase(this);
+            name = (AutoCompleteTextView)findViewById(R.id.name);
+            phone = (AutoCompleteTextView)findViewById(R.id.phone);
+            dayspin = (Spinner)findViewById(R.id.dayspin);
+
+
+            String mname = name.getText().toString();
+            String mphone = phone.getText().toString();
+
+            int day = dayspin.getSelectedItemPosition()+1;
+            String start_date = Integer.toString(day)+ "-" + Integer.toString(month) +"-"+Integer.toString(year);
+
+
+            m = new MessMember();
+            m.setName(mname);
+            m.setStart_date(start_date);
+            m.setPhone(mphone);
+            m.setRate_id(rate_id);
+
+            memberDatabase.add(m);
+            int mid = memberDatabase.getMemberId(m);
+            Log.d("getid", Integer.toString(mid));
+            int a;
+            for(int i=0 ; i<selectedItms.size();i++)
+            {
+                try{
+                    a = selectedItms.get(i).intValue()+1;
+                    Log.d("in loop", Integer.toString(a));
+                    memberGroup = new MessMemberGroup(mid,a);
+                    memberGroupDatabase.add(memberGroup);
+                }
+                catch(Exception e){}
+
+                /*String query = " insert into " + loginDatabaseHelper.TABLE_MessMember_Group + " values("+ Integer.toString(mid) + "," + Integer.toString(a) +");";
+                sqLiteDatabase.execSQL(query);*/
+            }
+
+
+            String q = "select * from " + loginDatabaseHelper.TABLE_MessMember + ";";
+            Cursor cursor = sqLiteDatabase.rawQuery(q,null);
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                String tuple=cursor.getString(0)+" "+cursor.getString(1)+"  "+cursor.getString(2) + cursor.getString(3)+"  "+cursor.getString(4)+"  "+
+                        cursor.getString(5)+"  "+cursor.getString(6)+"  "+cursor.getString(7)+"  "+cursor.getString(8)+"  "+cursor.getString(9);
+
+                Log.e("Member table",tuple);
+                cursor.moveToNext();
+            }
+
+            String qt = "select * from " + loginDatabaseHelper.TABLE_MessMember_Group + ";";
+            Cursor cursor1 = sqLiteDatabase.rawQuery(qt,null);
+            if(cursor1==null)
+                Log.e("he","in array cursor null");
+            cursor1.moveToFirst();
+            while(!cursor1.isAfterLast())
+            {
+
+                String tuple1=Integer.toString(cursor1.getInt(0));
+                String tuple=Integer.toString(cursor1.getInt(0))+ " " +Integer.toString(cursor1.getInt(1));
+                Log.e("Membergroup mid",tuple1);
+                Log.e("Membergroup table",tuple);
+                cursor1.moveToNext();
+            }
+
+            Log.e("done","done");
             NavUtils.navigateUpFromSameTask(this);
         }
 
@@ -108,11 +189,23 @@ public class CreateMember extends AppCompatActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
+            final ArrayList<Integer> mSelectedItems = new ArrayList<Integer>();
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
                     .setMultiChoiceItems(getCursor(),"group_name", "group_name", new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                               //
+                            if (isChecked) {
+                                // If the user checked the item, add it to the selected items
+                                // Log.d("value of which", Integer.toString(which));
+                                if (mSelectedItems.contains(which));
+                                    // Else, if the item is already in the array, remove it
+                                    //mSelectedItems.remove(Integer.valueOf(which));
+                                else
+                                    mSelectedItems.add(which);
+                            } else if (mSelectedItems.contains(which)) {
+                                // Else, if the item is already in the array, remove it
+                                mSelectedItems.remove(Integer.valueOf(which));
+                            }
 
                         }
                     })
@@ -121,6 +214,9 @@ public class CreateMember extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             // User clicked OK, so save the mSelectedItems results somewhere
                             // or return them to the component that opened the dialog
+                            CreateMember.selectedItms = new ArrayList<Integer>(mSelectedItems);
+
+
 
                         }
                     })
@@ -144,7 +240,8 @@ public class CreateMember extends AppCompatActivity {
 
     public static class Ratedialog extends DialogFragment {
         int pos;
-
+        int rid;
+        int ct =1;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -154,7 +251,9 @@ public class CreateMember extends AppCompatActivity {
                     .setSingleChoiceItems(getCursor(),pos,"category", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            //Log.d("rate pos ",Integer.toString(which));
+                            rid = which;
+                            //Log.d("rate pos id ",Integer.toString(rid));
                         }
                     })
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -162,7 +261,9 @@ public class CreateMember extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             // User clicked OK, so save the mSelectedItems results somewhere
                             // or return them to the component that opened the dialog
-
+                            //Log.d("rate pos id ",Integer.toString(rid));
+                            CreateMember.rate_id = rid + 1;
+                            //Log.d("cr rate_id",Integer.toString(CreateMember.rate_id));
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

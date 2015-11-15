@@ -33,42 +33,34 @@ public class MemberDatabase  {
         value.put(loginDatabaseHelper.MessMember_has_paid,member.getHas_paid());
         value.put(loginDatabaseHelper.MessMember_is_late,member.getIs_late());
         value.put(loginDatabaseHelper.MessMember_phone,member.getPhone());
+        value.put(loginDatabaseHelper.MessMember_img_id,member.getImg_id());
 
         db.insert(loginDatabaseHelper.TABLE_MessMember,null,value);
 
     }
 
-   /* public int getMemberId(MessMember member)
+    public int getMemberId(MessMember member)
     {
-        String query = " select " +this.MessMember_member_id + " from " +  this.TABLE_MessMember + " where " +
-                this.MessMember_name + " = " + "\"" + member.getName() + "\"" +
-                this.MessMember_start_date + " = " + "\"" + member.getStart_date() + "\"" +
-                this.MessMember_startof_month + " = " + "\"" + member.getStartof_month()  + "\"" +
-                this.MessMember_is_active + " = " + "\"" + member.getIs_active()  + "\"" +
-                this.MessMember_rate_id  + " = " + "\"" + member.getRate_id()  + "\"" +
-                this.MessMember_due_amt  + " = " + "\"" + member.getDue_amount()  + "\"" +
-                this.MessMember_has_paid + " = " + "\"" + member.getHas_paid() + "\"" +
-                this.MessMember_is_late + " = " + "\"" + member.getIs_late() + "\"" +
-                this.MessMember_phone + " = " + "\"" + member.getPhone() + "\"";
+        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember + " where " +
+                loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\"" + " and " +
 
-        Cursor c = db.rawQuery(query,null);
-        int a = 0;
-        try {
-            if(c==null)
-                //Log.e("hello", "welcome");
-                c.moveToFirst();
-        }
-        catch (Exception e){}
+                loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\"";
 
-        while (!c.isAfterLast())
+        Cursor cursor = db.rawQuery(query,null);
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
         {
 
-                a = c.getInt(0);
+            a=cursor.getInt(0);
 
-            c.moveToNext();
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
         }
         return a;
-    }*/
+    }
 
     public Boolean delete(Integer id)
     {
@@ -99,6 +91,7 @@ public class MemberDatabase  {
                     loginDatabaseHelper.MessMember_has_paid + " = " +  member.getHas_paid() + ", " +
                     loginDatabaseHelper.MessMember_is_late + " = " + member.getIs_late() + ", " +
                     loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\" " +
+                    loginDatabaseHelper.MessMember_img_id + " = " + "\"" + member.getImg_id() + "\" " +
                     " where " + loginDatabaseHelper.MessMember_member_id + " = " + member.getMember_id() + ";";
 
                    db.execSQL(query);

@@ -53,7 +53,7 @@ public class RateDataBase {
                     " set " +
                     loginDatabaseHelper.Rate_category + " = " + "\"" + rate.getCategory() + "\"," +
                     loginDatabaseHelper.Rate_amount + " = " +  rate.getAmount()  +
-                    " where " + loginDatabaseHelper.Rate_rate_id + " = " + rate.getRateid() + ";";
+                    " where " + loginDatabaseHelper.Rate_rate_id + " = " + rate.getRate_id() + ";";
             db.execSQL(query);
             check = true;
         }
