@@ -11,7 +11,7 @@
         android:id="@+id/imageView"
         android:layout_marginTop="8dp"
         android:layout_weight="0"
-        android:src="@drawable/ic_people_black_18dp"/>
+        android:src="@drawable/ic_a"/>
 
     <TextView
         android:id="@+id/member_name"
@@ -32,7 +32,7 @@
         android:layout_marginTop="8dp"
         android:layout_weight="0"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_people_black_18dp"
+        android:src="@drawable/ic_more_vert_black_24dp"
         style="?android:attr/borderlessButtonStyle"
         />
 
