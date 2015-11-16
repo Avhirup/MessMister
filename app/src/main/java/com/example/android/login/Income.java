@@ -30,12 +30,8 @@ public class Income {
         income_name=name;
     }
 
-    public String getExpName() {
-        return expense_name;
-    }
-
-    public int getExpID() {
-        return expense_id;
+    public String getIncomeName() {
+        return income_name;
     }
 
     public void setAmount(int amount) {
@@ -50,8 +46,5 @@ public class Income {
     {
         return date;
     }
-    public void setDate()
-    {
 
-    }
 }

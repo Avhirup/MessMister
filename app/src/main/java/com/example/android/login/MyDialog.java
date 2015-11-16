@@ -19,6 +19,8 @@ public class MyDialog
     LayoutInflater factory;
     View textEntryView;
     MemberDatabase memberDatabase;
+    IncomeDatabase incomeDatabase;
+    ExpenseDatabase expenseDatabase;
     RateDataBase rateDataBase;
     AutoCompleteTextView amount_paid;
     AutoCompleteTextView member_fee_name;
@@ -36,6 +38,8 @@ public class MyDialog
         alert.setView(textEntryView);
         setTitle();
         memberDatabase = new MemberDatabase(context);
+        incomeDatabase = new IncomeDatabase(context);
+        expenseDatabase=new ExpenseDatabase(context);
         rateDataBase = new RateDataBase(context);
         member_fee_name = (AutoCompleteTextView) textEntryView.findViewById(R.id.member_fee_name);
         amount_paid = (AutoCompleteTextView) textEntryView.findViewById(R.id.amount_paid);
@@ -134,28 +138,13 @@ public class MyDialog
                         try {
 
 
-                            MessMember m = new MessMember();
-
-
-                            int mid, rid, amt, dueamt, mdueamt;
+                            Income income = new Income();
                             String name = member_fee_name.getText().toString();
-                            String amount = amount_paid.getText().toString();
+                            int amount = Integer.parseInt(amount_paid.getText().toString());
+                            income.setIncomeName(name);
+                            income.setAmount(amount);
+                            incomeDatabase.add(income);
 
-                            int paidamt = Integer.parseInt(amount);
-                            m.setName(name);
-
-                            mid = memberDatabase.getMemberId(m);
-                            rid = memberDatabase.getrate_id(mid);
-
-
-                            amt = rateDataBase.getamt(rid);
-                            mdueamt = memberDatabase.getdue_amt(mid);
-                            if (mdueamt != 0) {
-                                dueamt = mdueamt - paidamt;
-                                memberDatabase.setDueamt(mid, dueamt);
-                            } else {
-                                toast.show();
-                            }
 
                         } catch (Exception e) {
                         }
@@ -191,28 +180,13 @@ public class MyDialog
                         try {
 
 
-                            MessMember m = new MessMember();
 
-
-                            int mid, rid, amt, dueamt, mdueamt;
+                            Expense expense = new Expense();
                             String name = member_fee_name.getText().toString();
-                            String amount = amount_paid.getText().toString();
-
-                            int paidamt = Integer.parseInt(amount);
-                            m.setName(name);
-
-                            mid = memberDatabase.getMemberId(m);
-                            rid = memberDatabase.getrate_id(mid);
-
-
-                            amt = rateDataBase.getamt(rid);
-                            mdueamt = memberDatabase.getdue_amt(mid);
-                            if (mdueamt != 0) {
-                                dueamt = mdueamt - paidamt;
-                                memberDatabase.setDueamt(mid, dueamt);
-                            } else {
-                                toast.show();
-                            }
+                            int amount = Integer.parseInt(amount_paid.getText().toString());
+                            expense.setExpenseName(name);
+                            expense.setAmount(amount);
+                            expenseDatabase.add(expense);
 
                         } catch (Exception e) {
                         }
