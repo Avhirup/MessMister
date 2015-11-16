@@ -37,23 +37,6 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Group_groupid = "_id";
     public final String Group_groupName = "group_name";
 
-
-    public final static String TABLE_Expense= "Expense";
-    public final String Expense_expense_id= "_id";
-    public final String Expense_expense_name ="expense_name";
-    public final String Expense_amount= "amount";
-
-    public final static String TABLE_Income= "Income";
-    public final String Income_income_id="_id";
-    public final String Income_month="month";
-    public final String Income_year="year";
-    public final String Income_amountlost="amountlost";
-    public final String Income_amountearned="amountearned";
-
-    public final static String TABLE_Expense_Income ="ExpenseIncome";
-    public final String Expense_Income_expense_id= "expense_id";
-    public final String Expense_Income_income_id= "income_id";
-
     public final static String TABLE_MessMember_Group="MessMemberGroup";
     public final String MessMember_Group_messmember_id="member_id";
     public final String MessMember_Group_group_id="group_id";
@@ -62,6 +45,16 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Notification_id = "_nid";
     public final String Notification_mid = "_mid";
     public final String Notification_notifyOn = "notifyOn";
+
+    public final static String TABLE_Income= "Income";
+    public final String Income_date="_date";
+    public final String Income_tag="_tag";
+    public final String Income_amount="_amount";
+
+    private final static  String TABLE_Expense= "Expense ";
+    public final String Expense_date="_date";
+    public final String Expense_tag="_tag";
+    public final String Expense_amount="_amount";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -74,11 +67,9 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         //write your tables here - medha
 
-        //Log.e("helper", "onCreate called");
         db.execSQL("create table login(_id integer primary key autoincrement, " +
                 "name text, password text);");
 
-        //Log.e("helper", "Create rate called");
         String query1 = " create table " + TABLE_Rate +
                 " ( " +
                 Rate_rate_id + " INTEGER primary key AUTOINCREMENT, " +
@@ -87,14 +78,13 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " ); ";
 
         db.execSQL(query1);
-      //Log.e("helper", "Create group called");
+
         String query3 = " create table " + TABLE_Group +
                 " ( " +
                 Group_groupid + " INTEGER primary key AUTOINCREMENT, " +
                 Group_groupName + " TEXT  " +
                 " ); ";
         db.execSQL(query3);
-        Log.e("helper", "Create member called");
 
 
         String query2 = " create table " +  TABLE_MessMember +
@@ -115,34 +105,6 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(query2);
 
-        String query5="create table "+ TABLE_Expense +" ( "+
-                Expense_expense_id + " INTEGER primary key AUTOINCREMENT, "+
-                Expense_expense_name + " TEXT not null, " +
-                Expense_amount + "INTEGER "+
-                ");";
-
-        db.execSQL(query5);
-
-
-        String query4=" create table "+ TABLE_Income +" ( "+
-                Income_income_id + " INTEGER primary key AUTOINCREMENT, "+
-                Income_month + " INTEGER, "+
-                Income_year + " INTEGER, "+
-                Income_amountearned +" INTEGER, "+
-                Income_amountlost +" INTEGER "+
-                " );";
-
-        db.execSQL(query4);
-
-
-       /* String query6=" create table "+ TABLE_Expense_Income+ " ( "+
-                Expense_Income_expense_id + " INTEGER, "+
-                Expense_Income_income_id + " INTEGER, "+
-                " foreign key " + "(" +  Expense_expense_id  + ")" + " references " + TABLE_Expense +" , "+
-                " foreign key " + "(" +  Expense_Income_income_id  + ")" + " references " + TABLE_Income + " );";
-
-        db.execSQL(query6);*/
-
 
         String query7=" create table "+TABLE_MessMember_Group+ " ( "+
                 MessMember_Group_messmember_id +" INTEGER, "+
@@ -158,6 +120,20 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 " foreign key " + "(" + Notification_mid  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+
                 ");";
         db.execSQL(query8);
+
+        String query9= "create table " + TABLE_Income + " ( "+
+                Income_date + " TEXT , " +
+                Income_tag  + " TEXT , " +
+                Income_amount + "INTEGER );";
+
+        db.execSQL(query9);
+
+        String query4= "create table " + TABLE_Expense + " ( "+
+                Income_date + " TEXT , " +
+                Income_tag  + " TEXT , " +
+                Income_amount + "INTEGER );";
+
+        db.execSQL(query4);
 
     }
 

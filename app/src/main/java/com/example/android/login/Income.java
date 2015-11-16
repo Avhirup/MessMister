@@ -9,66 +9,49 @@ import java.util.Set;
  */
 public class Income {
     //Declarations
-        private  int income_id;
-        private int month;
-        private int year;
-        private HashSet<FeeCollected> fee_collected_set;
-        private HashSet<Expense> expenses;
-        private int amount_lost;
-        private int amount_earned;
-        private int profit;
-
+    private String date;
+    private String income_name;
+    private int amount;
     //Constructors
     public Income()
     {
-        month=Calendar.MONTH;
-        year=Calendar.YEAR;
-        fee_collected_set=new HashSet<FeeCollected>();
-        expenses=new HashSet<Expense>();
-        amount_lost=0;
-        amount_earned=0;
-        profit=0;
-
+        income_name="";
+        amount=0;
+    }
+    public Income(String income_name,int amount)
+    {
+        this.income_name=income_name;
+        this.amount=amount;
     }
 
     //Methods
 
-    public int getIncomeId() {
-        return income_id;
+    public void setIncomeName(String name) {
+        income_name=name;
     }
 
-    public int getMonth() {
-        return month;
+    public String getExpName() {
+        return expense_name;
     }
 
-    public int getYear() {
-        return year;
+    public int getExpID() {
+        return expense_id;
     }
 
-    public int getAmountLost() {
-            calculateAmountLost();
-            return amount_lost;
+    public void setAmount(int amount) {
+        this.amount=amount;
     }
 
-    public int  getAmountEarned() {
-            calculateAmountEarned();
-            return amount_earned;
+    public int getAmount() {
+        return amount;
     }
 
-    public int getProfit() {
-        calculateProfit();
-        return profit;
+    public String getDate()
+    {
+        return date;
     }
+    public void setDate()
+    {
 
-    private void calculateAmountLost() {
-            // TODO implement here
-        }
-
-    private void calculateAmountEarned() {
-            // TODO implement here
     }
-
-    private void calculateProfit() {
-            // TODO implement here
-    }
- }
+}
