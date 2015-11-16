@@ -75,6 +75,12 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(intent);
             return true;
         }
+        else if(id == R.id.action_add)
+        {
+            Intent intent = new Intent(this, CreateMember.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -95,6 +101,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             intent = new Intent(this, Balance.class);
         }  else if (menuItem.getItemId() == R.id.item7) {
             intent = new Intent(this, About.class);
+        }
+        else if(menuItem.getItemId() == R.id.nothing)
+        {
+            d.closeDrawer(GravityCompat.START);
+            return true;
         }
         d.closeDrawer(GravityCompat.START);
         startActivity(intent);
