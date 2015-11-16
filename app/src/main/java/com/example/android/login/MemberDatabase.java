@@ -77,31 +77,19 @@ public class MemberDatabase  {
     }
 
 
-    public Boolean edit(MessMember member) {
-        boolean check;
-        try {
-            String query = " update  " + loginDatabaseHelper.TABLE_MessMember +
-                    " set " +
-                    loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\", " +
-                    loginDatabaseHelper.MessMember_start_date + " = " +  member.getStart_date() + ", " +
-                    loginDatabaseHelper.MessMember_startof_month + " = " + member.getStartof_month() + ", " +
-                    loginDatabaseHelper.MessMember_is_active + " = " +  member.getIs_active() + ", " +
-                    loginDatabaseHelper.MessMember_rate_id + " = " +  member.getRate_id() + ", " +
-                    loginDatabaseHelper.MessMember_due_amt + " = " +  member.getDue_amount() + ", " +
-                    loginDatabaseHelper.MessMember_has_paid + " = " +  member.getHas_paid() + ", " +
-                    loginDatabaseHelper.MessMember_is_late + " = " + member.getIs_late() + ", " +
-                    loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\" " +
-                    loginDatabaseHelper.MessMember_img_id + " = " + "\"" + member.getImg_id() + "\" " +
-                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + member.getMember_id() + ";";
+    public void edit(MessMember member) {
 
-                   db.execSQL(query);
-                    check = true;
 
-        }
-        catch (Exception e ){
-            check = false;
-        }
-        return  check;
+        String query = " update  " + loginDatabaseHelper.TABLE_MessMember +
+                " set " +
+                loginDatabaseHelper.MessMember_name + " = " + "\"" + member.getName() + "\", " +
+                loginDatabaseHelper.MessMember_startof_month + " = " + "\""+member.getStartof_month() + "\", " +
+                loginDatabaseHelper.MessMember_rate_id + " = " +  member.getRate_id() + ", " +
+                loginDatabaseHelper.MessMember_phone + " = " + "\"" + member.getPhone() + "\" " +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + member.getMember_id() + ";";
+
+        db.execSQL(query);
+        Log.e("hello","hello");
     }
 
     public Cursor getMemberTable()
@@ -261,6 +249,50 @@ public class MemberDatabase  {
                 return count;
     }
 
+    public String getStartmonth(int member_id)
+    {
+        String query = " select * from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
+
+        Cursor cursor = db.rawQuery(query, null);
+        String a = null;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getString(3);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return a;
+    }
+
+
+    public String getPhone(int member_id)
+    {
+        String query = " select * from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        String a = null;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getString(9);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return a;
+    }
 
 }
 

@@ -15,16 +15,16 @@ import android.view.MotionEvent;
 import android.view.View;
 
 public class MemberDescription extends AppCompatActivity {
-
+    String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_description);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Tanmayee Chinchaleekar");
-
+        title = getSupportActionBar().getTitle().toString();
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapsingToolbarLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -59,5 +59,10 @@ public class MemberDescription extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void editMember(View view)
+    {
+        Intent intent = new Intent(this, EditMember.class);
+        intent.putExtra("name",title);
+        startActivity(intent);
+    }
 }

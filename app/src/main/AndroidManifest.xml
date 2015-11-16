@@ -77,6 +77,13 @@
             android:label="@string/title_activity_create_bill" >
         </activity>
 
+        <activity
+            android:name=".EditMember"
+            android:label="EditMember"
+            android:parentActivityName=".MemberDescription">
+
+        </activity>
+
         <receiver
             android:name=".NotificationReceiver"
             android:enabled="true"

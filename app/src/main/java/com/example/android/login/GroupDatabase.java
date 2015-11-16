@@ -85,7 +85,7 @@ public class GroupDatabase {
     public ArrayList<String> getGroupNames()
     {
         ArrayList<String> grouplist = new ArrayList<String>();
-        String query ="(select * from " + loginDatabaseHelper.TABLE_Group + ";";
+        String query ="select * from " + loginDatabaseHelper.TABLE_Group + ";";
         Cursor cursor = db.rawQuery(query,null);
         if(cursor==null)
             Log.e("he","in array cursor null");
@@ -125,4 +125,35 @@ public class GroupDatabase {
         return  a;
     }
 
+
+    public ArrayList<String> getcurrgrpNames(ArrayList<Integer> idlist)
+    {
+        ArrayList<String> a = new ArrayList<>();
+        String query ;
+        Cursor cursor;
+        for ( int i =0 ;i< idlist.size() ; i++)
+        {
+            query = " select * from " + loginDatabaseHelper.TABLE_Group +
+                    " where " + loginDatabaseHelper.Group_groupid + " = " + idlist.get(i).intValue() +";";
+
+
+            cursor = db.rawQuery(query,null);
+
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                a.add(cursor.getString(1));
+
+                //Log.e("Member table",tuple);
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        }
+
+        return a;
+    }
 }

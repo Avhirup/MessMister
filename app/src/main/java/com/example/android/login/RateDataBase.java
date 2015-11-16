@@ -143,4 +143,27 @@ public class RateDataBase {
         cursor.close();
         return grouplist;
     }
+
+    public String getCategory(int id)
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
+                " where "+ loginDatabaseHelper.Rate_rate_id+" = "+ id + ";";
+        Cursor cursor = db.rawQuery(query,null);
+
+
+        String a = null;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getString(1);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return a;
+    }
 }

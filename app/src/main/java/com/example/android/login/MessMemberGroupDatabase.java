@@ -1,9 +1,10 @@
 package com.example.android.login;
-
+import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by manjush on 10-11-2015.
@@ -37,5 +38,38 @@ public class MessMemberGroupDatabase {
         return  cursor;
     }
 
+
+    public ArrayList<Integer> getgrpids(int mid)
+    {
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        Cursor cursor;
+
+
+        String query = " select * from " + loginDatabaseHelper.TABLE_MessMember_Group +
+                " where " + loginDatabaseHelper.MessMember_Group_messmember_id + " = "+ mid + ";";
+
+        cursor = db.rawQuery(query,null);
+        if(cursor==null)
+
+            Log.e("he", "in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a.add(cursor.getInt(1));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return  a;
+
+    }
+
+    public  void  delete(int mid)
+    {
+        String query = " delete from " + loginDatabaseHelper.TABLE_MessMember_Group +
+                " where " + loginDatabaseHelper.MessMember_Group_messmember_id + " = " + mid + ";";
+        db.execSQL(query);
+    }
 
 }
