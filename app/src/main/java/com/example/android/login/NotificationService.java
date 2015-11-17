@@ -22,15 +22,17 @@ public class NotificationService extends IntentService {
 
     }
 
-    public  void notificationGenerator() {
-        while(true) {
+    public  void notificationGenerator()
+    {
+
             memberDatabase = new MemberDatabase(this);
 
             Cursor cursor = memberDatabase.getMember();  //modification made
             cursor.moveToFirst();
             Log.e("In Notification", "Notification Cursor");
             int j = 0;
-            while (!cursor.isAfterLast()) {
+            while (!cursor.isAfterLast())
+            {
                 int memberid = Integer.parseInt(cursor.getString(0));
                 String membername = cursor.getString(1);
                 String dueamount = cursor.getString(6);
@@ -69,13 +71,6 @@ public class NotificationService extends IntentService {
                 }
                 j++;
             }
-            try {
-                Thread.sleep(10 * 60 * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            j = 0;
-        }
     }
 
 

@@ -110,6 +110,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.login.Members" />
         </activity>
+
+        <receiver
+            android:name=".OnAlarmReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
     </application>
 
 </manifest>

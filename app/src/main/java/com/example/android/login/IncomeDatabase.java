@@ -36,7 +36,7 @@ public class IncomeDatabase {
         db.insert(loginDatabaseHelper.TABLE_Income,null,value);
 
     }
-
+/*
     public Cursor getMonth()
     {
 
@@ -75,5 +75,5 @@ public class IncomeDatabase {
 
 
 
-
+*/
 }
