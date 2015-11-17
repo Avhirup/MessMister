@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Name"
                     android:layout_margin="8dp"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapWords"
                     />
 
             </android.support.design.widget.TextInputLayout>
@@ -209,6 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:minWidth="134dp"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                 android:entries="@array/days"
                 android:spinnerMode="dropdown"
                 android:layout_column="2"

@@ -11,8 +11,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
@@ -20,9 +19,8 @@
             android:label="@string/title_activity_first_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"
-                    />
 
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -38,7 +36,6 @@
             android:label="@string/title_activity_members" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 />
             </intent-filter>
         </activity>
@@ -78,6 +75,8 @@
         <activity
             android:name=".CreateBill"
             android:label="@string/title_activity_create_bill" >
+        </activity>
+        <activity android:name=".MemberDescription" >
         </activity>
     </application>
 

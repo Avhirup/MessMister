@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -82,11 +83,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         return super.onOptionsItemSelected(item);
     }
 
-    public void choose(View view)
-    {
-        picker picker = new picker();
-        picker.show(this.getSupportFragmentManager(), "hello");
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -155,6 +152,10 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
          final AutoCompleteTextView member_fee_name = (AutoCompleteTextView)textEntryView.findViewById(R.id.member_fee_name);
          final AutoCompleteTextView amount_paid = (AutoCompleteTextView)textEntryView.findViewById(R.id.amount_paid);
+        member_fee_name.setThreshold(0);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, new MemberDatabase(this).getAllMembers());
+        member_fee_name.setAdapter(adapter);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
