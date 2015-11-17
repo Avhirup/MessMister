@@ -55,10 +55,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         else
             selectionId = savedInstanceState.getInt("selection");
 
-
-
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
+
+        //Sending Broadcast
+        Intent intent=new Intent();
+        intent.setAction("NOTIFICATION");
+        intent.addFlags(intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(intent);
     }
 
     @Override

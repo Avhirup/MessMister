@@ -1,6 +1,8 @@
 package com.example.android.login;
 
 
+import android.database.Cursor;
+
 /**
  * Created by manjush on 27-10-2015.
  */
@@ -42,4 +44,5 @@ public class Notification {
     public void setNotifyOn(String notifyOn) {
         this.notifyOn = notifyOn;
     }
+
 }

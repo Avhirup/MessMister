@@ -76,6 +76,31 @@
             android:name=".CreateBill"
             android:label="@string/title_activity_create_bill" >
         </activity>
+
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".NotificationService"
+            android:exported="false" >
+        </service>
+
+        <receiver
+            android:name=".SnoozeReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="SNOOZE" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".MemberDescription" >
         </activity>
     </application>
