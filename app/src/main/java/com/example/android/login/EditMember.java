@@ -1,40 +1,40 @@
 package com.example.android.login;
 
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class CreateMember extends AppCompatActivity {
+/**
+ * Created by manjush on 14-11-2015.
+ */
+public class EditMember extends AppCompatActivity {
+
 
     Toolbar toolbar;
-    public int year, month;
-    public int day;
+    public int year, day, month;
     LoginDatabaseHelper loginDatabaseHelper;
     static SQLiteDatabase sqLiteDatabase=null;
-
+    public static boolean gflg , rflg ;
     MemberDatabase memberDatabase;
     MessMemberGroupDatabase memberGroupDatabase;
     GroupDatabase groupDatabase;
@@ -42,26 +42,66 @@ public class CreateMember extends AppCompatActivity {
     AutoCompleteTextView name;
     AutoCompleteTextView phone;
     Spinner dayspin;
-    MessMember m;
+    MessMember m,mprev;
     MessMemberGroup memberGroup;
     public static ArrayList<String> selectedItms;
     public ArrayList<Integer> grpidlist;
-    Button rate;
+    public ArrayList<Integer>currgrpIdlist;
+    public static ArrayList<String>currgrpNames;
+    int rid,mid;
     public static String ratecategory;
+    public static String r_category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_member);
         toolbar = (Toolbar)findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
-        final Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
-        displayDate();
+
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+
+        memberDatabase = new MemberDatabase(this);
+        memberGroupDatabase = new MessMemberGroupDatabase(this);
+        groupDatabase = new GroupDatabase(this);
+        rateDataBase  = new RateDataBase(this);
+        gflg = false;
+        rflg = false;
+        name = (AutoCompleteTextView)findViewById(R.id.name);
+        phone = (AutoCompleteTextView)findViewById(R.id.phone);
+        dayspin = (Spinner)findViewById(R.id.dayspin);
+
+        Intent intent = getIntent();
+        String mem_name  = intent.getStringExtra("name");
+        CharSequence mname =mem_name;
+        name.setText(mname);
+
+        mprev = new MessMember();
+        mprev.setName(mem_name);
+        mid = memberDatabase.getMemberId(mprev);
+        String mem_phone = memberDatabase.getPhone(mid);
+        CharSequence mphone = mem_phone;
+        phone.setText(mphone);
+
+        String st_date = memberDatabase.getStartmonth(mid);
+
+
+        Date Sdate = Date.valueOf(st_date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(Sdate);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        year = cal.get(Calendar.YEAR);
+        displayDate();
+
+        rid = memberDatabase.getrate_id(mid);
+        r_category = rateDataBase.getCategory(rid);
+
+        currgrpIdlist = new ArrayList<>(memberGroupDatabase.getgrpids(mid));
+        currgrpNames = new ArrayList<>(groupDatabase.getcurrgrpNames(currgrpIdlist));
+
         if(selectedItms!=null)
         {
             if(selectedItms.size()!=0)
@@ -89,58 +129,60 @@ public class CreateMember extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.action_done) {
             // Log.e("kk","jj");
-            memberDatabase = new MemberDatabase(this);
-            memberGroupDatabase = new MessMemberGroupDatabase(this);
-            groupDatabase = new GroupDatabase(this);
-            rateDataBase  = new RateDataBase(this);
-            name = (AutoCompleteTextView)findViewById(R.id.name);
-            phone = (AutoCompleteTextView)findViewById(R.id.phone);
-            dayspin = (Spinner)findViewById(R.id.dayspin);
+
 
 
             String mname = name.getText().toString();
-            String mphone = phone.getText().toString();
-
+            String memphone = phone.getText().toString();
+            Log.e("mphone",memphone);
+            int rate_id;
             int day1 = dayspin.getSelectedItemPosition()+1;
-            String start_date = Integer.toString(year)+ "-" + Integer.toString(month) +"-"+Integer.toString(day1);
+            Log.e("year",Integer.toString(year));
+            Log.e("month",Integer.toString(month));
+            Log.e("day",Integer.toString(day1));
 
-            int rate_id = rateDataBase.getrateId(ratecategory);
+            String start_date = Integer.toString(year)+ "-" + Integer.toString(month+1)+"-"+Integer.toString(day1) ;
+            if(rflg)
+                rate_id = rateDataBase.getrateId(ratecategory);
+            else
+                rate_id = rid;
 
             m = new MessMember();
+            m.setMember_id(mid);
             m.setName(mname);
-            m.setStart_date(start_date);
             m.setStartof_month(start_date);
-            m.setDue_amount(0);
-            m.setHas_paid(true);
-            m.setIs_active(true);
-            m.setIs_late(false);
-            m.setPhone(mphone);
+            m.setPhone(memphone);
             m.setRate_id(rate_id);
+            Log.e("before",m.getPhone());
+            memberDatabase.edit(m);
+            Log.e("after",memberDatabase.getPhone(1));
+            //Log.e("b",);
+            //int mid = memberDatabase.getMemberId(m);
+            //Log.d("getid", Integer.toString(mid));
+            Log.e("after", memberDatabase.getPhone(mid));
+            if(gflg) {
+                grpidlist = new ArrayList<Integer>(groupDatabase.getgrpIdlist(selectedItms));
+                memberGroupDatabase.delete(mid);
+                int a;
+                for (int i = 0; i < grpidlist.size(); i++) {
+                    try {
+                        a = grpidlist.get(i).intValue();
+                        Log.d("in loop", Integer.toString(a));
+                        memberGroup = new MessMemberGroup(mid, a);
+                        memberGroupDatabase.add(memberGroup);
+                    } catch (Exception e) {
+                    }
 
-            memberDatabase.add(m);
-            int mid = memberDatabase.getMemberId(m);
-            Log.d("getid", Integer.toString(mid));
-
-            grpidlist = new ArrayList<Integer>(groupDatabase.getgrpIdlist(selectedItms));
-            int a;
-            for(int i=0 ; i<grpidlist.size();i++)
-            {
-                try{
-                    a = grpidlist.get(i).intValue();
-                    Log.d("in loop", Integer.toString(a));
-                    memberGroup = new MessMemberGroup(mid,a);
-                    memberGroupDatabase.add(memberGroup);
                 }
-                catch(Exception e){}
-
             }
-
 
             String q = "select * from " + loginDatabaseHelper.TABLE_MessMember + ";";
             Cursor cursor = sqLiteDatabase.rawQuery(q,null);
-            if(cursor==null)
-                Log.e("he","in array cursor null");
-            cursor.moveToFirst();
+            try{
+                if(cursor==null)
+                    Log.e("he","in array cursor null");
+                cursor.moveToFirst();}
+            catch (Exception e){}
             while(!cursor.isAfterLast())
             {
 
@@ -153,9 +195,11 @@ public class CreateMember extends AppCompatActivity {
             cursor.close();
             String qt = "select * from " + loginDatabaseHelper.TABLE_MessMember_Group + ";";
             Cursor cursor1 = sqLiteDatabase.rawQuery(qt,null);
-            if(cursor1==null)
-                Log.e("he","in array cursor null");
-            cursor1.moveToFirst();
+            try{
+                if(cursor1==null)
+                    Log.e("he","in array cursor null");
+                cursor1.moveToFirst();}
+            catch(Exception e){}
             while(!cursor1.isAfterLast())
             {
 
@@ -166,6 +210,7 @@ public class CreateMember extends AppCompatActivity {
                 cursor1.moveToNext();
             }
             cursor1.close();
+
 
             Log.e("done","done");
             NavUtils.navigateUpFromSameTask(this);
@@ -189,33 +234,50 @@ public class CreateMember extends AppCompatActivity {
 
     public void addGroups(View view)
     {
-        Groupdialog groupdialog = new Groupdialog();
+        EditGroupdialog groupdialog = new EditGroupdialog();
         groupdialog.show(this.getSupportFragmentManager(), "hello");
     }
 
     public void addRate(View view)
     {
-        Ratedialog ratedialog= new Ratedialog();
+        EditRatedialog ratedialog= new EditRatedialog();
         ratedialog.show(this.getSupportFragmentManager(), "hello");
     }
 
 
 
-    public static class Groupdialog extends DialogFragment {
-
+    public static class EditGroupdialog extends DialogFragment {
+        int flg;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             // Set the dialog title
-            final ArrayList<String> mSelectedItems = new ArrayList<String>();
+            final ArrayList<String> mSelectedItems = new ArrayList<String>(EditMember.currgrpNames);
             Context context = getContext();
             GroupDatabase groupDatabase = new GroupDatabase(context);
             String gname = null;
             ArrayList<String> grpnames = new ArrayList<String>(groupDatabase.getGroupNames());
             final CharSequence [] names = grpnames.toArray(new CharSequence[grpnames.size()]);
+            final boolean [] checkval = new boolean[grpnames.size()];
+            EditMember.gflg = false;
+            for(int i=0;i<grpnames.size();i++)
+            {
+                flg = 0;
+                for(int j=0 ; j < EditMember.currgrpNames.size();j++)
+                {
+                    if(grpnames.get(i).equals(EditMember.currgrpNames.get(j)))
+                        flg = 1;
+
+                }
+                if(flg == 1)
+                    checkval[i] = true;
+                else
+                    checkval[i] = false;
+            }
+
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
-                    .setMultiChoiceItems(names,null,new DialogInterface.OnMultiChoiceClickListener() {
+                    .setMultiChoiceItems(names,checkval,new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
 
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -242,8 +304,8 @@ public class CreateMember extends AppCompatActivity {
                             // or return them to the component that opened the dialog
                             for(int i=0;i<mSelectedItems.size();i++)
                                 Log.e("mselected",mSelectedItems.get(i));
-                            CreateMember.selectedItms = new ArrayList<String>(mSelectedItems);
-
+                            EditMember.selectedItms = new ArrayList<String>(mSelectedItems);
+                            EditMember.gflg = true;
 
                         }
                     })
@@ -267,8 +329,8 @@ public class CreateMember extends AppCompatActivity {
         }
     }
 
-    public static class Ratedialog extends DialogFragment {
-        int pos;
+    public static class EditRatedialog extends DialogFragment {
+        int pos,i;
         String name = null;
 
         @NonNull
@@ -280,8 +342,15 @@ public class CreateMember extends AppCompatActivity {
             ArrayList<String>rate_category = new ArrayList<String>(r.getcategoryNames());
             final CharSequence[] category = rate_category.toArray(new CharSequence[rate_category.size()]);
             // Set the dialog title
+            EditMember.rflg = false;
+            for(i = 0; i<rate_category.size() ; i++)
+            {
+                if(rate_category.get(i).equals(EditMember.r_category))
+                    break;
+            }
+
             AlertDialog.Builder builder1 = builder.setTitle("Set Rate")
-                    .setSingleChoiceItems(category,-1,new DialogInterface.OnClickListener() {
+                    .setSingleChoiceItems(category,i,new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Log.d("rate pos ",Integer.toString(which));
@@ -295,7 +364,8 @@ public class CreateMember extends AppCompatActivity {
                             // User clicked OK, so save the mSelectedItems results somewhere
                             // or return them to the component that opened the dialog
                             //Log.d("rate pos id ",Integer.toString(rid));
-                            CreateMember.ratecategory = name;
+                            EditMember.ratecategory = name;
+                            EditMember.rflg = true;
                             //Log.d("cr rate_id",Integer.toString(CreateMember.rate_id));
                         }
                     })
@@ -346,4 +416,14 @@ public class CreateMember extends AppCompatActivity {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
 
