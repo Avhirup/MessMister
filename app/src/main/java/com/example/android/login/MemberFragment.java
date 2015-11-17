@@ -28,6 +28,7 @@ public class MemberFragment extends Fragment
     public static MemberFragment newInstance(int position)
     {
         MemberFragment memberFragment = new MemberFragment();
+        memberFragment.position = position;
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, position);
         memberFragment.setArguments(args);
@@ -38,16 +39,20 @@ public class MemberFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-
-        View view = inflater.inflate(R.layout.member_list, container, false);
+        View view;
+        if(position == 4)
+            view = inflater.inflate(R.layout.group_fragment, container, false);
+        else
+        {
+        view = inflater.inflate(R.layout.member_list, container, false);
         recycleAdapter = new RecycleAdapter(getContext());
         position = getArguments().getInt(ARG_SECTION_NUMBER);
         recycleAdapter.setPosition(position);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(recycleAdapter);
+        recyclerView.setAdapter(recycleAdapter);}
         return view;
+
     }
 
 

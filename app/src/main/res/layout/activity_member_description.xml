@@ -101,7 +101,6 @@
                     android:layout_gravity="fill"
                     android:layout_weight="2"
                     android:paddingTop="12dp"
-                    android:textIsSelectable="true"
                     android:text="Membership Status"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
@@ -139,7 +138,6 @@
                         android:layout_gravity="fill"
                         android:layout_weight="2"
                         android:paddingTop="12dp"
-                        android:textIsSelectable="true"
                         android:text="Payment Status"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -180,7 +178,6 @@
                         android:layout_gravity="fill"
                         android:layout_weight="2"
                         android:paddingTop="12dp"
-                        android:textIsSelectable="true"
                         android:text="Amount Due "/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -221,7 +218,6 @@
                         android:layout_gravity="fill"
                         android:layout_weight="2"
                         android:paddingTop="12dp"
-                        android:textIsSelectable="true"
                         android:text="Month Starts on"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -261,7 +257,6 @@
                         android:layout_gravity="fill"
                         android:layout_weight="2"
                         android:paddingTop="12dp"
-                        android:textIsSelectable="true"
                         android:text="Joining Date"/>
                     <TextView
                         android:layout_width="wrap_content"
