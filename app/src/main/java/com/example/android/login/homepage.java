@@ -85,11 +85,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         return super.onOptionsItemSelected(item);
     }
 
-    public void choose(View view)
-    {
-        picker picker = new picker();
-        picker.show(this.getSupportFragmentManager(), "hello");
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
