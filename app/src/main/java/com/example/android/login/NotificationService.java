@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class NotificationService extends IntentService {
     //comment
     MemberDatabase memberDatabase=null;
-    private final static int PERIOD= 2 * 1000;
+    private final static int PERIOD= 2 *60* 1000;
     public NotificationService() {
         super("NotificationService");
         Log.e("In Notification Service", "Database Starting");

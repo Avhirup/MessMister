@@ -10,7 +10,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 public class NotificationReceiver extends BroadcastReceiver {
-    final int PERIOD =1000;
+    final int PERIOD =10*60*1000;
     public NotificationReceiver() {
         Log.e("helper","IN NOTIFICATION RECEIVER");
     }
