@@ -49,10 +49,10 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
 
         //Sending Broadcast
-        Intent intent = new Intent();
-        intent.setAction("NOTIFICATION");
-        intent.addFlags(intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        sendBroadcast(intent);
+        //Intent intent = new Intent();
+        //intent.setAction("NOTIFICATION");
+        //intent.addFlags(intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        //sendBroadcast(intent);
     }
 
     @Override
