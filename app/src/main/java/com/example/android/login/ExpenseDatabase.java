@@ -2,7 +2,9 @@ package com.example.android.login;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,11 +28,17 @@ public class ExpenseDatabase {
         ContentValues value = new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
-        value.put(loginDatabaseHelper.Expense_date,date);
-        value.put(loginDatabaseHelper.Expense_tag,expense.getExpName());
-        value.put(loginDatabaseHelper.Expense_amount,expense.getAmount());
 
-        db.insert(loginDatabaseHelper.TABLE_Income,null,value);
+        String query="insert into "+LoginDatabaseHelper.TABLE_Expense+
+                " values ( \""+ date +"\" , \""+expense.getExpName()+"\" , "+expense.getAmount()+" ) ; ";
+        Log.e("helper",query);
+        db.execSQL(query);
 
+    }
+
+    public Cursor getExpense()
+    {
+        String query="select * from "+LoginDatabaseHelper.TABLE_Expense+" ;";
+        return db.rawQuery(query,null);
     }
 }

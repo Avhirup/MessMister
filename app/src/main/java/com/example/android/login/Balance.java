@@ -16,6 +16,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.Calendar;
 
 public class Balance extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -123,6 +126,11 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
             super.onBackPressed();
     }
 
+    public void CSVFile(View view)
+    {
+        GenerateCSV generateCSV=new GenerateCSV("MessMisterSpreadsheet.csv",this);
+    }
+
     public class PagerAdapter extends FragmentStatePagerAdapter
     {
 
@@ -150,6 +158,8 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
             else
                 return "YEAR VIEW";
         }
+
+
 
 
     }

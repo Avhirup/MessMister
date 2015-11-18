@@ -14,7 +14,7 @@ public class WhatsappReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "kripya udya paise aana");
         sendIntent.setType("text/plain");
         sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Log.e("SMSWhatsapp", "Pressed YES");

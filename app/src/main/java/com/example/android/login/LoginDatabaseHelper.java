@@ -51,7 +51,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Income_tag="_tag";
     public final String Income_amount="_amount";
 
-    private final static  String TABLE_Expense= "Expense ";
+    public final static  String TABLE_Expense= "Expense ";
     public final String Expense_date="_date";
     public final String Expense_tag="_tag";
     public final String Expense_amount="_amount";
@@ -129,9 +129,9 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query9);
 
         String query4= "create table " + TABLE_Expense + " ( "+
-                Income_date + " TEXT , " +
-                Income_tag  + " TEXT , " +
-                Income_amount + "INTEGER );";
+                Expense_date + " TEXT , " +
+                Expense_tag  + " TEXT , " +
+                Expense_amount + "INTEGER );";
 
         db.execSQL(query4);
 

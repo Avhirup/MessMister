@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -27,14 +28,19 @@ public class IncomeDatabase {
 
     public void add(Income income) {
         ContentValues value = new ContentValues();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
-        value.put(loginDatabaseHelper.Income_date,date);
-        value.put(loginDatabaseHelper.Income_tag,income.getIncomeName());
-        value.put(loginDatabaseHelper.Income_amount,income.getAmount());
+        String query="insert into "+LoginDatabaseHelper.TABLE_Income+
+                " values ( \""+ date +"\" , \""+income.getIncomeName()+"\" , "+income.getAmount()+" ) ; ";
+        Log.e("helper", query);
+        db.execSQL(query);
 
-        db.insert(loginDatabaseHelper.TABLE_Income,null,value);
+    }
 
+    public Cursor getIncome()
+    {
+        String query="select * from "+LoginDatabaseHelper.TABLE_Income+" ;";
+        return db.rawQuery(query,null);
     }
 /*
     public Cursor getMonth()
