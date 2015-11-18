@@ -65,11 +65,55 @@ public class MessMemberGroupDatabase {
 
     }
 
+
+    public ArrayList<Integer> getmidlist(int grpid)
+    {
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        Cursor cursor;
+
+
+        String query = " select * from " + loginDatabaseHelper.TABLE_MessMember_Group +
+                " where " + loginDatabaseHelper.MessMember_Group_group_id + " = "+ grpid + ";";
+
+        cursor = db.rawQuery(query,null);
+        if(cursor==null)
+
+            Log.e("he", "in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a.add(cursor.getInt(0));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return  a;
+
+    }
+
     public  void  delete(int mid)
     {
         String query = " delete from " + loginDatabaseHelper.TABLE_MessMember_Group +
                 " where " + loginDatabaseHelper.MessMember_Group_messmember_id + " = " + mid + ";";
         db.execSQL(query);
     }
+
+
+    public  void  delete(int mid,int grpid)
+    {
+        String query = " delete from " + loginDatabaseHelper.TABLE_MessMember_Group +
+                " where " + loginDatabaseHelper.MessMember_Group_messmember_id + " = " + mid + " and " +
+                    loginDatabaseHelper.MessMember_Group_group_id + " = " + grpid +";";
+        db.execSQL(query);
+    }
+
+    public  void  deletebyGrp(int grpId)
+    {
+        String query = " delete from " + loginDatabaseHelper.TABLE_MessMember_Group +
+                " where " + loginDatabaseHelper.MessMember_Group_group_id + " = " + grpId + ";";
+        db.execSQL(query);
+    }
+
 
 }

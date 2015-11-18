@@ -16,6 +16,7 @@ public class Groups extends AppCompatActivity {
 
     RecycleAdapter recycleAdapter;
     RecyclerView recyclerView;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,10 @@ public class Groups extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
+
+        name  = intent.getStringExtra("grpname");
+        getSupportActionBar().setTitle(name);
         recycleAdapter = new RecycleAdapter(this);
         recycleAdapter.setPosition(5);
         recyclerView = (RecyclerView)findViewById(R.id.recycle_list);
@@ -42,7 +47,12 @@ public class Groups extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
+        if(id == R.id.delete)
+        {
+            int grpid = new GroupDatabase(getApplicationContext()).getgrpId(name);
+            new MessMemberGroupDatabase(getApplicationContext()).deletebyGrp(grpid);
+            new GroupDatabase(getApplicationContext()).deletebyName(name);
+        }
         return super.onOptionsItemSelected(item);
     }
 

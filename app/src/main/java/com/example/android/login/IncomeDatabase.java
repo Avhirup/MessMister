@@ -37,7 +37,7 @@ public class IncomeDatabase {
 
     }
 
-    public Cursor getMonth()
+   /* public Cursor getMonth()
     {
 
     }
@@ -69,7 +69,7 @@ public class IncomeDatabase {
     public Cursor groupByYear(int year)
     {
 
-    }
+    }*/
 
 
 

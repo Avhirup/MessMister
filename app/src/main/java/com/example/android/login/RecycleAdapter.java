@@ -30,7 +30,8 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
     public Context context1;
     List<String> list = new ArrayList<>();
-    int position;
+    public  int position;
+    public static String grpname,memberName;
 
     LayoutInflater inflater;
     public RecycleAdapter(Context context)
@@ -76,47 +77,25 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     public void setList()
     {
         if(position == 1) {
-            this.list.add(new String("Medha Naik"));
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("Isha Gulavani"));
-            this.list.add(new String("Tejal Sarda"));
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("item1"));
+           this.list = new MemberDatabase(context1).getlateMemberslist();
         }
         else if(position == 2)
         {
-            this.list.add(new String("Isha Gulavani"));
-            this.list.add(new String("Tejal Sarda"));
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("item1"));
+            this.list = new MemberDatabase(context1).getDueMemberslist();
         }
         else if(position == 3)
         {
 
-            this.list.add(new String("Tejal Sarda"));
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("item1"));
+            this.list = new  MemberDatabase(context1).getAllMembers();
         }
         else if (position == 4)
         {
-            this.list = new  MemberDatabase(context1).getAllMembers();
 
+            this.list = new GroupDatabase(context1).getGroupNames();
         }
         else if(position == 5)
         {
-            this.list.add(new String("Tejal Sarda"));
-            this.list.add(new String("Ambika Kale"));
-            this.list.add(new String("Manjusha Pednekar"));
-            this.list.add(new String("Tanmayee Chinchlikar"));
-            this.list.add(new String("item1"));
+            this.list = new MemberDatabase(context1).getNamesbyidlist(new MessMemberGroupDatabase(context1).getmidlist(new GroupDatabase(context1).getgrpId(grpname)));
         }
 
     }
@@ -132,19 +111,31 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
 
             super(itemView);
+
             textView = (TextView)itemView.findViewById(R.id.member_name);
+
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    String name;
                     if(position == 4)
                     {
+
+                        RecycleAdapter.grpname = textView.getText().toString();
+                        Log.e("grpname", RecycleAdapter.grpname);
                         Intent intent = new Intent(context1, Groups.class);
+                        intent.putExtra("grpname", RecycleAdapter.grpname);
                         context1.startActivity(intent);
+
+
                     }
                     else {
+                         name = textView.getText().toString();
+                        RecycleAdapter.memberName = name;
                         Intent intent = new Intent(context1, MemberDescription.class);
+                        intent.putExtra("name",name);
                         context1.startActivity(intent);
+
                     }
                 }
             });
@@ -187,15 +178,28 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     }
                     else if(id == R.id.group_extend)
                     {
-                            ExtendPeriod extendPeriod = new ExtendPeriod(context1);
-                        extendPeriod.show();;
+                        ExtendPeriod extendPeriod = new ExtendPeriod(context1,0);
+                        extendPeriod.show();
                     }
                     else if(id == R.id.activity)
                     {
+                        int grpid = new GroupDatabase(context1).getgrpId(RecycleAdapter.grpname);
+                        ArrayList<Integer> midlist = new MessMemberGroupDatabase(context1).getmidlist(grpid);
+                        new MemberDatabase(context1).setgrpInactive(midlist);
 
                     }
                     else if(id == R.id.group_remove)
-                    {}
+                    {
+                        Log.e("membername",RecycleAdapter.memberName);
+                        Log.e("grpname",RecycleAdapter.grpname);
+                        int mid = new MemberDatabase(context1).getMemberIdbyName(RecycleAdapter.memberName);
+
+                        int grpid = new GroupDatabase(context1).getgrpId(RecycleAdapter.grpname);
+                        new MessMemberGroupDatabase(context1).delete(mid,grpid);
+                       /* RecycleAdapter.position = 5;
+                        setList();*/
+
+                    }
                     return false;
                 }
             });

@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by medha on 27/10/15.
@@ -62,18 +65,13 @@ public class MemberDatabase  {
         return a;
     }
 
-    public Boolean delete(Integer id)
+    public void delete(Integer id)
     {
-        boolean check;
-        try {
-            String query = " delete from" + loginDatabaseHelper.TABLE_MessMember + " where " + loginDatabaseHelper.MessMember_member_id + " = " + id ;
+
+            String query = " delete from " + loginDatabaseHelper.TABLE_MessMember + " where " + loginDatabaseHelper.MessMember_member_id + " = " + id +";";
             db.execSQL(query);
-            check = true;
-        }
-        catch (Exception e){
-            check = false;
-        }
-        return  check;
+
+
     }
 
 
@@ -89,7 +87,7 @@ public class MemberDatabase  {
                 " where " + loginDatabaseHelper.MessMember_member_id + " = " + member.getMember_id() + ";";
 
         db.execSQL(query);
-        Log.e("hello","hello");
+        Log.e("hello", "hello");
     }
 
     public Cursor getMemberTable()
@@ -142,6 +140,25 @@ public class MemberDatabase  {
         return cursor;
     }
 
+    public ArrayList<String> getlateMemberslist()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where " +loginDatabaseHelper.MessMember_is_late + " = 1"+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
+    }
+
     public Cursor getDueMembers()
     {
         ArrayList<String> memberlist = new ArrayList<String>();
@@ -161,6 +178,28 @@ public class MemberDatabase  {
 
         return cursor;
     }
+
+    public ArrayList<String> getDueMemberslist()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query ="select * from " + loginDatabaseHelper.TABLE_MessMember +
+                " where _id NOT IN "+ "(select _id from " + loginDatabaseHelper.TABLE_MessMember +
+                " where " +loginDatabaseHelper.MessMember_due_amt + " = 0)"+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return memberlist;
+    }
+
 
     public int getrate_id(int _id)
     {
@@ -221,7 +260,7 @@ public class MemberDatabase  {
 
     public String getMembername(int member_id)
     {
-        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember +
+        String query = " select * from " +  loginDatabaseHelper.TABLE_MessMember +
                 " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
 
         Cursor cursor = db.rawQuery(query,null);
@@ -294,6 +333,225 @@ public class MemberDatabase  {
         return a;
     }
 
+
+    public String getMemberstartdate(int member_id)
+    {
+        String query = " select * from "  +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        String a = null;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getString(2);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
+
+
+    public int getMemberIsActive(int member_id)
+    {
+        String query = " select * from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + "\"" + member_id + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        int a = 0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(4);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
+
+    public void setActive(int id)
+    {
+
+        String query = " update  " + loginDatabaseHelper.TABLE_MessMember +
+                " set " +
+                loginDatabaseHelper.MessMember_is_active + " = 1" +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + id + ";";
+
+        db.execSQL(query);
+    }
+
+    public void setInActive(int id)
+    {
+
+        String query = " update  " + loginDatabaseHelper.TABLE_MessMember +
+                " set " +
+                loginDatabaseHelper.MessMember_is_active + " = 0" +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + id + ";";
+
+        db.execSQL(query);
+    }
+
+    public ArrayList<String> getNamesbyidlist(ArrayList<Integer> idlist)
+    {
+        ArrayList<String> a = new ArrayList<>();
+        String query ;
+        Cursor cursor;
+        for ( int i =0 ;i< idlist.size() ; i++)
+        {
+            query = " select * from " + loginDatabaseHelper.TABLE_MessMember +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + idlist.get(i).intValue() +";";
+
+
+            cursor = db.rawQuery(query,null);
+
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                a.add(cursor.getString(1));
+
+                //Log.e("Member table",tuple);
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        }
+
+        return a;
+    }
+
+    public int getMemberIdbyName(String member)
+    {
+        String query = " select " +loginDatabaseHelper.MessMember_member_id + " from " +  loginDatabaseHelper.TABLE_MessMember +
+                " where " + loginDatabaseHelper.MessMember_name + " = " + "\"" + member + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(0);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
+
+    public void setgrpInactive(ArrayList<Integer> mid) {
+        String query = null;
+        for (int i = 0; i < mid.size(); i++)
+        {
+             query =  " update  " + loginDatabaseHelper.TABLE_MessMember +
+                    " set " +
+                    loginDatabaseHelper.MessMember_is_active + " = " + 0  +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid.get(i) + ";";
+
+            db.execSQL(query);
+        }
+
+    }
+
+    public void extendperiod(ArrayList<Integer> mid ,int period)
+    {
+
+        String query1;
+        String query2;
+        String st_date = null;
+        Cursor cursor;
+        int month,day,year;
+        for (int i =0 ; i < mid.size() ;i++)
+        {
+            query1 = " select * from " + loginDatabaseHelper.TABLE_MessMember +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid.get(i) + ";";
+            cursor = db.rawQuery(query1,null);
+
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                st_date =cursor.getString(3);
+
+                //Log.e("Member table",tuple);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+
+            Calendar cal = Calendar.getInstance();
+            try{
+            cal.setTime(sdf.parse(st_date));
+            }catch (Exception e){}
+            cal.add(Calendar.DATE, period);
+            st_date = sdf.format(cal.getTime());
+
+            query2 =  " update  " + loginDatabaseHelper.TABLE_MessMember +
+                    " set " +
+                    loginDatabaseHelper.MessMember_startof_month + " = " + "\"" + st_date +"\"" +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid.get(i) + ";";
+
+            db.execSQL(query2);
+        }
+    }
+
+
+    public void extendperiodbyMid(int mid ,int period)
+    {
+
+        String query1;
+        String query2;
+        String st_date = null;
+        Cursor cursor;
+        int month,day,year;
+
+            query1 = " select * from " + loginDatabaseHelper.TABLE_MessMember +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid + ";";
+            cursor = db.rawQuery(query1,null);
+
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                st_date =cursor.getString(3);
+
+                //Log.e("Member table",tuple);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+
+            Calendar cal = Calendar.getInstance();
+            try{
+                cal.setTime(sdf.parse(st_date));
+            }catch (Exception e){}
+            cal.add(Calendar.DATE, period);
+            st_date = sdf.format(cal.getTime());
+
+            query2 =  " update  " + loginDatabaseHelper.TABLE_MessMember +
+                    " set " +
+                    loginDatabaseHelper.MessMember_startof_month + " = " + "\"" + st_date +"\"" +
+                    " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid + ";";
+
+            db.execSQL(query2);
+
+    }
 }
 
 
