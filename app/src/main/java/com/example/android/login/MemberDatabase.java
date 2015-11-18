@@ -92,6 +92,15 @@ public class MemberDatabase  {
         Log.e("hello","hello");
     }
 
+    public void changeDueAmount(int m_id,int dueAmount)
+    {
+        String query = "update " + loginDatabaseHelper.TABLE_MessMember+ " set "+
+                loginDatabaseHelper.MessMember_due_amt+" = "+dueAmount+
+                " where "+loginDatabaseHelper.MessMember_member_id+" = "+m_id+ ";";
+        Log.e("In MD",query);
+        db.execSQL(query);
+
+    }
     public Cursor getMemberTable()
     {
         String query = "select * from " + loginDatabaseHelper.TABLE_MessMember +";";

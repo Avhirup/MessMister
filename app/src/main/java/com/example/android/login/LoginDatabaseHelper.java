@@ -96,7 +96,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 MessMember_is_active + " INTEGER, " +
                 MessMember_rate_id + " INTEGER, " +
                 MessMember_due_amt + " INTEGER, " +
-                MessMember_has_paid + " INTEGER, " +
+                MessMember_has_paid + " BOOLEAN, " +
                 MessMember_is_late + " INTEGER, " +
                 MessMember_phone + " Text, " +
                 MessMember_img_id + " INTEGER, "+

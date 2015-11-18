@@ -37,9 +37,10 @@ public class NotificationDatabase {
                         " set " +
                         loginDatabaseHelper.Notification_notifyOn  + " = " + "\"" + notification.getNotifyOn()+"\"" +
                         " where " +
-                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + "and" +
+                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + " and " +
                         loginDatabaseHelper.Notification_mid + " = " + notification.getMember_id() +
                         ";";
+        Log.e("Notification database",query);
         db.execSQL(query);
     }
 

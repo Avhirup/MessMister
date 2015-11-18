@@ -69,10 +69,20 @@ public class RateDataBase {
     public Cursor getAmount(String category)
     {
         String query="select "+loginDatabaseHelper.Rate_amount+" from "+loginDatabaseHelper.TABLE_Rate+
-                " where "+loginDatabaseHelper.TABLE_Rate+"."+loginDatabaseHelper.Rate_category+" = "+category+";";
+                " where "+loginDatabaseHelper.TABLE_Rate+"."+loginDatabaseHelper.Rate_category+" = "+category+" ;";
 
         Cursor cursor=db.rawQuery(query,null);
         return cursor;
+    }
+
+    public int getAmount(int rate_id)
+    {
+        String query="select "+loginDatabaseHelper.Rate_amount+" from "+loginDatabaseHelper.TABLE_Rate+" where "
+                +loginDatabaseHelper.Rate_rate_id+" = "+rate_id+" ;";
+        Cursor cursor=db.rawQuery(query,null);
+        cursor.moveToFirst();
+        return  Integer.parseInt(cursor.getString(0));
+
     }
 
     public Cursor getRateTable()

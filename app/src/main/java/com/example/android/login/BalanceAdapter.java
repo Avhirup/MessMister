@@ -22,7 +22,7 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
     public Context context1;
     ValuesAdapter valuesAdapter;
     RecyclerView recyclerView;
-    List<String> list = new ArrayList<>();
+    List<String> lqwoist = new ArrayList<>();
     int position;
 
     LayoutInflater inflater;
