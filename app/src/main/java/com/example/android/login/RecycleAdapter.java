@@ -33,7 +33,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     List<String> list = new ArrayList<>();
     public  int position;
     public static String grpname=null,memberName=null;
-
+    String group_name;
     LayoutInflater inflater;
     public RecycleAdapter(Context context)
     {
@@ -51,6 +51,10 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         return vHolder;
     }
 
+    public void setgrpname(String name)
+    {
+        group_name = name;
+    }
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
 
@@ -102,10 +106,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         else if(position == 5)
         {
             this.list = new MemberDatabase(context1).getNamesbyidlist(new MessMemberGroupDatabase(context1).getmidlist(new GroupDatabase(context1).getgrpId(grpname)));
-            for(int i =0 ; i< this.list.size(); i++)
-            {
-                Log.e("member",this.list.get(i));
-            }
+
 
         }
 
@@ -138,6 +139,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                         Intent intent = new Intent(context1, Groups.class);
                         intent.putExtra("grpname", RecycleAdapter.grpname);
                         context1.startActivity(intent);
+
 
 
                     }
@@ -211,11 +213,11 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     }
                     else if(id == R.id.group_remove)
                     {
+                        String meberName = textView.getText().toString();
+                        Log.e("mname",meberName);
+                        int mid = new MemberDatabase(context1).getMemberIdbyName(meberName);
 
-                        Log.e("grpname",RecycleAdapter.grpname);
-                        int mid = new MemberDatabase(context1).getMemberIdbyName(RecycleAdapter.memberName);
-
-                        int grpid = new GroupDatabase(context1).getgrpId(RecycleAdapter.grpname);
+                        int grpid = new GroupDatabase(context1).getgrpId(group_name);
                         new MessMemberGroupDatabase(context1).delete(mid,grpid);
 
                        /* RecycleAdapter.position = 5;

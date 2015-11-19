@@ -34,6 +34,7 @@ public class Groups extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recycleAdapter);
+        recycleAdapter.setgrpname(name);
 
     }
 
@@ -52,6 +53,8 @@ public class Groups extends AppCompatActivity {
             int grpid = new GroupDatabase(getApplicationContext()).getgrpId(name);
             new MessMemberGroupDatabase(getApplicationContext()).deletebyGrp(grpid);
             new GroupDatabase(getApplicationContext()).deletebyName(name);
+            Intent intent = new Intent(this, Members.class);
+            startActivity(intent);
             finish();
         }
         return super.onOptionsItemSelected(item);

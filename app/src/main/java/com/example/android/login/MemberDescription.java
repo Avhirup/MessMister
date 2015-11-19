@@ -99,13 +99,22 @@ public class MemberDescription extends AppCompatActivity {
         jdateval.setText(stdate);
 
         phoneButton = (ImageButton)findViewById(R.id.phoneButton);
-        phoneButton.setOnClickListener( new View.OnClickListener() {
+        phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + mphone));
                 callIntent.setPackage("com.android.server.telecom");
                 startActivity(callIntent);
+
+            }
+        });
+
+        ImageButton messageButton = (ImageButton)findViewById(R.id.messageButton);
+        messageButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
 
             }
         });

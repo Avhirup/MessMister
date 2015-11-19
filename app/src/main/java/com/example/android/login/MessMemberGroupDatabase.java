@@ -102,6 +102,7 @@ public class MessMemberGroupDatabase {
 
     public  void  delete(int mid,int grpid)
     {
+        Log.e("hl",mid+" "+grpid);
         String query = " delete from " + loginDatabaseHelper.TABLE_MessMember_Group +
                 " where " + loginDatabaseHelper.MessMember_Group_messmember_id + " = " + mid + " and " +
                     loginDatabaseHelper.MessMember_Group_group_id + " = " + grpid +";";
