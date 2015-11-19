@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,5 +45,6 @@ public class SnoozeReceiver extends BroadcastReceiver {
 
         Notification notification=new Notification(notification_id,member_id,newNotifyOn);
         notificationDatabase.updateNotifyOn(notification);
+        Toast.makeText(context,"To be next notified on"+newNotifyOn,Toast.LENGTH_LONG).show();
     }
 }
