@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,11 @@ import java.util.List;
 public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHolder> {
 
     public Context context1;
-    List<String> list = new ArrayList<>();
-    int position;
+    TextView tag;
+    TextView amount;
+    List<pair> list;
+    String position;
+    Boolean aBoolean = true;
 
     LayoutInflater inflater;
 
@@ -40,13 +44,15 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
 
+        amount.setText(Integer.toString(list.get(position).amount1));
+        tag.setText(list.get(position).tag1);
         Log.e("bind", position + "");
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return list.size();
     }
 
     @Override
@@ -56,12 +62,20 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
-    public void setList() {
+    public void setBool(Boolean aBoolean)
+    {
+        this.aBoolean = aBoolean;
+    }
 
+    public void setList() {
+            if(aBoolean)
+            this.list = new IncomeDatabase(context1).getTuples(position);
+            else
+                this.list = new IncomeDatabase(context1).getToday(position);
     }
 
     class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -72,6 +86,9 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
 
 
             super(itemView);
+            tag = (TextView)itemView.findViewById(R.id.tag);
+            amount=(TextView)itemView.findViewById(R.id.amount);
+
 
 
         }

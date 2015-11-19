@@ -99,6 +99,7 @@ public class MyDialog
                             if (mdueamt != 0) {
                                 dueamt = mdueamt - paidamt;
                                 memberDatabase.setDueamt(mid, dueamt);
+                                new IncomeDatabase(context).add(new Income(name +" paid", paidamt));
                             } else {
                                 toast.show();
                             }
@@ -128,7 +129,7 @@ public class MyDialog
     public void getIncomeValues()
     {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_dropdown_item_1line, new MemberDatabase(context).getAllMembers());
+                android.R.layout.simple_dropdown_item_1line, new IncomeDatabase(context).getAllIncomes());
 
         member_fee_name.setAdapter(adapter);
 
@@ -170,7 +171,7 @@ public class MyDialog
     public void getExpenseValues()
     {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_dropdown_item_1line, new MemberDatabase(context).getAllMembers());
+                android.R.layout.simple_dropdown_item_1line, new ExpenseDatabase(context).getAllExpenses());
 
         member_fee_name.setAdapter(adapter);
 
@@ -183,7 +184,7 @@ public class MyDialog
 
                             Expense expense = new Expense();
                             String name = member_fee_name.getText().toString();
-                            int amount = Integer.parseInt(amount_paid.getText().toString());
+                            int amount = -Integer.parseInt(amount_paid.getText().toString());
                             expense.setExpenseName(name);
                             expense.setAmount(amount);
                             expenseDatabase.add(expense);

@@ -9,6 +9,7 @@
         android:background="#ffffff"
         android:weightSum="2">
         <TextView
+            android:id="@+id/tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Electric Bill"
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3000"
-
+            android:id="@+id/amount"
             android:textColor="@color/cardview_dark_background"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
