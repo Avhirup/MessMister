@@ -219,7 +219,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                         new MessMemberGroupDatabase(context1).delete(mid,grpid);
 
                        /* RecycleAdapter.position = 5;
-                        setList();*/
+                        setList();/*/
 
                     }
                     return false;
