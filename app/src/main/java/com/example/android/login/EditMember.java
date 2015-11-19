@@ -160,7 +160,7 @@ public class EditMember extends AppCompatActivity {
             m.setRate_id(rate_id);
             Log.e("before",m.getPhone());
             memberDatabase.edit(m);
-            Log.e("after",memberDatabase.getPhone(1));
+            Log.e("after",memberDatabase.getPhone(mid));
             //Log.e("b",);
             //int mid = memberDatabase.getMemberId(m);
             //Log.d("getid", Integer.toString(mid));

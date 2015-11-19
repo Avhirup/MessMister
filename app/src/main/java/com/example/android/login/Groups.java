@@ -25,8 +25,8 @@ public class Groups extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent intent = getIntent();
 
+        Intent intent = getIntent();
         name  = intent.getStringExtra("grpname");
         getSupportActionBar().setTitle(name);
         recycleAdapter = new RecycleAdapter(this);
