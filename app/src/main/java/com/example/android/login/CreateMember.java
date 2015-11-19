@@ -69,7 +69,7 @@ public class CreateMember extends AppCompatActivity {
         }
         if(ratecategory!=null)
             ratecategory = null;
-        
+
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
     }
