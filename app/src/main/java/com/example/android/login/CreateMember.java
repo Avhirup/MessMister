@@ -69,6 +69,7 @@ public class CreateMember extends AppCompatActivity {
         }
         if(ratecategory!=null)
             ratecategory = null;
+        
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
     }
@@ -101,16 +102,17 @@ public class CreateMember extends AppCompatActivity {
 
                 String mname = name.getText().toString();
                 String mphone = phone.getText().toString();
+                String start_date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day);
                 if (mname != null && !mname.isEmpty()) {
                     int day1 = dayspin.getSelectedItemPosition() + 1;
-                    String start_date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day1);
+                    String startof_month = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day1);
 
                     int rate_id = rateDataBase.getrateId(ratecategory);
 
                     m = new MessMember();
                     m.setName(mname);
                     m.setStart_date(start_date);
-                    m.setStartof_month(start_date);
+                    m.setStartof_month(startof_month);
                     m.setDue_amount(0);
                     m.setHas_paid(true);
                     m.setIs_active(true);
@@ -204,7 +206,7 @@ public class CreateMember extends AppCompatActivity {
 
 
     public static class Groupdialog extends DialogFragment {
-
+        int flg;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -216,6 +218,10 @@ public class CreateMember extends AppCompatActivity {
             String gname = null;
             ArrayList<String> grpnames = new ArrayList<String>(groupDatabase.getGroupNames());
             final CharSequence [] names = grpnames.toArray(new CharSequence[grpnames.size()]);
+            final boolean [] checkval = new boolean[grpnames.size()];
+
+
+
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
                     .setMultiChoiceItems(names,null,new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
@@ -252,6 +258,7 @@ public class CreateMember extends AppCompatActivity {
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
+
                         }
                     });
 
