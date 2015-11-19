@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +36,7 @@ public class SnoozeReceiver extends BroadcastReceiver {
 
 
         int member_id=intent.getExtras().getInt("memberid");
-        Log.e("helper",member_id+"");
+        //Log.e("helper",member_id+"");
         notificationDatabase=new NotificationDatabase(context);
         int notification_id=notificationDatabase.getNotificationId(member_id);//i needmethod to mid -> nid
         String notifyOn=notificationDatabase.getNotifyOn(member_id);
@@ -44,5 +45,6 @@ public class SnoozeReceiver extends BroadcastReceiver {
 
         Notification notification=new Notification(notification_id,member_id,newNotifyOn);
         notificationDatabase.updateNotifyOn(notification);
+        Toast.makeText(context,"To be next notified on"+newNotifyOn,Toast.LENGTH_LONG).show();
     }
 }

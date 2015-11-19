@@ -2,9 +2,12 @@ package com.example.android.login;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -24,13 +27,38 @@ public class ExpenseDatabase {
 
     public void add(Expense expense) {
         ContentValues value = new ContentValues();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
-        value.put(loginDatabaseHelper.Expense_date,date);
-        value.put(loginDatabaseHelper.Expense_tag,expense.getExpName());
-        value.put(loginDatabaseHelper.Expense_amount,expense.getAmount());
 
-        db.insert(loginDatabaseHelper.TABLE_Income,null,value);
+        String query="insert into "+LoginDatabaseHelper.TABLE_Expense+
+                " values ( \""+ date +"\" , \""+expense.getExpName()+"\" , "+expense.getAmount()+" ) ; ";
+        Log.e("helper",query);
+        db.execSQL(query);
 
+    }
+
+    public Cursor getExpense()
+    {
+        String query="select * from "+LoginDatabaseHelper.TABLE_Expense+" ;";
+        Cursor cursor =  db.rawQuery(query,null);
+        return cursor;
+    }
+
+    public ArrayList<String> getAllExpenses()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query = "select * from " + loginDatabaseHelper.TABLE_Expense+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
     }
 }

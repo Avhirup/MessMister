@@ -51,7 +51,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String Income_tag="_tag";
     public final String Income_amount="_amount";
 
-    private final static  String TABLE_Expense= "Expense ";
+    public final static  String TABLE_Expense= "Expense ";
     public final String Expense_date="_date";
     public final String Expense_tag="_tag";
     public final String Expense_amount="_amount";
@@ -96,7 +96,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 MessMember_is_active + " INTEGER, " +
                 MessMember_rate_id + " INTEGER, " +
                 MessMember_due_amt + " INTEGER, " +
-                MessMember_has_paid + " INTEGER, " +
+                MessMember_has_paid + " BOOLEAN, " +
                 MessMember_is_late + " INTEGER, " +
                 MessMember_phone + " Text, " +
                 MessMember_img_id + " INTEGER, "+
@@ -124,16 +124,18 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         String query9= "create table " + TABLE_Income + " ( "+
                 Income_date + " TEXT , " +
                 Income_tag  + " TEXT , " +
-                Income_amount + "INTEGER );";
+                Income_amount + " INTEGER );";
 
         db.execSQL(query9);
 
         String query4= "create table " + TABLE_Expense + " ( "+
-                Income_date + " TEXT , " +
-                Income_tag  + " TEXT , " +
-                Income_amount + "INTEGER );";
+                Expense_date + " TEXT , " +
+                Expense_tag  + " TEXT , " +
+                Expense_amount + " INTEGER );";
 
         db.execSQL(query4);
+        db.execSQL("create table months(_id text);");
+        db.execSQL("create table years(_id text);");
 
     }
 

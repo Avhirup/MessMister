@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class NotificationService extends IntentService {
     //comment
-    MemberDatabase memberDatabase=null;
-    private final static int PERIOD= 2 * 1000;
+    NotificationDatabase notificationDatabase=null;
+    MemberDatabase memberDatabase;
+    private final static int PERIOD= 2 *60* 1000;
     public NotificationService() {
         super("NotificationService");
         Log.e("In Notification Service", "Database Starting");
@@ -22,18 +23,21 @@ public class NotificationService extends IntentService {
 
     }
 
-    public  void notificationGenerator() {
-        while(true) {
-            memberDatabase = new MemberDatabase(this);
+    public  void notificationGenerator()
+    {
 
-            Cursor cursor = memberDatabase.getMember();  //modification made
+            notificationDatabase = new NotificationDatabase(this);
+            memberDatabase=new MemberDatabase(this);
+
+            Cursor cursor = notificationDatabase.getNotificationTable();  //modification made
             cursor.moveToFirst();
             Log.e("In Notification", "Notification Cursor");
             int j = 0;
-            while (!cursor.isAfterLast()) {
-                int memberid = Integer.parseInt(cursor.getString(0));
-                String membername = cursor.getString(1);
-                String dueamount = cursor.getString(6);
+            while (!cursor.isAfterLast())
+            {
+                int memberid = Integer.parseInt(cursor.getString(1));
+                String membername = memberDatabase.getMembername(memberid);
+                int dueamount = memberDatabase.getdue_amt(memberid);
 
 
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
@@ -69,13 +73,6 @@ public class NotificationService extends IntentService {
                 }
                 j++;
             }
-            try {
-                Thread.sleep(10 * 60 * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            j = 0;
-        }
     }
 
 
