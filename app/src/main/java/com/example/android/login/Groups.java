@@ -52,6 +52,7 @@ public class Groups extends AppCompatActivity {
             int grpid = new GroupDatabase(getApplicationContext()).getgrpId(name);
             new MessMemberGroupDatabase(getApplicationContext()).deletebyGrp(grpid);
             new GroupDatabase(getApplicationContext()).deletebyName(name);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

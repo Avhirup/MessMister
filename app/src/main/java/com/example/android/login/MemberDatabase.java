@@ -521,7 +521,19 @@ public class MemberDatabase {
                 " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid + ";";
 
         db.execSQL(query2);
+
     }
+
+    public void changeDueAmount(int m_id,int dueAmount)
+    {
+        String query = "update " + loginDatabaseHelper.TABLE_MessMember+ " set "+
+                loginDatabaseHelper.MessMember_due_amt+" = "+dueAmount+
+                " where "+loginDatabaseHelper.MessMember_member_id+" = "+m_id+ ";";
+        Log.e("In MD",query);
+        db.execSQL(query);
+
+    }
+
 }
 
 

@@ -58,6 +58,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
         late = (RecyclerView)findViewById(R.id.recycle_list);
         today=(RecyclerView)findViewById(R.id.recycle_list2);
+        if(getIntent().getIntExtra("value", 1) == 1)
         setAdapters();
 
         //Sending Broadcast

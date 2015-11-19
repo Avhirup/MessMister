@@ -144,6 +144,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     else {
                          name = textView.getText().toString();
                         RecycleAdapter.memberName = name;
+                        Log.e("membername", RecycleAdapter.memberName);
                         Intent intent = new Intent(context1, MemberDescription.class);
                         intent.putExtra("name",name);
                         context1.startActivity(intent);
@@ -216,6 +217,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
                         int grpid = new GroupDatabase(context1).getgrpId(RecycleAdapter.grpname);
                         new MessMemberGroupDatabase(context1).delete(mid,grpid);
+
                        /* RecycleAdapter.position = 5;
                         setList();*/
 
