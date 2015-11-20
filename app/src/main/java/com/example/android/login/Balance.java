@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -129,6 +130,11 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
     public void CSVFile(View view)
     {
         GenerateCSV generateCSV=new GenerateCSV("MessMisterSpreadsheet.csv",this);
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+        CharSequence text = "Exel spreadsheet is successfully downloaded";
+        toast = Toast.makeText(this, text, duration);
+        toast.show();
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter
