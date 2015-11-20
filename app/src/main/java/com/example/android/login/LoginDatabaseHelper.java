@@ -142,7 +142,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         String query11 = " insert into " + TABLE_Rate + " values (\""boys monthly\"",
 
-        String query11 = " insert into " + TABLE_MessMember + " values ("*/
+        String query11 = " insert into " + TABLE_MessMember + " values */
 
     }
 
