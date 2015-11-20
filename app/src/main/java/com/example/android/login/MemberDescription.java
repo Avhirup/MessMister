@@ -25,7 +25,7 @@ import java.util.Calendar;
 import android.net.Uri;
 
 public class MemberDescription extends AppCompatActivity {
-    String name;
+    public  static String name;
     MessMember m;
     int mid;
     MemberDatabase memberDatabase;
@@ -33,7 +33,7 @@ public class MemberDescription extends AppCompatActivity {
     ToggleButton togglebtn;
     TextView pvalue;
     TextView amtval;
-    TextView startmval;
+    public  static TextView startmval;
     TextView jdateval;
     ImageButton phoneButton;
     String mphone;
@@ -165,9 +165,9 @@ public class MemberDescription extends AppCompatActivity {
         }
         if(id== R.id.action_add_period)
         {
-           ExtendPeriod extendPeriod = new ExtendPeriod(this,1);
+           ExtendPeriod extendPeriod = new ExtendPeriod(this,2);
             extendPeriod.show();
-           finish();
+
         }
 
         if(id == R.id.action_add_fees)
@@ -186,6 +186,7 @@ public class MemberDescription extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 
 }

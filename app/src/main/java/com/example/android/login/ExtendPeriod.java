@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -49,6 +52,21 @@ public class ExtendPeriod
                         if (type == 1) {
                             int mid = new MemberDatabase(context).getMemberIdbyName(RecycleAdapter.memberName);
                             new MemberDatabase(context).extendperiodbyMid(mid, no);
+                        }
+                        if(type == 2)
+                        {
+                            int mid = new MemberDatabase(context).getMemberIdbyName(MemberDescription.name);
+                            new MemberDatabase(context).extendperiodbyMid(mid, no);
+                            String value = new MemberDatabase(context).getStartmonth(mid);
+                            int day = 0;
+                            try {
+                                Date Sdate = Date.valueOf(value);
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(Sdate);
+                                day = cal.get(Calendar.DAY_OF_MONTH);
+                            }
+                            catch (Exception e){}
+                            MemberDescription.startmval.setText(Integer.toString(day));
                         }
                     }
                 }

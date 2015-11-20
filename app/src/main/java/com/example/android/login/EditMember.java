@@ -219,8 +219,7 @@ public class EditMember extends AppCompatActivity {
 
             Log.e("done","done");
             //NavUtils.navigateUpFromSameTask(this);
-            Intent intent = new Intent(this, MemberDescription.class);
-            intent.putExtra("name", mname);
+            Intent intent = new Intent(this, Members.class);
             startActivity(intent);
             finish();
 
