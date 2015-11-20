@@ -137,16 +137,75 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table months(_id text);");
         db.execSQL("create table years(_id text);");
 
-      /*  String query10 = " insert into " + TABLE_Group + " values (\"Walchand \");";
+     /*  String query10 = " insert into " + TABLE_Group +"(" +Group_groupName + ")"+ " values (\"Walchand \");";
         db.execSQL(query10);
 
-        String query11 = " insert into " + TABLE_Rate + " values (\"boys monthly\",2400);";
+        String query11 = " insert into " + TABLE_Rate +"(" + Rate_category + "")" +" values (\"boys monthly\",2400);";
         db.execSQL(query11);
         String query12 = " insert into " + TABLE_MessMember + " values (\"Avhirup\",\"2015-10-18\",\"2015-10-15\",1,1,0,0,1,\"8484008910\",0);";
         db.execSQL(query12);
         String query13 = " insert into " + TABLE_MessMember + " values (\"Rohan\",\"2015-10-15\",\"2015-10-10\",1,1,0,0,1,\"8275119400\",0);";
         db.execSQL(query13);
-        String */
+        String query14 = "insert into " + TABLE_MessMember_Group + " values (1,1);";
+        db.execSQL(query14);
+        String query15 = "insert into " + TABLE_MessMember_Group + " values (2,1);";
+        db.execSQL(query15);*/
+
+        ContentValues values = new ContentValues();
+        values.put(Group_groupName, "Walchand");
+        db.insert(TABLE_Group, null, values);
+
+        ContentValues val = new ContentValues();
+        val.put(Rate_category,"boys monthly");
+        val.put(Rate_amount, 2400);
+        db.insert(TABLE_Rate, null, val);
+
+        ContentValues val1 = new ContentValues();
+        val1.put(MessMember_name,"Avhirup");
+        val1.put(MessMember_start_date,"2015-10-18");
+        val1.put(MessMember_startof_month, "2015-10-15");
+        val1.put(MessMember_is_active,1);
+        val1.put(MessMember_rate_id,1);
+        val1.put(MessMember_due_amt,500);
+        val1.put(MessMember_has_paid,0);
+        val1.put(MessMember_is_late,1);
+        val1.put(MessMember_phone,"8484008910");
+        val1.put(MessMember_img_id, 0);
+        db.insert(TABLE_MessMember, null, val1);
+
+        ContentValues val2 = new ContentValues();
+        val2.put(MessMember_name,"Rohan");
+        val2.put(MessMember_start_date,"2015-10-15");
+        val2.put(MessMember_startof_month, "2015-10-10");
+        val2.put(MessMember_is_active,1);
+        val2.put(MessMember_rate_id,1);
+        val2.put(MessMember_due_amt,800);
+        val2.put(MessMember_has_paid,0);
+        val2.put(MessMember_is_late,1);
+        val2.put(MessMember_phone,"8275119400");
+        val2.put(MessMember_img_id, 0);
+        db.insert(TABLE_MessMember, null, val2);
+
+        ContentValues val3 = new ContentValues();
+        val3.put(MessMember_Group_messmember_id,1);
+        val3.put(MessMember_Group_group_id, 1);
+        db.insert(TABLE_MessMember_Group, null, val3);
+
+        ContentValues val4 = new ContentValues();
+        val4.put(MessMember_Group_messmember_id,2);
+        val4.put(MessMember_Group_group_id, 1);
+        db.insert(TABLE_MessMember_Group, null, val4);
+
+        ContentValues val5 = new ContentValues();
+        val5.put(Notification_mid,1);
+        val5.put(Notification_notifyOn,"2015-11-20");
+        db.insert(TABLE_Notification,null,val5);
+
+        ContentValues val6 = new ContentValues();
+        val6.put(Notification_mid,2);
+        val6.put(Notification_notifyOn,"2015-11-20");
+        db.insert(TABLE_Notification,null,val6);
+
     }
 
     @Override
