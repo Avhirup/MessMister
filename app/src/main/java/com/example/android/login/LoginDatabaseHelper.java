@@ -137,10 +137,10 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table months(_id text);");
         db.execSQL("create table years(_id text);");
 
-       /* String query10 = " insert into " + TABLE_Group + " values ( \"Walchand \");";
+       /* String query10 = " insert into " + TABLE_Group + " values ("\"Walchand \"");";
         db.execSQL(query10);
 
-        String query11 = " insert into " + TABLE_Rate + " values "
+        String query11 = " insert into " + TABLE_Rate + " values (\""boys monthly\"",
 
         String query11 = " insert into " + TABLE_MessMember + " values ("*/
 
