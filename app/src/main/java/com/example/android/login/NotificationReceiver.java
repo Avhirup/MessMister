@@ -23,7 +23,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent i=new Intent(context,OnAlarmReceiver.class);
         PendingIntent pi=PendingIntent.getBroadcast(context,0,i,0);
         Log.e("in Notifcation Receiver", "InSide OnReceive");
-        mgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), PERIOD, pi);
+        mgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 15*60*1000, PERIOD, pi);
 
     }
 }
