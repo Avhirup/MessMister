@@ -46,7 +46,7 @@ public class MemberFragment extends Fragment
         recycleAdapter = new RecycleAdapter(getContext());
         position = getArguments().getInt(ARG_SECTION_NUMBER);
         recycleAdapter.setPosition(position);
-        if(position == 4)
+        if(position == 3)
         {
             view = inflater.inflate(R.layout.group_fragment, container, false);
             setViewSwitcher(view);
@@ -94,6 +94,9 @@ public class MemberFragment extends Fragment
                 }
                 editText.setText("");
                 viewSwitcher.showPrevious();
+                recycleAdapter = new RecycleAdapter(getContext());
+                recycleAdapter.setPosition(position);
+                recyclerView.setAdapter(recycleAdapter);
             }
         });
     }

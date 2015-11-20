@@ -133,7 +133,7 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
         GenerateCSV generateCSV=new GenerateCSV("MessMisterSpreadsheet.csv",this);
         Toast toast;
         int duration = Toast.LENGTH_SHORT;
-        CharSequence text = "Exel spreadsheet is successfully downloaded";
+        CharSequence text = "Excel spreadsheet has been saved in downloads folder.";
         toast = Toast.makeText(this, text, duration);
         toast.show();
     }

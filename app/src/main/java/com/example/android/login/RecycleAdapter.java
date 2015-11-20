@@ -89,16 +89,10 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         }
         else if(position == 2)
         {
-            this.list = new MemberDatabase(context1).getDueMemberslist();
-            //this.list.add("Manjusha");
-            //this.list.add("Medha");
-        }
-        else if(position == 3)
-        {
 
             this.list = new  MemberDatabase(context1).getAllMembers();
         }
-        else if (position == 4)
+        else if (position == 3)
         {
 
             this.list = new GroupDatabase(context1).getGroupNames();
@@ -131,7 +125,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                 @Override
                 public void onClick(View v) {
                     String name;
-                    if(position == 4)
+                    if(position == 3)
                     {
 
                         RecycleAdapter.grpname = textView.getText().toString();
@@ -213,12 +207,14 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     }
                     else if(id == R.id.group_remove)
                     {
+                        //
                         String meberName = textView.getText().toString();
                         Log.e("mname",meberName);
                         int mid = new MemberDatabase(context1).getMemberIdbyName(meberName);
 
                         int grpid = new GroupDatabase(context1).getgrpId(group_name);
                         new MessMemberGroupDatabase(context1).delete(mid,grpid);
+
 
                        /* RecycleAdapter.position = 5;
                         setList();/*/
