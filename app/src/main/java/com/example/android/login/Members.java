@@ -168,7 +168,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
 
         @Override
@@ -176,11 +176,10 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
             if(position == 0)
                 return "LATE";
             else if(position == 1)
-                return "DUE";
-            else if(position == 2)
                 return "ALL";
             else
                 return "GROUPS";
+
         }
     }
 

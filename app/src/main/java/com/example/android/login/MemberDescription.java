@@ -114,7 +114,9 @@ public class MemberDescription extends AppCompatActivity {
         messageButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent whatsapp = new Intent();
+                whatsapp.setAction("WHATSAPPACTION");
+                sendBroadcast(whatsapp);
 
             }
         });

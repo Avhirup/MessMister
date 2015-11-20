@@ -20,10 +20,6 @@ public class NotificationDatabase {
         db = loginDatabaseHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(loginDatabaseHelper.Notification_mid,1);
-        values.put(loginDatabaseHelper.Notification_notifyOn,"18-01-2015");
-
-        db.insert(loginDatabaseHelper.TABLE_Notification,null,values);
 
     }
 
