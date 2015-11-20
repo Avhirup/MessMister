@@ -16,7 +16,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
     public final static String TABLE_MessMember = "MessMember";
     public final String MessMember_member_id= "_id";
-    public final String MessMember_name = "name";
+    public final String MessMember_name = "_name";
     public final String MessMember_start_date = "start_date";
     public final String MessMember_startof_month = "startof_month";
     public final String MessMember_is_active = "is_active";

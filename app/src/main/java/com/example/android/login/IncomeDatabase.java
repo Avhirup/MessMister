@@ -130,7 +130,7 @@ public class IncomeDatabase {
     public ArrayList<String> getAllIncomes()
     {
         ArrayList<String> memberlist = new ArrayList<String>();
-        String query = "select * from " + loginDatabaseHelper.TABLE_Income+";";
+        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Income+";";
         Cursor cursor = db.rawQuery(query,null);
         if(cursor==null)
             Log.e("he","in array cursor null");
@@ -138,7 +138,7 @@ public class IncomeDatabase {
         while(!cursor.isAfterLast())
         {
 
-            memberlist.add(cursor.getString(1));
+            memberlist.add(cursor.getString(0));
             cursor.moveToNext();
         }
         cursor.close();

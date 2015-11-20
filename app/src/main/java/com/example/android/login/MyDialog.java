@@ -4,18 +4,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by medha on 17/11/15.
  */
 public class MyDialog
 {
+    RecyclerView recyclerView;
     Context context;
+    ValuesAdapter valuesAdapter;
     AlertDialog.Builder alert;
     LayoutInflater factory;
     View textEntryView;
@@ -30,9 +37,10 @@ public class MyDialog
     int duration = Toast.LENGTH_SHORT;
     int type;
     String titles[] = {"  Add New Member Fee","  Add Quick Income", "  Add Quick Expense"};
-    public MyDialog(Context context, int type) {
+    public MyDialog(Context context, int type, RecyclerView recyclerView) {
         this.context = context;
         this.type = type;
+        this.recyclerView = recyclerView;
         factory = LayoutInflater.from(context);
         alert = new AlertDialog.Builder(context);
         textEntryView = factory.inflate(R.layout.edittext3, null);
@@ -102,14 +110,15 @@ public class MyDialog
                                 dueamt = mdueamt - paidamt;
                                 memberDatabase.setDueamt(mid, dueamt);
                                 new IncomeDatabase(context).add(new Income(name +" paid", paidamt));
+                                setAdapter();
                             } else {
                                 toast.show();
                             }
 
                         } catch (Exception e) {
                         }
-
-                        return;
+                        if(valuesAdapter != null)
+                        valuesAdapter.notifyItemChanged(valuesAdapter.getItemCount());
                     }
                 }
 
@@ -148,7 +157,7 @@ public class MyDialog
                             income.setIncomeName(name);
                             income.setAmount(amount);
                             incomeDatabase.add(income);
-
+                            setAdapter();
 
                         } catch (Exception e) {
                         }
@@ -191,6 +200,7 @@ public class MyDialog
                             expense.setExpenseName(name);
                             expense.setAmount(amount);
                             expenseDatabase.add(expense);
+                            setAdapter();
 
                         } catch (Exception e) {
                         }
@@ -210,6 +220,19 @@ public class MyDialog
 
         );
 
+    }
+
+
+    public void  setAdapter()
+    {
+        if(recyclerView != null) {
+            valuesAdapter = new ValuesAdapter(context);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(new Date());
+            valuesAdapter.setPosition(date);
+            valuesAdapter.setBool(false);
+            recyclerView.setAdapter(valuesAdapter);
+        }
     }
     }
 
