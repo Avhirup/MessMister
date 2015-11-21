@@ -65,7 +65,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //write your tables here - medha
+        ///write your tables here - medha
 
         db.execSQL("create table login(_id integer primary key autoincrement, " +
                 "name text, password text);");
