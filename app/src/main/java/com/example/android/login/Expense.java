@@ -6,10 +6,10 @@ package com.example.android.login;
 public class Expense{
 
     //Declarations
-    private static int expense_id;
     private String date;
     private String expense_name;
     private int amount;
+
     //Constructors
     public Expense()
     {
@@ -23,21 +23,12 @@ public class Expense{
     }
 
     //Methods
-
-    public int getExpId()
-    {
-        return expense_id;
-    }
-    public void setExpName(String name) {
+    public void setExpenseName(String name) {
         expense_name=name;
     }
 
     public String getExpName() {
         return expense_name;
-    }
-
-    public int getExpID() {
-        return expense_id;
     }
 
     public void setAmount(int amount) {
@@ -52,9 +43,6 @@ public class Expense{
     {
         return date;
     }
-    public void setDate()
-    {
 
-    }
 
 }
