@@ -1,11 +1,9 @@
 package com.example.android.login;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,23 +12,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Members extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,17 +33,17 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_members);
-        toolbar = (Toolbar)findViewById(R.id.t_bar);
+        toolbar = (Toolbar) findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
         d = (DrawerLayout) findViewById(R.id.d_lay);
-        drawerToggle = new ActionBarDrawerToggle(this, d, toolbar,R.string.closed,R.string.open);
+        drawerToggle = new ActionBarDrawerToggle(this, d, toolbar, R.string.closed, R.string.open);
         d.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        navigationView = (NavigationView)findViewById(R.id.navigationView);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tabLayout = (TabLayout)findViewById(R.id.t_layout);
-        viewPager = (ViewPager)findViewById(R.id.pager);
+        tabLayout = (TabLayout) findViewById(R.id.t_layout);
+        viewPager = (ViewPager) findViewById(R.id.pager);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setTabsFromPagerAdapter(pagerAdapter);
@@ -85,7 +70,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent =  new Intent(this, Settings.class);
+            Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
             return true;
         }
@@ -97,27 +82,16 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Intent intent = null;
         menuItem.setChecked(true);
-        if(menuItem.getItemId() == R.id.item1)
-        {
+        if (menuItem.getItemId() == R.id.item1) {
             intent = new Intent(this, homepage.class);
-        }
-        else if(menuItem.getItemId() == R.id.item2)
-        {
+        } else if (menuItem.getItemId() == R.id.item2) {
             d.closeDrawer(GravityCompat.START);
             return true;
-        }
-
-        else if(menuItem.getItemId() == R.id.item5)
-        {
+        } else if (menuItem.getItemId() == R.id.item5) {
             intent = new Intent(this, Balance.class);
-        }
-
-        else if(menuItem.getItemId() == R.id.item7)
-        {
+        } else if (menuItem.getItemId() == R.id.item7) {
             intent = new Intent(this, About.class);
-        }
-        else if(menuItem.getItemId() == R.id.nothing)
-        {
+        } else if (menuItem.getItemId() == R.id.nothing) {
             d.closeDrawer(GravityCompat.START);
             return true;
         }
@@ -132,37 +106,32 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
         super.onSaveInstanceState(outState);
 
     }
+
     @Override
     public void onBackPressed() {
-        if(d.isDrawerOpen(GravityCompat.START))
+        if (d.isDrawerOpen(GravityCompat.START))
             d.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
     }
 
 
-
-
-
-    public void create(View view)
-    {
+    public void create(View view) {
         Intent intent = new Intent(this, CreateMember.class);
         startActivity(intent);
     }
 
 
-    public class PagerAdapter extends FragmentStatePagerAdapter
-    {
+    public class PagerAdapter extends FragmentStatePagerAdapter {
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
 
-
         @Override
         public Fragment getItem(int position) {
-             return MemberFragment.newInstance(position + 1);
+            return MemberFragment.newInstance(position + 1);
 
         }
 
@@ -173,18 +142,15 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if(position == 0)
+            if (position == 0)
                 return "LATE";
-            else if(position == 1)
+            else if (position == 1)
                 return "ALL";
             else
                 return "GROUPS";
 
         }
     }
-
-
-
 
 
 }

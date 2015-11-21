@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class OnAlarmReceiver extends BroadcastReceiver {
     public OnAlarmReceiver() {
-        Log.e("InOn Alarm ","In consrtucutor");
+        Log.e("InOn Alarm ", "In consrtucutor");
     }
 
     @Override

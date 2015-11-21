@@ -23,12 +23,7 @@
             app:titleTextColor="#fff">
 
 
-
         </android.support.v7.widget.Toolbar>
-
-
-
-
 
 
         <FrameLayout
@@ -37,11 +32,9 @@
 
 
             <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/pager">
-            </android.support.v4.view.ViewPager>
-
+                android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
 
         </FrameLayout>
@@ -49,15 +42,14 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-        android:background="@color/cardview_light_background"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/cardview_light_background"
         app:headerLayout="@layout/header"
-        app:menu="@menu/menu_drawer"
         app:itemBackground="@color/cardview_light_background"
-        >
+        app:menu="@menu/menu_drawer">
 
     </android.support.design.widget.NavigationView>
 

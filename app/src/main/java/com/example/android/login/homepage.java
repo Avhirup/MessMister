@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    static SQLiteDatabase sqLiteDatabase = null;
     Toolbar toolbar;
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
@@ -28,18 +29,15 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     RecyclerView today;
     ValuesAdapter valuesAdapter;
     com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
-
-
     LoginDatabaseHelper loginDatabaseHelper;
     MenuItem menuItem;
     Menu menu;
-    static SQLiteDatabase sqLiteDatabase = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getIntent().getIntExtra("value", 1) == 1)
-        setContentView(R.layout.activity_homepage);
+        if (getIntent().getIntExtra("value", 1) == 1)
+            setContentView(R.layout.activity_homepage);
         else
             setContentView(R.layout.homepage2);
         toolbar = (Toolbar) findViewById(R.id.t_bar);
@@ -56,10 +54,10 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         menuItem.setChecked(true);
         loginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB", null, 1);
         sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
-        late = (RecyclerView)findViewById(R.id.recycle_list);
-        today=(RecyclerView)findViewById(R.id.recycle_list2);
-        if(getIntent().getIntExtra("value", 1) == 1)
-        setAdapters();
+        late = (RecyclerView) findViewById(R.id.recycle_list);
+        today = (RecyclerView) findViewById(R.id.recycle_list2);
+        if (getIntent().getIntExtra("value", 1) == 1)
+            setAdapters();
 
         //Sending Broadcast
         Intent intent = new Intent();
@@ -87,9 +85,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
             return true;
-        }
-        else if(id == R.id.action_add)
-        {
+        } else if (id == R.id.action_add) {
             Intent intent = new Intent(this, CreateMember.class);
             startActivity(intent);
             return true;
@@ -109,14 +105,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             return true;
         } else if (menuItem.getItemId() == R.id.item2) {
             intent = new Intent(this, Members.class);
-        }
-         else if (menuItem.getItemId() == R.id.item5) {
+        } else if (menuItem.getItemId() == R.id.item5) {
             intent = new Intent(this, Balance.class);
-        }  else if (menuItem.getItemId() == R.id.item7) {
+        } else if (menuItem.getItemId() == R.id.item7) {
             intent = new Intent(this, About.class);
-        }
-        else if(menuItem.getItemId() == R.id.nothing)
-        {
+        } else if (menuItem.getItemId() == R.id.nothing) {
             d.closeDrawer(GravityCompat.START);
             return true;
         }
@@ -147,6 +140,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         addFee.show();
 
     }
+
     public void addIncome(View view) {
 
         floatingActionsMenu.toggle();
@@ -155,6 +149,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
 
     }
+
     public void addExpense(View view) {
 
         floatingActionsMenu.toggle();
@@ -163,19 +158,18 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     }
 
-    public  void setAdapters()
-    {
-            late.setLayoutManager(new LinearLayoutManager(this));
-            recycleAdapter = new RecycleAdapter(this);
-            recycleAdapter.setPosition(1);
-            late.setAdapter(recycleAdapter);
-            today.setLayoutManager(new LinearLayoutManager(this));
-            valuesAdapter= new ValuesAdapter(this);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String date = sdf.format(new Date());
-            valuesAdapter.setPosition(date);
-            valuesAdapter.setBool(false);
-            today.setAdapter(valuesAdapter);
+    public void setAdapters() {
+        late.setLayoutManager(new LinearLayoutManager(this));
+        recycleAdapter = new RecycleAdapter(this);
+        recycleAdapter.setPosition(1);
+        late.setAdapter(recycleAdapter);
+        today.setLayoutManager(new LinearLayoutManager(this));
+        valuesAdapter = new ValuesAdapter(this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        valuesAdapter.setPosition(date);
+        valuesAdapter.setBool(false);
+        today.setAdapter(valuesAdapter);
     }
 
 }

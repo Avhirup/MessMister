@@ -24,11 +24,7 @@
             app:titleTextColor="#fff">
 
 
-
         </android.support.v7.widget.Toolbar>
-
-
-
 
 
         <FrameLayout
@@ -38,62 +34,64 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:orientation="vertical" android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:focusableInTouchMode="true"
-                    android:layout_height="match_parent">
+                    android:orientation="vertical">
+
                     <android.support.v7.widget.CardView
-                        android:background="#ffffff"
-                        android:elevation="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        >
+                        android:background="#ffffff"
+                        android:elevation="6dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:background="#ffffff"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
-                                android:padding="16dp"
-                                >
+                                android:padding="16dp">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#ffffff">
+                                    android:background="#ffffff"
+                                    android:orientation="horizontal">
+
                                     <TextView
+                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="TODAY"
-                                        android:textColor="@color/primaryBlue"
                                         android:layout_margin="16dp"
-                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                        android:textSize="14sp"
+                                        android:text="TODAY"
                                         android:textAllCaps="true"
-                                        />
+                                        android:textColor="@color/primaryBlue"
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                             </android.support.v7.widget.CardView>
 
                             <FrameLayout
-                                android:layout_height="220dp"
                                 android:layout_width="match_parent"
-                                android:paddingRight="8dp"
-                                android:focusableInTouchMode="true"
+                                android:layout_height="220dp"
                                 android:background="#ffffff"
-                                android:paddingLeft="8dp">
+                                android:focusableInTouchMode="true"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp">
 
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/recycle_list2"
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
 
                                 </android.support.v7.widget.RecyclerView>
 
@@ -106,57 +104,56 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
-                        android:background="#ffffff"
-                        android:elevation="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        >
+                        android:background="#ffffff"
+                        android:elevation="6dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:background="#ffffff"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
-                                android:padding="16dp"
-                                >
+                                android:padding="16dp">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#ffffff">
+                                    android:background="#ffffff"
+                                    android:orientation="horizontal">
+
                                     <TextView
+                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Late members"
-                                        android:textColor="@color/primaryBlue"
                                         android:layout_margin="16dp"
-                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                        android:textSize="14sp"
+                                        android:text="Late members"
                                         android:textAllCaps="true"
-                                        />
+                                        android:textColor="@color/primaryBlue"
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                             </android.support.v7.widget.CardView>
 
                             <FrameLayout
-                                android:layout_height="220dp"
                                 android:layout_width="match_parent"
-                                android:paddingRight="8dp"
-                                android:focusableInTouchMode="true"
+                                android:layout_height="220dp"
                                 android:background="#ffffff"
-                                android:paddingLeft="8dp">
+                                android:focusableInTouchMode="true"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp">
 
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/recycle_list"
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
 
                                 </android.support.v7.widget.RecyclerView>
 
@@ -167,14 +164,10 @@
 
 
                     </android.support.v7.widget.CardView>
-
 
 
                 </LinearLayout>
             </ScrollView>
-
-
-
 
 
             <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -182,49 +175,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="16dp"
                 fab:fab_addButtonColorNormal="@color/accentPink"
                 fab:fab_addButtonColorPressed="@color/pink_pressed"
                 fab:fab_addButtonPlusIconColor="#fff"
-                fab:fab_labelStyle="@style/menu_labels_style"
-                android:layout_margin="16dp"
-                android:layout_gravity="right|bottom">
+                fab:fab_labelStyle="@style/menu_labels_style">
 
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_c"
-                    android:src="@drawable/ic_remove_white_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
-                    fab:fab_title="Quick Expense"
                     android:foregroundGravity="bottom"
                     android:onClick="addExpense"
-                    fab:fab_colorPressed="@color/pink_pressed"/>
+                    android:src="@drawable/ic_remove_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Quick Expense" />
 
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
                     android:foregroundGravity="bottom"
-                    android:src="@drawable/ic_add_white_24dp"
-                    fab:fab_title="Quick Income"
                     android:onClick="addIncome"
-                    fab:fab_colorPressed="@color/pink_pressed"/>
+                    android:src="@drawable/ic_add_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Quick Income" />
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
-                    fab:fab_title="Add Member fee"
-                    fab:fab_colorPressed="@color/pink_pressed"
-                    android:onClick="addFee"
                     android:foregroundGravity="center"
-                    android:src="@drawable/ic_person_add_white_24dp"/>
+                    android:onClick="addFee"
+                    android:src="@drawable/ic_person_add_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Add Member fee" />
 
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -234,15 +227,14 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-        android:background="@color/cardview_light_background"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/cardview_light_background"
         app:headerLayout="@layout/header"
-        app:menu="@menu/menu_drawer"
         app:itemBackground="@color/cardview_light_background"
-        >
+        app:menu="@menu/menu_drawer">
 
     </android.support.design.widget.NavigationView>
 

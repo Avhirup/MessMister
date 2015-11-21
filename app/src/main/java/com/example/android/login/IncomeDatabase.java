@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -41,10 +40,9 @@ public class IncomeDatabase {
 
     }
 
-    public Cursor getIncome()
-    {
-        String query="select  * from "+LoginDatabaseHelper.TABLE_Income+" ;";
-        return  db.rawQuery(query,null);
+    public Cursor getIncome() {
+        String query = "select  * from " + LoginDatabaseHelper.TABLE_Income + " ;";
+        return db.rawQuery(query, null);
 
     }
 
@@ -117,26 +115,23 @@ public class IncomeDatabase {
 
     }
 
-    public String getTotal(String date)
-    {
+    public String getTotal(String date) {
 
-        String query = "select sum(m) from (Select _tag, sum(_amount) m from Income where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag " + "union " +  "Select _tag, sum(_amount) m from Expense where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag); ";
+        String query = "select sum(m) from (Select _tag, sum(_amount) m from Income where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag " + "union " + "Select _tag, sum(_amount) m from Expense where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag); ";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         return Integer.toString(cursor.getInt(0));
 
     }
 
-    public ArrayList<String> getAllIncomes()
-    {
+    public ArrayList<String> getAllIncomes() {
         ArrayList<String> memberlist = new ArrayList<String>();
-        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Income+";";
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Income + ";";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
             memberlist.add(cursor.getString(0));
             cursor.moveToNext();
@@ -148,12 +143,12 @@ public class IncomeDatabase {
     public List<pair> getTuples(String date) {
         List<pair> array_list = new ArrayList<>();
         Log.e("date", date);
-       // String query = "select _tag, _amount from Income where _date between \"2015-11-01\" and \"2015-11-31\";";
-        String query = "Select _tag, sum(_amount) from Income where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag " + "union " +  "Select _tag, sum(_amount) from Expense where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag; ";
+        // String query = "select _tag, _amount from Income where _date between \"2015-11-01\" and \"2015-11-31\";";
+        String query = "Select _tag, sum(_amount) from Income where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag " + "union " + "Select _tag, sum(_amount) from Expense where _date between \"" + date + "-01\" " + " and  \"" + date + "-31\" group by _tag; ";
         Cursor cursor = db.rawQuery(query, null);
         Log.e("columns", cursor.getColumnCount() + "");
         Log.e("rows", cursor.getCount() + "");
-       if (cursor != null) {
+        if (cursor != null) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
 
@@ -172,7 +167,7 @@ public class IncomeDatabase {
         List<pair> array_list = new ArrayList<>();
         Log.e("date", date);
         // String query = "select _tag, _amount from Income where _date between \"2015-11-01\" and \"2015-11-31\";";
-        String query = "Select _tag, sum(_amount) from Income where _date = \"" + date + "\" group by _tag " + "union " +  "Select _tag, sum(_amount) from Expense where _date = \"" + date + "\"  group by _tag; ";
+        String query = "Select _tag, sum(_amount) from Income where _date = \"" + date + "\" group by _tag " + "union " + "Select _tag, sum(_amount) from Expense where _date = \"" + date + "\"  group by _tag; ";
         Cursor cursor = db.rawQuery(query, null);
         Log.e("columns", cursor.getColumnCount() + "");
         Log.e("rows", cursor.getCount() + "");
@@ -190,7 +185,7 @@ public class IncomeDatabase {
         return array_list;
     }
 
-    }
+}
 
 
 

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -512,24 +511,22 @@ public class MemberDatabase {
 
     }
 
-    public void update_haspaid(int mid)
-    {
-       String query2 = " update  " + loginDatabaseHelper.TABLE_MessMember +
+    public void update_haspaid(int mid) {
+        String query2 = " update  " + loginDatabaseHelper.TABLE_MessMember +
                 " set " +
                 loginDatabaseHelper.MessMember_due_amt + " = 0, " +
-               loginDatabaseHelper.MessMember_has_paid + " = 1 " +
+                loginDatabaseHelper.MessMember_has_paid + " = 1 " +
                 " where " + loginDatabaseHelper.MessMember_member_id + " = " + mid + ";";
 
         db.execSQL(query2);
 
     }
 
-    public void changeDueAmount(int m_id,int dueAmount)
-    {
-        String query = "update " + loginDatabaseHelper.TABLE_MessMember+ " set "+
-                loginDatabaseHelper.MessMember_due_amt+" = "+dueAmount+
-                " where "+loginDatabaseHelper.MessMember_member_id+" = "+m_id+ ";";
-        Log.e("In MD",query);
+    public void changeDueAmount(int m_id, int dueAmount) {
+        String query = "update " + loginDatabaseHelper.TABLE_MessMember + " set " +
+                loginDatabaseHelper.MessMember_due_amt + " = " + dueAmount +
+                " where " + loginDatabaseHelper.MessMember_member_id + " = " + m_id + ";";
+        Log.e("In MD", query);
         db.execSQL(query);
 
     }

@@ -16,9 +16,8 @@ public class MemberGroup {
 
     }
 
-    public MemberGroup(String group_name)
-    {
-        this.group_name=group_name;
+    public MemberGroup(String group_name) {
+        this.group_name = group_name;
     }
 
     //getters & setters
@@ -30,10 +29,9 @@ public class MemberGroup {
         return group_name;
     }
 
-    public void setGroupName(String group_name){
-        this.group_name=group_name;
+    public void setGroupName(String group_name) {
+        this.group_name = group_name;
     }
-
 
 
     public void setGroup_id(int group_id) {

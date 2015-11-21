@@ -1,28 +1,17 @@
 package com.example.android.login;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.audiofx.BassBoost;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;
@@ -38,9 +27,9 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         factory = LayoutInflater.from(this);
-        toolbar = (Toolbar)findViewById(R.id.t_bar);
+        toolbar = (Toolbar) findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
-        listView = (ListView)findViewById(R.id.settings_list);
+        listView = (ListView) findViewById(R.id.settings_list);
         alert = new AlertDialog.Builder(this);
         listView.setOnItemClickListener(new SettingsListner());
     }
@@ -60,27 +49,24 @@ public class Settings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class SettingsListner implements AdapterView.OnItemClickListener
-    {
+    public class SettingsListner implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            if(position == 0)
-            {
+            if (position == 0) {
                 final View textEntryView = factory.inflate(R.layout.edittext2, null);
                 alert.setView(textEntryView);
                 alert.setTitle("Create New Rate");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        TextInputLayout rate_name=(TextInputLayout)textEntryView.findViewById(R.id.rate_layout_name);
-                        TextInputLayout amount=(TextInputLayout)textEntryView.findViewById(R.id.rate_layout2);
-                        String category=rate_name.getEditText().getText().toString();
-                        int amnt=Integer.parseInt(amount.getEditText().getText().toString());
-                        Rate rate=new Rate(category + " ("+amnt + ")",amnt);
-                        rateDataBase=new RateDataBase(getBaseContext());
+                        TextInputLayout rate_name = (TextInputLayout) textEntryView.findViewById(R.id.rate_layout_name);
+                        TextInputLayout amount = (TextInputLayout) textEntryView.findViewById(R.id.rate_layout2);
+                        String category = rate_name.getEditText().getText().toString();
+                        int amnt = Integer.parseInt(amount.getEditText().getText().toString());
+                        Rate rate = new Rate(category + " (" + amnt + ")", amnt);
+                        rateDataBase = new RateDataBase(getBaseContext());
                         rateDataBase.add(rate);
-
 
 
                     }

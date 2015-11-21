@@ -7,8 +7,9 @@ public class MessMemberGroup {
 
     private int mid;
     private int gid;
-    public MessMemberGroup()
-    {}
+
+    public MessMemberGroup() {
+    }
 
     public MessMemberGroup(int mid, int gid) {
         this.mid = mid;

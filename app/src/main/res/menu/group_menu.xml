@@ -3,9 +3,9 @@
 
     <item
         android:id="@+id/group_extend"
-        android:title="Extend Period"/>
+        android:title="Extend Period" />
     <item
         android:id="@+id/activity"
-        android:title="Make Inactive"/>
+        android:title="Make Inactive" />
 
 </menu>

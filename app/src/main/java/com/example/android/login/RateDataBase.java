@@ -1,6 +1,5 @@
 package com.example.android.login;
 
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,8 +16,8 @@ public class RateDataBase {
     LoginDatabaseHelper loginDatabaseHelper;
     SQLiteDatabase db;
 
-    public RateDataBase(Context context){
-        loginDatabaseHelper=new LoginDatabaseHelper(context,"LOGIN_DB",null,1);
+    public RateDataBase(Context context) {
+        loginDatabaseHelper = new LoginDatabaseHelper(context, "LOGIN_DB", null, 1);
         db = loginDatabaseHelper.getWritableDatabase();
     }
 
@@ -26,10 +25,10 @@ public class RateDataBase {
     public void add(Rate rate) {
         Log.e("helper", "in add");
         ContentValues values = new ContentValues();
-        values.put(loginDatabaseHelper.Rate_category,rate.getCategory());
-        values.put(loginDatabaseHelper.Rate_amount,rate.getAmount());
+        values.put(loginDatabaseHelper.Rate_category, rate.getCategory());
+        values.put(loginDatabaseHelper.Rate_amount, rate.getAmount());
 
-        db.insert(loginDatabaseHelper.TABLE_Rate,null,values);
+        db.insert(loginDatabaseHelper.TABLE_Rate, null, values);
 
     }
 
@@ -37,14 +36,13 @@ public class RateDataBase {
     public boolean delete(Integer rateId) {
         boolean check;
         try {
-            String query = " delete from" + loginDatabaseHelper.TABLE_Rate + " where " + loginDatabaseHelper.Rate_rate_id+ " = " + rateId ;
+            String query = " delete from" + loginDatabaseHelper.TABLE_Rate + " where " + loginDatabaseHelper.Rate_rate_id + " = " + rateId;
             db.execSQL(query);
             check = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             check = false;
         }
-        return  check;
+        return check;
     }
 
 
@@ -54,59 +52,52 @@ public class RateDataBase {
             String query = " update " + loginDatabaseHelper.TABLE_Rate +
                     " set " +
                     loginDatabaseHelper.Rate_category + " = " + "\"" + rate.getCategory() + "\"," +
-                    loginDatabaseHelper.Rate_amount + " = " +  rate.getAmount()  +
+                    loginDatabaseHelper.Rate_amount + " = " + rate.getAmount() +
                     " where " + loginDatabaseHelper.Rate_rate_id + " = " + rate.getRate_id() + ";";
             db.execSQL(query);
             check = true;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             check = false;
         }
-        return  check;
+        return check;
     }
 
-    public Cursor getAmount(String category)
-    {
-        String query="select "+loginDatabaseHelper.Rate_amount+" from "+loginDatabaseHelper.TABLE_Rate+
-                " where "+loginDatabaseHelper.TABLE_Rate+"."+loginDatabaseHelper.Rate_category+" = "+category+" ;";
+    public Cursor getAmount(String category) {
+        String query = "select " + loginDatabaseHelper.Rate_amount + " from " + loginDatabaseHelper.TABLE_Rate +
+                " where " + loginDatabaseHelper.TABLE_Rate + "." + loginDatabaseHelper.Rate_category + " = " + category + " ;";
 
-        Cursor cursor=db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
         return cursor;
     }
 
-    public int getAmount(int rate_id)
-    {
-        String query="select "+loginDatabaseHelper.Rate_amount+" from "+loginDatabaseHelper.TABLE_Rate+" where "
-                +loginDatabaseHelper.Rate_rate_id+" = "+rate_id+" ;";
-        Cursor cursor=db.rawQuery(query,null);
+    public int getAmount(int rate_id) {
+        String query = "select " + loginDatabaseHelper.Rate_amount + " from " + loginDatabaseHelper.TABLE_Rate + " where "
+                + loginDatabaseHelper.Rate_rate_id + " = " + rate_id + " ;";
+        Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
-        return  Integer.parseInt(cursor.getString(0));
+        return Integer.parseInt(cursor.getString(0));
 
     }
 
-    public Cursor getRateTable()
-    {
-        String query="select * from "+loginDatabaseHelper.TABLE_Rate+" ;";
-        Cursor cursor=db.rawQuery(query,null);
-        return  cursor;
+    public Cursor getRateTable() {
+        String query = "select * from " + loginDatabaseHelper.TABLE_Rate + " ;";
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
     }
 
-    public int getamt(int rate_id)
-    {
+    public int getamt(int rate_id) {
         String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
-                " where "+ loginDatabaseHelper.Rate_rate_id+"="+rate_id+";";
-        Cursor cursor = db.rawQuery(query,null);
+                " where " + loginDatabaseHelper.Rate_rate_id + "=" + rate_id + ";";
+        Cursor cursor = db.rawQuery(query, null);
 
 
-        int a =0;
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        int a = 0;
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
-            a=cursor.getInt(2);
+            a = cursor.getInt(2);
 
             //Log.e("Member table",tuple);
             cursor.moveToNext();
@@ -114,21 +105,19 @@ public class RateDataBase {
         return a;
     }
 
-    public int getrateId(String category)
-    {
+    public int getrateId(String category) {
         String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
-                " where "+ loginDatabaseHelper.Rate_category+" = "+ "\"" + category + "\"" + ";";
-        Cursor cursor = db.rawQuery(query,null);
+                " where " + loginDatabaseHelper.Rate_category + " = " + "\"" + category + "\"" + ";";
+        Cursor cursor = db.rawQuery(query, null);
 
 
-        int a =0;
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        int a = 0;
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
-            a=cursor.getInt(0);
+            a = cursor.getInt(0);
 
             //Log.e("Member table",tuple);
             cursor.moveToNext();
@@ -136,16 +125,14 @@ public class RateDataBase {
         return a;
     }
 
-    public ArrayList<String> getcategoryNames()
-    {
+    public ArrayList<String> getcategoryNames() {
         ArrayList<String> grouplist = new ArrayList<String>();
-        String query =" select * from " + loginDatabaseHelper.TABLE_Rate + ";";
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        String query = " select * from " + loginDatabaseHelper.TABLE_Rate + ";";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
             grouplist.add(cursor.getString(1));
             cursor.moveToNext();
@@ -154,21 +141,19 @@ public class RateDataBase {
         return grouplist;
     }
 
-    public String getCategory(int id)
-    {
+    public String getCategory(int id) {
         String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
-                " where "+ loginDatabaseHelper.Rate_rate_id+" = "+ id + ";";
-        Cursor cursor = db.rawQuery(query,null);
+                " where " + loginDatabaseHelper.Rate_rate_id + " = " + id + ";";
+        Cursor cursor = db.rawQuery(query, null);
 
 
         String a = null;
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
-            a=cursor.getString(1);
+            a = cursor.getString(1);
 
             //Log.e("Member table",tuple);
             cursor.moveToNext();

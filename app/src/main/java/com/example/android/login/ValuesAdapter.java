@@ -8,13 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by medha on 18/11/15.
  */
-public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHolder> {
+public class ValuesAdapter extends RecyclerView.Adapter<ValuesAdapter.viewHolder> {
 
     public Context context1;
     TextView tag;
@@ -68,35 +67,30 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
     }
 
 
-
-
     public void setPosition(String position) {
         this.position = position;
     }
 
-    public void setBool(Boolean aBoolean)
-    {
+    public void setBool(Boolean aBoolean) {
         this.aBoolean = aBoolean;
     }
 
     public void setList() {
-            if(aBoolean)
+        if (aBoolean)
             this.list = new IncomeDatabase(context1).getTuples(position);
-            else
-                this.list = new IncomeDatabase(context1).getToday(position);
+        else
+            this.list = new IncomeDatabase(context1).getToday(position);
     }
 
     class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
 
 
         public viewHolder(View itemView) {
 
 
             super(itemView);
-            tag = (TextView)itemView.findViewById(R.id.tag);
-            amount=(TextView)itemView.findViewById(R.id.amount);
-
+            tag = (TextView) itemView.findViewById(R.id.tag);
+            amount = (TextView) itemView.findViewById(R.id.amount);
 
 
         }

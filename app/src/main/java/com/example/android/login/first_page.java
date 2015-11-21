@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +18,7 @@ public class first_page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LoginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB",null, 1);
+        LoginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB", null, 1);
         try {
             db = LoginDatabaseHelper.getWritableDatabase();
             Cursor cursor = db.query("login", new String[]{"name", "password"}, null, null, null, null, null);
@@ -27,7 +27,7 @@ public class first_page extends AppCompatActivity {
                 cursor.close();
                 db.close();
                 Log.i("error", "hh");
-               Intent intent = new Intent(this, Signup.class);
+                Intent intent = new Intent(this, Signup.class);
                 startActivity(intent);
                 finish();
             } else {
@@ -39,9 +39,9 @@ public class first_page extends AppCompatActivity {
                 finish();
 
             }
+        } catch (Exception e) {
+            Log.e("error", "tt");
         }
-        catch (Exception e){
-            Log.e("error","tt");}
 
 
     }

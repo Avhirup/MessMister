@@ -1,8 +1,6 @@
 package com.example.android.login;
 
 
-import android.database.Cursor;
-
 /**
  * Created by manjush on 27-10-2015.
  */
@@ -12,8 +10,8 @@ public class Notification {
     private int member_id;
     private String notifyOn;
 
-    public Notification()
-    {}
+    public Notification() {
+    }
 
     public Notification(int notification_id, int member_id, String notifyOn) {
         this.notification_id = notification_id;

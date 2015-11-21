@@ -12,20 +12,17 @@ import android.view.ViewGroup;
 /**
  * Created by medha on 18/11/15.
  */
-public class BalanceFragment extends Fragment
-{
+public class BalanceFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     int position;
     RecyclerView recyclerView;
-        BalanceAdapter balanceAdapter;
+    BalanceAdapter balanceAdapter;
 
-    public BalanceFragment()
-    {
+    public BalanceFragment() {
 
     }
 
-    public static BalanceFragment newInstance(int position)
-    {
+    public static BalanceFragment newInstance(int position) {
         BalanceFragment memberFragment = new BalanceFragment();
         memberFragment.position = position;
         Bundle args = new Bundle();
@@ -39,11 +36,11 @@ public class BalanceFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view;
-        balanceAdapter= new BalanceAdapter(getContext());
+        balanceAdapter = new BalanceAdapter(getContext());
         position = getArguments().getInt(ARG_SECTION_NUMBER);
         balanceAdapter.setPosition(position);
         view = inflater.inflate(R.layout.member_list, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycle_list);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(balanceAdapter);
         return view;

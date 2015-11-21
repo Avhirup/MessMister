@@ -1,16 +1,11 @@
 package com.example.android.login;
 
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,13 +14,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import java.lang.reflect.Member;
 import java.sql.Date;
 import java.util.Calendar;
-import android.net.Uri;
 
 public class MemberDescription extends AppCompatActivity {
-    public  static String name;
+    public static String name;
+    public static TextView startmval;
     MessMember m;
     int mid;
     MemberDatabase memberDatabase;
@@ -33,7 +27,6 @@ public class MemberDescription extends AppCompatActivity {
     ToggleButton togglebtn;
     TextView pvalue;
     TextView amtval;
-    public  static TextView startmval;
     TextView jdateval;
     ImageButton phoneButton;
     String mphone;
@@ -46,29 +39,29 @@ public class MemberDescription extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        memberDatabase =  new MemberDatabase(this);
+        memberDatabase = new MemberDatabase(this);
         Intent intent = getIntent();
-         name  = intent.getStringExtra("name");
+        name = intent.getStringExtra("name");
         getSupportActionBar().setTitle(name);
 
 
-        phone = (TextView)findViewById(R.id.phone);
-        pvalue = (TextView)findViewById(R.id.pvalue);
-        amtval= (TextView)findViewById(R.id.amtval);
-        startmval = (TextView)findViewById(R.id.startmval);
-        jdateval = (TextView)findViewById(R.id.jdateval);
-        togglebtn = (ToggleButton)findViewById(R.id.togglebtn);
+        phone = (TextView) findViewById(R.id.phone);
+        pvalue = (TextView) findViewById(R.id.pvalue);
+        amtval = (TextView) findViewById(R.id.amtval);
+        startmval = (TextView) findViewById(R.id.startmval);
+        jdateval = (TextView) findViewById(R.id.jdateval);
+        togglebtn = (ToggleButton) findViewById(R.id.togglebtn);
 
         m = new MessMember();
         m.setName(name);
 
-         mid = memberDatabase.getMemberId(m);
+        mid = memberDatabase.getMemberId(m);
 
         mphone = memberDatabase.getPhone(mid);
         int dueamt = memberDatabase.getdue_amt(mid);
 
         String pstatus;
-        if(dueamt == 0)
+        if (dueamt == 0)
             pstatus = "PAID";
         else
             pstatus = "NOT PAID";
@@ -76,15 +69,15 @@ public class MemberDescription extends AppCompatActivity {
         String stdate = memberDatabase.getMemberstartdate(mid);
         String stmonth = memberDatabase.getStartmonth(mid);
         int day = 0;
-            try {
-                Date Sdate = Date.valueOf(stmonth);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(Sdate);
-                day = cal.get(Calendar.DAY_OF_MONTH);
-            }
-            catch (Exception e){}
+        try {
+            Date Sdate = Date.valueOf(stmonth);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(Sdate);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+        } catch (Exception e) {
+        }
 
-        int day1 = 0,month1 = 0,yr = 0;
+        int day1 = 0, month1 = 0, yr = 0;
         try {
             Date jdate = Date.valueOf(stdate);
             Calendar cal = Calendar.getInstance();
@@ -92,28 +85,27 @@ public class MemberDescription extends AppCompatActivity {
             day1 = cal.get(Calendar.DAY_OF_MONTH);
             month1 = cal.get(Calendar.MONTH);
             yr = cal.get(Calendar.YEAR);
+        } catch (Exception e) {
         }
 
-        catch (Exception e){}
-
-        month1 = month1+1;
-        String join = Integer.toString(yr) +"-"+Integer.toString(month1+1)+"-"+Integer.toString(day1);
+        month1 = month1 + 1;
+        String join = Integer.toString(yr) + "-" + Integer.toString(month1 + 1) + "-" + Integer.toString(day1);
 
         int isactive = memberDatabase.getMemberIsActive(mid);
         String status;
-        if(isactive==0)
-          togglebtn.setChecked(false);
+        if (isactive == 0)
+            togglebtn.setChecked(false);
         else
-           togglebtn.setChecked(true);
+            togglebtn.setChecked(true);
 
-       // togglebtn.
+        // togglebtn.
         phone.setText(mphone);
         pvalue.setText(pstatus);
         amtval.setText(Integer.toString(dueamt));
         startmval.setText(Integer.toString(day));
         jdateval.setText(join);
 
-        phoneButton = (ImageButton)findViewById(R.id.phoneButton);
+        phoneButton = (ImageButton) findViewById(R.id.phoneButton);
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,8 +117,8 @@ public class MemberDescription extends AppCompatActivity {
             }
         });
 
-        ImageButton messageButton = (ImageButton)findViewById(R.id.messageButton);
-        messageButton.setOnClickListener( new View.OnClickListener() {
+        ImageButton messageButton = (ImageButton) findViewById(R.id.messageButton);
+        messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent whatsapp = new Intent();
@@ -144,15 +136,12 @@ public class MemberDescription extends AppCompatActivity {
         });
     }
 
-    public void setActiveStatus(View view)
-    {
-        togglebtn = (ToggleButton)findViewById(R.id.togglebtn);
+    public void setActiveStatus(View view) {
+        togglebtn = (ToggleButton) findViewById(R.id.togglebtn);
 
-        if(togglebtn.isChecked())
-        {
+        if (togglebtn.isChecked()) {
             memberDatabase.setActive(mid);
-        }
-        else
+        } else
             memberDatabase.setInActive(mid);
 
     }
@@ -180,15 +169,13 @@ public class MemberDescription extends AppCompatActivity {
             finish();
             return true;
         }
-        if(id== R.id.action_add_period)
-        {
-           ExtendPeriod extendPeriod = new ExtendPeriod(this,2);
+        if (id == R.id.action_add_period) {
+            ExtendPeriod extendPeriod = new ExtendPeriod(this, 2);
             extendPeriod.show();
 
         }
 
-        if(id == R.id.action_add_fees)
-        {
+        if (id == R.id.action_add_fees) {
             MyDialog addFee = new MyDialog(this, 0, null);
             addFee.show();
         }
@@ -196,14 +183,12 @@ public class MemberDescription extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void editMember(View view)
-    {
+    public void editMember(View view) {
         Intent intent = new Intent(this, EditMember.class);
-        intent.putExtra("name",name);
+        intent.putExtra("name", name);
         startActivity(intent);
         finish();
     }
-
 
 
 }

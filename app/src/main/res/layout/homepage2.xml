@@ -24,11 +24,7 @@
             app:titleTextColor="#fff">
 
 
-
         </android.support.v7.widget.Toolbar>
-
-
-
 
 
         <FrameLayout
@@ -38,205 +34,206 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:orientation="vertical" android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:focusableInTouchMode="true"
-                    android:layout_height="match_parent">
+                    android:orientation="vertical">
+
                     <android.support.v7.widget.CardView
-                        android:background="#ffffff"
-                        android:elevation="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        >
+                        android:background="#ffffff"
+                        android:elevation="6dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:background="#ffffff"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="#ffffff"
                                 android:layout_marginBottom="16dp"
-                                android:padding="16dp"
-                                >
+                                android:background="#ffffff"
+                                android:padding="16dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#ffffff">
+                                    android:background="#ffffff"
+                                    android:orientation="horizontal">
+
                                     <TextView
+                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Getting Started"
-                                        android:textColor="@color/primaryBlue"
                                         android:layout_margin="16dp"
-                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                        android:textSize="14sp"
+                                        android:text="Getting Started"
                                         android:textAllCaps="true"
-                                        />
+                                        android:textColor="@color/primaryBlue"
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                             </android.support.v7.widget.CardView>
 
                             <FrameLayout
-                                android:layout_height="wrap_content"
                                 android:layout_width="match_parent"
-                                android:paddingRight="8dp"
-                                android:focusableInTouchMode="true"
+                                android:layout_height="wrap_content"
                                 android:background="#ffffff"
-                                android:paddingLeft="8dp">
+                                android:focusableInTouchMode="true"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp">
 
-                              <LinearLayout
-                                  android:layout_width="match_parent"
-                                  android:layout_height="match_parent"
-                                  android:orientation="vertical">
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      android:layout_marginBottom="8dp"
-                                      >
-                                      <ImageView
-                                          android:layout_width="25dp"
-                                          android:id="@+id/menu_button"
-                                          android:layout_marginTop="8dp"
-                                          android:paddingTop="8dp"
-                                          android:layout_weight="0"
-                                          android:layout_height="wrap_content"
-                                          android:src="@drawable/ic_more_vert_black_24dp"
-                                          />
-                                      <TextView
-                                          android:id="@+id/member_name"
-                                          android:layout_width="wrap_content"
-                                          android:layout_height="wrap_content"
-                                          android:layout_weight="3"
-                                          android:layout_marginLeft="8dp"
-                                          android:padding="8dp"
-                                          android:textSize="15sp"
-                                          android:layout_gravity="fill"
-                                          android:text="Create New Rate From Settings Menu On Top Right."
-                                          android:textStyle="normal"
-                                          android:textColor="#404040" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="8dp">
 
+                                        <ImageView
+                                            android:id="@+id/menu_button"
+                                            android:layout_width="25dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_weight="0"
+                                            android:paddingTop="8dp"
+                                            android:src="@drawable/ic_more_vert_black_24dp" />
 
-                                  </LinearLayout>
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      >
-                                      <ImageView
-                                          android:layout_width="25dp"
-                                          android:layout_marginTop="8dp"
-                                          android:paddingTop="8dp"
-                                          android:layout_weight="0"
-                                          android:layout_height="wrap_content"
-                                          android:src="@drawable/ic_menu_black_24dp"
-                                          />
-                                      <TextView
-                                          android:layout_width="wrap_content"
-                                          android:layout_height="wrap_content"
-                                          android:layout_weight="3"
-                                          android:padding="8dp"
-                                          android:layout_marginLeft="8dp"
-                                          android:textSize="15sp"
-                                          android:layout_gravity="fill"
-                                          android:text="Create Groups For Members From Members Section From Top Left Menu."
-                                          android:textStyle="normal"
-                                          android:textColor="#404040" />
+                                        <TextView
+                                            android:id="@+id/member_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="fill"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_weight="3"
+                                            android:padding="8dp"
+                                            android:text="Create New Rate From Settings Menu On Top Right."
+                                            android:textColor="#404040"
+                                            android:textSize="15sp"
+                                            android:textStyle="normal" />
 
 
+                                    </LinearLayout>
 
-                                  </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
 
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      >
-                                      <ImageView
-                                          android:layout_width="25dp"
-                                          android:layout_marginTop="8dp"
-                                          android:layout_weight="0"
-                                          android:paddingTop="8dp"
-                                          android:layout_height="wrap_content"
-                                          android:src="@drawable/ic_person_add_black_24dp"
-                                          />
-                                      <TextView
-                                          android:layout_width="wrap_content"
-                                          android:layout_height="wrap_content"
-                                          android:layout_marginLeft="8dp"
-                                          android:layout_weight="3"
-                                          android:padding="8dp"
-                                          android:textSize="15sp"
-                                          android:layout_gravity="fill"
-                                          android:text="Create New Member By Clicking  Icon Above Or From Member Section."
-                                          android:textStyle="normal"
-                                          android:textColor="#404040" />
+                                        <ImageView
+                                            android:layout_width="25dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_weight="0"
+                                            android:paddingTop="8dp"
+                                            android:src="@drawable/ic_menu_black_24dp" />
 
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="fill"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_weight="3"
+                                            android:padding="8dp"
+                                            android:text="Create Groups For Members From Members Section From Top Left Menu."
+                                            android:textColor="#404040"
+                                            android:textSize="15sp"
+                                            android:textStyle="normal" />
 
 
-                                  </LinearLayout>
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      >
-                                      <ImageView
-                                          android:layout_width="25dp"
-                                          android:layout_marginTop="8dp"
-                                          android:paddingTop="8dp"
-                                          android:layout_weight="0"
-                                          android:layout_height="wrap_content"
-                                          android:src="@drawable/ic_add_circle_black_24dp"
-                                          />
-                                      <TextView
-                                          android:layout_width="wrap_content"
-                                          android:layout_height="wrap_content"
-                                          android:layout_marginLeft="8dp"
-                                          android:layout_weight="3"
-                                          android:padding="8dp"
-                                          android:textSize="15sp"
-                                          android:layout_gravity="fill"
-                                          android:text="Add Member Fee, Expense, Income By Clicking On Button below."
-                                          android:textStyle="normal"
-                                          android:textColor="#404040" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="25dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_weight="0"
+                                            android:paddingTop="8dp"
+                                            android:src="@drawable/ic_person_add_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="fill"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_weight="3"
+                                            android:padding="8dp"
+                                            android:text="Create New Member By Clicking  Icon Above Or From Member Section."
+                                            android:textColor="#404040"
+                                            android:textSize="15sp"
+                                            android:textStyle="normal" />
 
 
+                                    </LinearLayout>
 
-                                  </LinearLayout>
-                                  <LinearLayout
-                                      android:layout_width="match_parent"
-                                      android:layout_height="wrap_content"
-                                      >
-                                      <ImageView
-                                          android:layout_width="25dp"
-                                          android:layout_marginTop="8dp"
-                                          android:layout_weight="0"
-                                          android:paddingTop="8dp"
-                                          android:layout_height="wrap_content"
-                                          android:src="@drawable/ic_note_add_black_24dp"
-                                          />
-                                      <TextView
-                                          android:layout_width="wrap_content"
-                                          android:layout_height="wrap_content"
-                                          android:layout_marginLeft="8dp"
-                                          android:layout_weight="3"
-                                          android:padding="8dp"
-                                          android:textSize="15sp"
-                                          android:layout_gravity="fill"
-                                          android:text="Create Excel Balance Sheet From Balance Sheet Section." android:textStyle="normal"
-                                          android:textColor="#404040"
-                                          android:layout_marginBottom="16dp"/>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="25dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_weight="0"
+                                            android:paddingTop="8dp"
+                                            android:src="@drawable/ic_add_circle_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="fill"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_weight="3"
+                                            android:padding="8dp"
+                                            android:text="Add Member Fee, Expense, Income By Clicking On Button below."
+                                            android:textColor="#404040"
+                                            android:textSize="15sp"
+                                            android:textStyle="normal" />
 
 
+                                    </LinearLayout>
 
-                                  </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
 
-                              </LinearLayout>
+                                        <ImageView
+                                            android:layout_width="25dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_weight="0"
+                                            android:paddingTop="8dp"
+                                            android:src="@drawable/ic_note_add_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="fill"
+                                            android:layout_marginBottom="16dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_weight="3"
+                                            android:padding="8dp"
+                                            android:text="Create Excel Balance Sheet From Balance Sheet Section."
+                                            android:textColor="#404040"
+                                            android:textSize="15sp"
+                                            android:textStyle="normal" />
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
 
 
                             </FrameLayout>
@@ -247,14 +244,8 @@
                     </android.support.v7.widget.CardView>
 
 
-
-
-
                 </LinearLayout>
             </ScrollView>
-
-
-
 
 
             <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -262,49 +253,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="16dp"
                 fab:fab_addButtonColorNormal="@color/accentPink"
                 fab:fab_addButtonColorPressed="@color/pink_pressed"
                 fab:fab_addButtonPlusIconColor="#fff"
-                fab:fab_labelStyle="@style/menu_labels_style"
-                android:layout_margin="16dp"
-                android:layout_gravity="right|bottom">
+                fab:fab_labelStyle="@style/menu_labels_style">
 
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_c"
-                    android:src="@drawable/ic_remove_white_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
-                    fab:fab_title="Quick Expense"
                     android:foregroundGravity="bottom"
                     android:onClick="addExpense"
-                    fab:fab_colorPressed="@color/pink_pressed"/>
+                    android:src="@drawable/ic_remove_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Quick Expense" />
 
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
                     android:foregroundGravity="bottom"
-                    android:src="@drawable/ic_add_white_24dp"
-                    fab:fab_title="Quick Income"
                     android:onClick="addIncome"
-                    fab:fab_colorPressed="@color/pink_pressed"/>
+                    android:src="@drawable/ic_add_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Quick Income" />
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    fab:fab_colorNormal="@color/accentPink"
-                    fab:fab_title="Add Member fee"
-                    fab:fab_colorPressed="@color/pink_pressed"
-                    android:onClick="addFee"
                     android:foregroundGravity="center"
-                    android:src="@drawable/ic_person_add_white_24dp"/>
+                    android:onClick="addFee"
+                    android:src="@drawable/ic_person_add_white_24dp"
+                    fab:fab_colorNormal="@color/accentPink"
+                    fab:fab_colorPressed="@color/pink_pressed"
+                    fab:fab_title="Add Member fee" />
 
 
             </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -314,15 +305,14 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-        android:background="@color/cardview_light_background"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/cardview_light_background"
         app:headerLayout="@layout/header"
-        app:menu="@menu/menu_drawer"
         app:itemBackground="@color/cardview_light_background"
-        >
+        app:menu="@menu/menu_drawer">
 
     </android.support.design.widget.NavigationView>
 

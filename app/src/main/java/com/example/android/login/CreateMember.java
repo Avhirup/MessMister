@@ -1,40 +1,38 @@
 package com.example.android.login;
 
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CreateMember extends AppCompatActivity {
 
-    Toolbar toolbar;
+    public static ArrayList<String> selectedItms;
+    public static String ratecategory;
+    static SQLiteDatabase sqLiteDatabase = null;
     public int year, month;
     public int day;
+    public ArrayList<Integer> grpidlist;
+    Toolbar toolbar;
     LoginDatabaseHelper loginDatabaseHelper;
-    static SQLiteDatabase sqLiteDatabase=null;
-
     MemberDatabase memberDatabase;
     MessMemberGroupDatabase memberGroupDatabase;
     GroupDatabase groupDatabase;
@@ -44,15 +42,13 @@ public class CreateMember extends AppCompatActivity {
     Spinner dayspin;
     MessMember m;
     MessMemberGroup memberGroup;
-    public static ArrayList<String> selectedItms;
-    public ArrayList<Integer> grpidlist;
     Button rate;
-    public static String ratecategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_member);
-        toolbar = (Toolbar)findViewById(R.id.t_bar);
+        toolbar = (Toolbar) findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
         final Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
@@ -62,16 +58,15 @@ public class CreateMember extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-        if(selectedItms!=null)
-        {
-            if(selectedItms.size()!=0)
+        if (selectedItms != null) {
+            if (selectedItms.size() != 0)
                 selectedItms.clear();
         }
-        if(ratecategory!=null)
+        if (ratecategory != null)
             ratecategory = null;
 
-        loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
-        sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
+        loginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB", null, 1);
+        sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
     }
 
     @Override
@@ -88,7 +83,7 @@ public class CreateMember extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
-        if(id == R.id.action_done) {
+        if (id == R.id.action_done) {
             // Log.e("kk","jj");
             try {
                 memberDatabase = new MemberDatabase(this);
@@ -168,14 +163,14 @@ public class CreateMember extends AppCompatActivity {
                     cursor1.close();
                 }
 
+            } catch (Exception e) {
             }
-            catch (Exception e){}
-                Log.e("done", "done");
+            Log.e("done", "done");
 
             NavUtils.navigateUpFromSameTask(this);
         }
 
-        if(id == R.id.home) {
+        if (id == R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
 
@@ -184,29 +179,39 @@ public class CreateMember extends AppCompatActivity {
     }
 
 
-
-    public void displayDate()
-    {
-        Spinner spinner = (Spinner)findViewById(R.id.dayspin);
+    public void displayDate() {
+        Spinner spinner = (Spinner) findViewById(R.id.dayspin);
         spinner.setSelection(day - 1);
     }
 
-    public void addGroups(View view)
-    {
+    public void addGroups(View view) {
         Groupdialog groupdialog = new Groupdialog();
         groupdialog.show(this.getSupportFragmentManager(), "hello");
     }
 
-    public void addRate(View view)
-    {
-        Ratedialog ratedialog= new Ratedialog();
+    public void addRate(View view) {
+        Ratedialog ratedialog = new Ratedialog();
         ratedialog.show(this.getSupportFragmentManager(), "hello");
     }
 
-
+    public ArrayList<String> getTableValues() {
+        Log.e("he", "in array gettabel");
+        ArrayList<String> my_array = new ArrayList<>();
+        Cursor cursor = new RateDataBase(this).getRateTable();
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String rate = cursor.getString(1) + " : " + cursor.getString(2);
+            my_array.add(rate);
+            cursor.moveToNext();
+        }
+        return my_array;
+    }
 
     public static class Groupdialog extends DialogFragment {
         int flg;
+
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -217,13 +222,12 @@ public class CreateMember extends AppCompatActivity {
             GroupDatabase groupDatabase = new GroupDatabase(context);
             String gname = null;
             ArrayList<String> grpnames = new ArrayList<String>(groupDatabase.getGroupNames());
-            final CharSequence [] names = grpnames.toArray(new CharSequence[grpnames.size()]);
-            final boolean [] checkval = new boolean[grpnames.size()];
-
+            final CharSequence[] names = grpnames.toArray(new CharSequence[grpnames.size()]);
+            final boolean[] checkval = new boolean[grpnames.size()];
 
 
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
-                    .setMultiChoiceItems(names,null,new DialogInterface.OnMultiChoiceClickListener() {
+                    .setMultiChoiceItems(names, null, new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
 
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -235,7 +239,7 @@ public class CreateMember extends AppCompatActivity {
                                 // Log.e("item selected",itemName);
 
                                 mSelectedItems.add(names[which].toString());
-                                Log.e("added",names[which].toString());
+                                Log.e("added", names[which].toString());
                             } else if (mSelectedItems.contains(names[which].toString())) {
                                 // Else, if the item is already in the array, remove it
                                 mSelectedItems.remove(names[which].toString());
@@ -248,8 +252,8 @@ public class CreateMember extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                             // User clicked OK, so save the mSelectedItems results somewhere
                             // or return them to the component that opened the dialog
-                            for(int i=0;i<mSelectedItems.size();i++)
-                                Log.e("mselected",mSelectedItems.get(i));
+                            for (int i = 0; i < mSelectedItems.size(); i++)
+                                Log.e("mselected", mSelectedItems.get(i));
                             CreateMember.selectedItms = new ArrayList<String>(mSelectedItems);
 
 
@@ -265,16 +269,28 @@ public class CreateMember extends AppCompatActivity {
             return builder.create();
         }
 
-        public Cursor getCursor()
-        {
+        public Cursor getCursor() {
 
-            String query="select * from "+LoginDatabaseHelper.TABLE_Group+" ;";
+            String query = "select * from " + LoginDatabaseHelper.TABLE_Group + " ;";
 
-            Cursor cursor=sqLiteDatabase.rawQuery(query,null);
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
 
             return cursor;
         }
     }
+
+
+
+   /* public  void setRateSpinner()
+    {
+        ArrayList<String> my_array ;
+        my_array = getTableValues();
+        Spinner My_spinner = (Spinner) findViewById(R.id.rate_spinner);
+        ArrayAdapter my_Adapter = new ArrayAdapter(this, R.layout.rate_spinner_row,
+                my_array);
+        My_spinner.setAdapter(my_Adapter);
+
+    }*/
 
     public static class Ratedialog extends DialogFragment {
         int pos;
@@ -286,11 +302,11 @@ public class CreateMember extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             RateDataBase r = new RateDataBase(getContext());
-            ArrayList<String>rate_category = new ArrayList<String>(r.getcategoryNames());
+            ArrayList<String> rate_category = new ArrayList<String>(r.getcategoryNames());
             final CharSequence[] category = rate_category.toArray(new CharSequence[rate_category.size()]);
             // Set the dialog title
             AlertDialog.Builder builder1 = builder.setTitle("Set Rate")
-                    .setSingleChoiceItems(category,-1,new DialogInterface.OnClickListener() {
+                    .setSingleChoiceItems(category, -1, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Log.d("rate pos ",Integer.toString(which));
@@ -317,41 +333,10 @@ public class CreateMember extends AppCompatActivity {
             return builder.create();
         }
 
-        public Cursor getCursor()
-        {
-            Cursor cursor=new RateDataBase(getContext()).getRateTable();
+        public Cursor getCursor() {
+            Cursor cursor = new RateDataBase(getContext()).getRateTable();
             return cursor;
         }
-    }
-
-
-
-   /* public  void setRateSpinner()
-    {
-        ArrayList<String> my_array ;
-        my_array = getTableValues();
-        Spinner My_spinner = (Spinner) findViewById(R.id.rate_spinner);
-        ArrayAdapter my_Adapter = new ArrayAdapter(this, R.layout.rate_spinner_row,
-                my_array);
-        My_spinner.setAdapter(my_Adapter);
-
-    }*/
-
-
-    public ArrayList<String> getTableValues() {
-        Log.e("he","in array gettabel");
-        ArrayList<String> my_array = new ArrayList<>();
-        Cursor cursor=new RateDataBase(this).getRateTable();
-        if(cursor==null)
-            Log.e("he","in array cursor null");
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
-            String rate=cursor.getString(1)+" : "+cursor.getString(2);
-            my_array.add(rate);
-            cursor.moveToNext();
-        }
-        return my_array;
     }
 
 }

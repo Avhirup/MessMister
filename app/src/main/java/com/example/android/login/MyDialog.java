@@ -2,9 +2,7 @@ package com.example.android.login;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +16,7 @@ import java.util.Date;
 /**
  * Created by medha on 17/11/15.
  */
-public class MyDialog
-{
+public class MyDialog {
     RecyclerView recyclerView;
     Context context;
     ValuesAdapter valuesAdapter;
@@ -36,7 +33,8 @@ public class MyDialog
     Toast toast;
     int duration = Toast.LENGTH_SHORT;
     int type;
-    String titles[] = {"  Add New Member Fee","  Add Quick Income", "  Add Quick Expense"};
+    String titles[] = {"  Add New Member Fee", "  Add Quick Income", "  Add Quick Expense"};
+
     public MyDialog(Context context, int type, RecyclerView recyclerView) {
         this.context = context;
         this.type = type;
@@ -48,7 +46,7 @@ public class MyDialog
         setTitle();
         memberDatabase = new MemberDatabase(context);
         incomeDatabase = new IncomeDatabase(context);
-        expenseDatabase=new ExpenseDatabase(context);
+        expenseDatabase = new ExpenseDatabase(context);
         rateDataBase = new RateDataBase(context);
         member_fee_name = (AutoCompleteTextView) textEntryView.findViewById(R.id.member_fee_name);
         amount_paid = (AutoCompleteTextView) textEntryView.findViewById(R.id.amount_paid);
@@ -58,17 +56,16 @@ public class MyDialog
 
         if (type == 0)
             getMemberValues();
-        else if(type == 1)
+        else if (type == 1)
             getIncomeValues();
-        else if(type == 2)
+        else if (type == 2)
             getExpenseValues();
 
 
     }
 
 
-
-    public void show(){
+    public void show() {
 
         alert.show();
     }
@@ -77,8 +74,7 @@ public class MyDialog
         alert.setTitle(titles[type]);
     }
 
-    public void getMemberValues()
-    {
+    public void getMemberValues() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_dropdown_item_1line, new MemberDatabase(context).getAllMembers());
 
@@ -109,7 +105,7 @@ public class MyDialog
                             if (mdueamt != 0) {
                                 dueamt = mdueamt - paidamt;
                                 memberDatabase.setDueamt(mid, dueamt);
-                                new IncomeDatabase(context).add(new Income(name +" paid", paidamt));
+                                new IncomeDatabase(context).add(new Income(name + " paid", paidamt));
                                 setAdapter();
                             } else {
                                 toast.show();
@@ -117,8 +113,8 @@ public class MyDialog
 
                         } catch (Exception e) {
                         }
-                        if(valuesAdapter != null)
-                        valuesAdapter.notifyItemChanged(valuesAdapter.getItemCount());
+                        if (valuesAdapter != null)
+                            valuesAdapter.notifyItemChanged(valuesAdapter.getItemCount());
                     }
                 }
 
@@ -138,8 +134,7 @@ public class MyDialog
     }
 
 
-    public void getIncomeValues()
-    {
+    public void getIncomeValues() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_dropdown_item_1line, new IncomeDatabase(context).getAllIncomes());
 
@@ -180,8 +175,7 @@ public class MyDialog
 
     }
 
-    public void getExpenseValues()
-    {
+    public void getExpenseValues() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_dropdown_item_1line, new ExpenseDatabase(context).getAllExpenses());
 
@@ -191,7 +185,6 @@ public class MyDialog
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         try {
-
 
 
                             Expense expense = new Expense();
@@ -223,9 +216,8 @@ public class MyDialog
     }
 
 
-    public void  setAdapter()
-    {
-        if(recyclerView != null) {
+    public void setAdapter() {
+        if (recyclerView != null) {
             valuesAdapter = new ValuesAdapter(context);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date = sdf.format(new Date());
@@ -234,7 +226,7 @@ public class MyDialog
             recyclerView.setAdapter(valuesAdapter);
         }
     }
-    }
+}
 
 
 

@@ -23,14 +23,7 @@
             app:titleTextColor="#fff">
 
 
-
-
         </android.support.v7.widget.Toolbar>
-
-
-
-
-
 
 
         <FrameLayout
@@ -40,69 +33,69 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:orientation="vertical" android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:focusableInTouchMode="true"
-                    android:layout_height="match_parent">
+                    android:orientation="vertical">
+
                     <android.support.v7.widget.CardView
-                        android:background="#ffffff"
-                        android:elevation="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        >
+                        android:background="#ffffff"
+                        android:elevation="6dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:background="#ffffff"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
-                                android:padding="16dp"
-                                >
+                                android:padding="16dp">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#ffffff">
+                                    android:background="#ffffff"
+                                    android:orientation="horizontal">
+
                                     <TextView
+                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="About app"
-                                        android:textColor="@color/primaryBlue"
                                         android:layout_margin="16dp"
-                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                        android:textSize="14sp"
+                                        android:text="About app"
                                         android:textAllCaps="true"
-                                        />
+                                        android:textColor="@color/primaryBlue"
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                             </android.support.v7.widget.CardView>
 
                             <FrameLayout
-                                android:layout_height="140dp"
                                 android:layout_width="match_parent"
-                                android:paddingRight="8dp"
-                                android:focusableInTouchMode="true"
+                                android:layout_height="140dp"
                                 android:background="#ffffff"
-                                android:paddingLeft="8dp">
+                                android:focusableInTouchMode="true"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp">
 
                                 <TextView
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_gravity="center"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="16dp"
+                                    android:text="MessMister is  a productivity app for mess owners.\nThis project was developed as TY B.tech Miniproject 2015-16 in WCE, sangli."
                                     android:textColor="@color/cardview_dark_background"
-                                    android:textStyle="italic"
                                     android:textSize="14sp"
-                                    android:text="MessMister is  a productivity app for mess owners.\nThis project was developed as TY B.tech Miniproject 2015-16 in WCE, sangli."/>
-
-
+                                    android:textStyle="italic" />
 
 
                             </FrameLayout>
@@ -113,195 +106,202 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
-                        android:background="#ffffff"
-                        android:elevation="6dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        >
+                        android:background="#ffffff"
+                        android:elevation="6dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:background="#ffffff"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
-                                android:padding="16dp"
-                                >
+                                android:padding="16dp">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:background="#ffffff">
+                                    android:background="#ffffff"
+                                    android:orientation="horizontal">
+
                                     <TextView
+                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="developers"
-                                        android:textColor="@color/primaryBlue"
                                         android:layout_margin="16dp"
-                                        style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                        android:textSize="14sp"
+                                        android:text="developers"
                                         android:textAllCaps="true"
-                                        />
+                                        android:textColor="@color/primaryBlue"
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                             </android.support.v7.widget.CardView>
 
                             <FrameLayout
-                                android:layout_height="wrap_content"
                                 android:layout_width="match_parent"
-                                android:focusableInTouchMode="true"
-                                android:background="#ffffff">
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff"
+                                android:focusableInTouchMode="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
-                                    <android.support.v7.widget.CardView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="#ffffff"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="16dp">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="400dp"
-                                            android:orientation="vertical"
-                                            android:background="#ffffff"
-                                            android:weightSum="3">
-                                            <ImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:src="@drawable/manjusha"
-                                                android:layout_weight="3"/>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical"
-                                                android:layout_weight="0">
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                                    android:text="manjusha pednekar"
-                                                    android:layout_marginBottom="8dp"
-                                                    android:layout_gravity="center"/>
-
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                                    android:text="2013bcs009"
-                                                    android:textColor="@color/primaryBlue"
-                                                    android:layout_marginBottom="16dp"
-                                                    android:layout_gravity="center"/>
-                                            </LinearLayout>
-                                        </LinearLayout>
-
-                                    </android.support.v7.widget.CardView>
 
                                     <android.support.v7.widget.CardView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:background="#ffffff"
                                         android:layout_gravity="center"
-                                        android:layout_margin="16dp">
+                                        android:layout_margin="16dp"
+                                        android:background="#ffffff">
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="400dp"
-                                            android:orientation="vertical"
                                             android:background="#ffffff"
+                                            android:orientation="vertical"
                                             android:weightSum="3">
+
                                             <ImageView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                android:src="@drawable/avhirup"
-                                                android:layout_weight="3"/>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="0"
-                                                android:orientation="vertical"
-                                                >
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                                                android:layout_weight="3"
+                                                android:src="@drawable/manjusha" />
 
-                                                    android:text="Avhirup chakraborty"
-                                                    android:layout_marginBottom="8dp"
-                                                    android:layout_gravity="center"/>
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                                    android:textColor="@color/primaryBlue"
-                                                    android:text="2013bcs015"
-                                                    android:layout_marginBottom="16dp"
-                                                    android:layout_gravity="center"/>
-                                            </LinearLayout>
-                                        </LinearLayout>
-
-                                    </android.support.v7.widget.CardView>
-
-                                    <android.support.v7.widget.CardView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="#ffffff"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="16dp">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="400dp"
-                                            android:orientation="vertical"
-                                            android:background="#ffffff"
-                                            android:weightSum="3">
-                                            <ImageView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:src="@drawable/medha"
-                                                android:layout_weight="3"/>
                                             <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_weight="0"
                                                 android:orientation="vertical">
+
                                                 <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
+                                                    android:layout_gravity="center"
                                                     android:layout_marginBottom="8dp"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                                    android:text="medha naik"
-                                                    android:layout_gravity="center"/>
+                                                    android:text="manjusha pednekar"
+                                                    android:textAllCaps="true" />
+
                                                 <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content"
-                                                    android:textAllCaps="true"
-                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
-                                                    android:text="2013bcs016"
-                                                    android:textColor="@color/primaryBlue"
+                                                    android:layout_gravity="center"
                                                     android:layout_marginBottom="16dp"
-                                                    android:layout_gravity="center"/>
+                                                    android:text="2013bcs009"
+                                                    android:textAllCaps="true"
+                                                    android:textColor="@color/primaryBlue" />
                                             </LinearLayout>
                                         </LinearLayout>
 
                                     </android.support.v7.widget.CardView>
 
+                                    <android.support.v7.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="16dp"
+                                        android:background="#ffffff">
 
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="400dp"
+                                            android:background="#ffffff"
+                                            android:orientation="vertical"
+                                            android:weightSum="3">
 
+                                            <ImageView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="3"
+                                                android:src="@drawable/avhirup" />
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+
+                                                    android:layout_marginBottom="8dp"
+                                                    android:text="Avhirup chakraborty"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:layout_marginBottom="16dp"
+                                                    android:text="2013bcs015"
+                                                    android:textAllCaps="true"
+                                                    android:textColor="@color/primaryBlue" />
+                                            </LinearLayout>
+                                        </LinearLayout>
+
+                                    </android.support.v7.widget.CardView>
+
+                                    <android.support.v7.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="16dp"
+                                        android:background="#ffffff">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="400dp"
+                                            android:background="#ffffff"
+                                            android:orientation="vertical"
+                                            android:weightSum="3">
+
+                                            <ImageView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="3"
+                                                android:src="@drawable/medha" />
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="0"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:layout_marginBottom="8dp"
+                                                    android:text="medha naik"
+                                                    android:textAllCaps="true" />
+
+                                                <TextView
+                                                    style="@style/Base.TextAppearance.AppCompat.Widget.Button"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:layout_marginBottom="16dp"
+                                                    android:text="2013bcs016"
+                                                    android:textAllCaps="true"
+                                                    android:textColor="@color/primaryBlue" />
+                                            </LinearLayout>
+                                        </LinearLayout>
+
+                                    </android.support.v7.widget.CardView>
 
 
                                 </LinearLayout>
@@ -315,10 +315,8 @@
                     </android.support.v7.widget.CardView>
 
 
-
                 </LinearLayout>
             </ScrollView>
-
 
 
         </FrameLayout>
@@ -326,15 +324,14 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-        android:background="@color/cardview_light_background"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/cardview_light_background"
         app:headerLayout="@layout/header"
-        app:menu="@menu/menu_drawer"
         app:itemBackground="@color/cardview_light_background"
-        >
+        app:menu="@menu/menu_drawer">
 
 
     </android.support.design.widget.NavigationView>

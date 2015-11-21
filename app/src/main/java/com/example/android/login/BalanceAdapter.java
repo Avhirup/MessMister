@@ -1,23 +1,20 @@
 package com.example.android.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by medha on 18/11/15.
  */
-public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHolder> {
+public class BalanceAdapter extends RecyclerView.Adapter<BalanceAdapter.viewHolder> {
 
     public Context context1;
     ValuesAdapter valuesAdapter;
@@ -49,7 +46,7 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
 
         title.setText(list.get(position));
         total.setText(new IncomeDatabase(context1).getTotal(list.get(position)));
-        valuesAdapter= new ValuesAdapter(context1);
+        valuesAdapter = new ValuesAdapter(context1);
         valuesAdapter.setPosition(list.get(position));
         recyclerView.setLayoutManager(new LinearLayoutManager(context1));
         recyclerView.setHasFixedSize(false);
@@ -75,7 +72,7 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
     }
 
     public void setList() {
-        if(position == 1)
+        if (position == 1)
             list = new IncomeDatabase(context1).getMonth();
         else
             list = new IncomeDatabase(context1).getYear();
@@ -85,15 +82,13 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
     class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-
         public viewHolder(View itemView) {
 
 
             super(itemView);
-            title = (TextView)itemView.findViewById(R.id.title);
-            total = (TextView)itemView.findViewById(R.id.total);
-            recyclerView = (RecyclerView)itemView.findViewById(R.id.recycle_list);
-
+            title = (TextView) itemView.findViewById(R.id.title);
+            total = (TextView) itemView.findViewById(R.id.total);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.recycle_list);
 
 
         }

@@ -17,10 +17,9 @@ public class ExpenseDatabase {
     LoginDatabaseHelper loginDatabaseHelper;
     SQLiteDatabase db;
 
-    public ExpenseDatabase(Context context)
-    {
+    public ExpenseDatabase(Context context) {
 
-        loginDatabaseHelper=new LoginDatabaseHelper(context,"LOGIN_DB",null,1);
+        loginDatabaseHelper = new LoginDatabaseHelper(context, "LOGIN_DB", null, 1);
         db = loginDatabaseHelper.getWritableDatabase();
 
     }
@@ -30,30 +29,27 @@ public class ExpenseDatabase {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
 
-        String query="insert into "+LoginDatabaseHelper.TABLE_Expense+
-                " values ( \""+ date +"\" , \""+expense.getExpName()+"\" , "+expense.getAmount()+" ) ; ";
-        Log.e("helper",query);
+        String query = "insert into " + LoginDatabaseHelper.TABLE_Expense +
+                " values ( \"" + date + "\" , \"" + expense.getExpName() + "\" , " + expense.getAmount() + " ) ; ";
+        Log.e("helper", query);
         db.execSQL(query);
 
     }
 
-    public Cursor getExpense()
-    {
-        String query="select * from "+LoginDatabaseHelper.TABLE_Expense+" ;";
-        Cursor cursor =  db.rawQuery(query,null);
+    public Cursor getExpense() {
+        String query = "select * from " + LoginDatabaseHelper.TABLE_Expense + " ;";
+        Cursor cursor = db.rawQuery(query, null);
         return cursor;
     }
 
-    public ArrayList<String> getAllExpenses()
-    {
+    public ArrayList<String> getAllExpenses() {
         ArrayList<String> memberlist = new ArrayList<String>();
-        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Expense+";";
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor==null)
-            Log.e("he","in array cursor null");
+        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Expense + ";";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor == null)
+            Log.e("he", "in array cursor null");
         cursor.moveToFirst();
-        while(!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
 
             memberlist.add(cursor.getString(0));
             cursor.moveToNext();

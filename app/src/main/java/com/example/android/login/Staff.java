@@ -1,12 +1,12 @@
 package com.example.android.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,15 +23,15 @@ public class Staff extends AppCompatActivity implements NavigationView.OnNavigat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
-        toolbar = (Toolbar)findViewById(R.id.t_bar);
+        toolbar = (Toolbar) findViewById(R.id.t_bar);
         setSupportActionBar(toolbar);
         d = (DrawerLayout) findViewById(R.id.d_lay);
-        drawerToggle = new ActionBarDrawerToggle(this, d, toolbar,R.string.closed,R.string.open);
+        drawerToggle = new ActionBarDrawerToggle(this, d, toolbar, R.string.closed, R.string.open);
         d.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        navigationView = (NavigationView)findViewById(R.id.navigationView);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
-        if(savedInstanceState == null)
+        if (savedInstanceState == null)
             selectionId = R.id.item1;
         else
             selectionId = savedInstanceState.getInt("selection");
@@ -53,7 +53,7 @@ public class Staff extends AppCompatActivity implements NavigationView.OnNavigat
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent =  new Intent(this, Settings.class);
+            Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
             return true;
         }
@@ -66,22 +66,13 @@ public class Staff extends AppCompatActivity implements NavigationView.OnNavigat
         Intent intent = null;
         menuItem.setChecked(true);
         selectionId = menuItem.getItemId();
-        if(selectionId == R.id.item1)
-        {
+        if (selectionId == R.id.item1) {
             intent = new Intent(this, homepage.class);
-        }
-        else if(selectionId == R.id.item2)
-        {
+        } else if (selectionId == R.id.item2) {
             intent = new Intent(this, Members.class);
-        }
-
-        else if(selectionId == R.id.item5)
-        {
+        } else if (selectionId == R.id.item5) {
             intent = new Intent(this, Balance.class);
-        }
-
-        else if(selectionId == R.id.item7)
-        {
+        } else if (selectionId == R.id.item7) {
             intent = new Intent(this, About.class);
         }
         d.closeDrawer(GravityCompat.START);
@@ -95,17 +86,17 @@ public class Staff extends AppCompatActivity implements NavigationView.OnNavigat
         super.onSaveInstanceState(outState);
         outState.putInt("selection", selectionId);
     }
+
     @Override
     public void onBackPressed() {
-        if(d.isDrawerOpen(GravityCompat.START))
+        if (d.isDrawerOpen(GravityCompat.START))
             d.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
     }
 
 
-    public void create(View view)
-    {
+    public void create(View view) {
         Intent intent = new Intent(this, CreateStaff.class);
         startActivity(intent);
     }

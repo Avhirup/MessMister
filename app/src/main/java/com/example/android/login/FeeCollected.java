@@ -5,49 +5,44 @@ package com.example.android.login;
  */
 public class FeeCollected {
 
-    public FeeCollected()
-    {
-
-    }
     private static int fee_id;
     private String date;
     private String fee_name;
     private float amount;
+    public FeeCollected() {
 
-    public FeeCollected(String fee_name, float amount)
-    {
+    }
+
+    public FeeCollected(String fee_name, float amount) {
         this.fee_name = fee_name;
         this.amount = amount;
     }
 
-    public int getFeeId()
-    {
+    public int getFeeId() {
         return fee_id;
-    }
-    public void setFeeName(String name) {
-        fee_name=name;
     }
 
     public String getFeeName() {
         return fee_name;
     }
 
-
-
-    public void setAmount(int amount) {
-        this.amount=amount;
+    public void setFeeName(String name) {
+        fee_name = name;
     }
 
     public float getAmount() {
         return amount;
     }
 
-    public  void setDate(String date)
-    {
-
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
-    public String getDate()
-    {
+
+    public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+
     }
 }

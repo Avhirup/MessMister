@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by medha on 10/9/15.
@@ -12,10 +11,14 @@ import android.util.Log;
 public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
 
-
-
     public final static String TABLE_MessMember = "MessMember";
-    public final String MessMember_member_id= "_id";
+    public final static String TABLE_Rate = "Rate";
+    public final static String TABLE_Group = "MemberGroup";
+    public final static String TABLE_MessMember_Group = "MessMemberGroup";
+    public final static String TABLE_Notification = "Notification";
+    public final static String TABLE_Income = "Income";
+    public final static String TABLE_Expense = "Expense ";
+    public final String MessMember_member_id = "_id";
     public final String MessMember_name = "_name";
     public final String MessMember_start_date = "start_date";
     public final String MessMember_startof_month = "startof_month";
@@ -26,35 +29,22 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
     public final String MessMember_is_late = "is_late";
     public final String MessMember_phone = "phone";
     public final String MessMember_img_id = "img_id";
-
-
-    public final static String TABLE_Rate = "Rate";
     public final String Rate_rate_id = "_id";
     public final String Rate_category = "category";
     public final String Rate_amount = "amount";
-
-    public final static String TABLE_Group = "MemberGroup";
     public final String Group_groupid = "_id";
     public final String Group_groupName = "group_name";
-
-    public final static String TABLE_MessMember_Group="MessMemberGroup";
-    public final String MessMember_Group_messmember_id="member_id";
-    public final String MessMember_Group_group_id="group_id";
-
-    public final static String TABLE_Notification = "Notification";
+    public final String MessMember_Group_messmember_id = "member_id";
+    public final String MessMember_Group_group_id = "group_id";
     public final String Notification_id = "_nid";
     public final String Notification_mid = "_mid";
     public final String Notification_notifyOn = "notifyOn";
-
-    public final static String TABLE_Income= "Income";
-    public final String Income_date="_date";
-    public final String Income_tag="_tag";
-    public final String Income_amount="_amount";
-
-    public final static  String TABLE_Expense= "Expense ";
-    public final String Expense_date="_date";
-    public final String Expense_tag="_tag";
-    public final String Expense_amount="_amount";
+    public final String Income_date = "_date";
+    public final String Income_tag = "_tag";
+    public final String Income_amount = "_amount";
+    public final String Expense_date = "_date";
+    public final String Expense_tag = "_tag";
+    public final String Expense_amount = "_amount";
 
     public LoginDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
@@ -87,7 +77,7 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query3);
 
 
-        String query2 = " create table " +  TABLE_MessMember +
+        String query2 = " create table " + TABLE_MessMember +
                 " ( " +
                 MessMember_member_id + " INTEGER primary key AUTOINCREMENT, " +
                 MessMember_name + " TEXT UNIQUE not NULL, " +
@@ -99,38 +89,38 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
                 MessMember_has_paid + " BOOLEAN, " +
                 MessMember_is_late + " INTEGER, " +
                 MessMember_phone + " Text, " +
-                MessMember_img_id + " INTEGER, "+
-                " foreign key " + "( " +  MessMember_rate_id  + " )" + " references " + TABLE_Rate +
+                MessMember_img_id + " INTEGER, " +
+                " foreign key " + "( " + MessMember_rate_id + " )" + " references " + TABLE_Rate +
                 " ); ";
 
         db.execSQL(query2);
 
 
-        String query7=" create table "+TABLE_MessMember_Group+ " ( "+
-                MessMember_Group_messmember_id +" INTEGER, "+
-                MessMember_Group_group_id + " INTEGER, "+
-                " foreign key " + "(" +  MessMember_Group_messmember_id  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+" , "+
-                " foreign key " + "(" +  MessMember_Group_group_id  + ")" + " references " + TABLE_Group +"("+Group_groupid+")"+");";
+        String query7 = " create table " + TABLE_MessMember_Group + " ( " +
+                MessMember_Group_messmember_id + " INTEGER, " +
+                MessMember_Group_group_id + " INTEGER, " +
+                " foreign key " + "(" + MessMember_Group_messmember_id + ")" + " references " + TABLE_MessMember + "(" + MessMember_member_id + ")" + " , " +
+                " foreign key " + "(" + MessMember_Group_group_id + ")" + " references " + TABLE_Group + "(" + Group_groupid + ")" + ");";
         db.execSQL(query7);
 
-        String query8 = " create table " + TABLE_Notification + " ( "+
-                Notification_id + " INTEGER primary key AUTOINCREMENT, "+
-                Notification_mid + " INTEGER, "+
+        String query8 = " create table " + TABLE_Notification + " ( " +
+                Notification_id + " INTEGER primary key AUTOINCREMENT, " +
+                Notification_mid + " INTEGER, " +
                 Notification_notifyOn + " TEXT, " +
-                " foreign key " + "(" + Notification_mid  + ")" + " references " + TABLE_MessMember +"("+MessMember_member_id+")"+
+                " foreign key " + "(" + Notification_mid + ")" + " references " + TABLE_MessMember + "(" + MessMember_member_id + ")" +
                 ");";
         db.execSQL(query8);
 
-        String query9= "create table " + TABLE_Income + " ( "+
+        String query9 = "create table " + TABLE_Income + " ( " +
                 Income_date + " TEXT , " +
-                Income_tag  + " TEXT , " +
+                Income_tag + " TEXT , " +
                 Income_amount + " INTEGER );";
 
         db.execSQL(query9);
 
-        String query4= "create table " + TABLE_Expense + " ( "+
+        String query4 = "create table " + TABLE_Expense + " ( " +
                 Expense_date + " TEXT , " +
-                Expense_tag  + " TEXT , " +
+                Expense_tag + " TEXT , " +
                 Expense_amount + " INTEGER );";
 
         db.execSQL(query4);
@@ -156,55 +146,55 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_Group, null, values);
 
         ContentValues val = new ContentValues();
-        val.put(Rate_category,"boys monthly");
+        val.put(Rate_category, "boys monthly");
         val.put(Rate_amount, 2400);
         db.insert(TABLE_Rate, null, val);
 
         ContentValues val1 = new ContentValues();
-        val1.put(MessMember_name,"Avhirup");
-        val1.put(MessMember_start_date,"2015-9-18");
+        val1.put(MessMember_name, "Avhirup");
+        val1.put(MessMember_start_date, "2015-9-18");
         val1.put(MessMember_startof_month, "2015-9-15");
-        val1.put(MessMember_is_active,1);
-        val1.put(MessMember_rate_id,1);
-        val1.put(MessMember_due_amt,500);
-        val1.put(MessMember_has_paid,0);
-        val1.put(MessMember_is_late,1);
-        val1.put(MessMember_phone,"8484008910");
+        val1.put(MessMember_is_active, 1);
+        val1.put(MessMember_rate_id, 1);
+        val1.put(MessMember_due_amt, 500);
+        val1.put(MessMember_has_paid, 0);
+        val1.put(MessMember_is_late, 1);
+        val1.put(MessMember_phone, "8484008910");
         val1.put(MessMember_img_id, 0);
         db.insert(TABLE_MessMember, null, val1);
 
         ContentValues val2 = new ContentValues();
-        val2.put(MessMember_name,"Rohan");
-        val2.put(MessMember_start_date,"2015-9-15");
+        val2.put(MessMember_name, "Rohan");
+        val2.put(MessMember_start_date, "2015-9-15");
         val2.put(MessMember_startof_month, "2015-9-10");
-        val2.put(MessMember_is_active,1);
-        val2.put(MessMember_rate_id,1);
-        val2.put(MessMember_due_amt,800);
-        val2.put(MessMember_has_paid,0);
-        val2.put(MessMember_is_late,1);
-        val2.put(MessMember_phone,"8275119400");
+        val2.put(MessMember_is_active, 1);
+        val2.put(MessMember_rate_id, 1);
+        val2.put(MessMember_due_amt, 800);
+        val2.put(MessMember_has_paid, 0);
+        val2.put(MessMember_is_late, 1);
+        val2.put(MessMember_phone, "8275119400");
         val2.put(MessMember_img_id, 0);
         db.insert(TABLE_MessMember, null, val2);
 
         ContentValues val3 = new ContentValues();
-        val3.put(MessMember_Group_messmember_id,1);
+        val3.put(MessMember_Group_messmember_id, 1);
         val3.put(MessMember_Group_group_id, 1);
         db.insert(TABLE_MessMember_Group, null, val3);
 
         ContentValues val4 = new ContentValues();
-        val4.put(MessMember_Group_messmember_id,2);
+        val4.put(MessMember_Group_messmember_id, 2);
         val4.put(MessMember_Group_group_id, 1);
         db.insert(TABLE_MessMember_Group, null, val4);
 
         ContentValues val5 = new ContentValues();
-        val5.put(Notification_mid,1);
-        val5.put(Notification_notifyOn,"2015-11-20");
-        db.insert(TABLE_Notification,null,val5);
+        val5.put(Notification_mid, 1);
+        val5.put(Notification_notifyOn, "2015-11-20");
+        db.insert(TABLE_Notification, null, val5);
 
         ContentValues val6 = new ContentValues();
-        val6.put(Notification_mid,2);
-        val6.put(Notification_notifyOn,"2015-11-20");
-        db.insert(TABLE_Notification,null,val6);
+        val6.put(Notification_mid, 2);
+        val6.put(Notification_notifyOn, "2015-11-20");
+        db.insert(TABLE_Notification, null, val6);
 
     }
 

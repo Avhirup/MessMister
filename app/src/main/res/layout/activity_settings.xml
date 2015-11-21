@@ -23,12 +23,7 @@
             app:titleTextColor="#fff">
 
 
-
         </android.support.v7.widget.Toolbar>
-
-
-
-
 
 
         <FrameLayout
@@ -43,11 +38,9 @@
                 android:entries="@array/genderItems"></ListView>
 
 
-
         </FrameLayout>
 
     </LinearLayout>
-
 
 
 </android.support.v4.widget.DrawerLayout>

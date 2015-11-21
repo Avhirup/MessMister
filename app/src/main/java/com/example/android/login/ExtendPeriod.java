@@ -7,13 +7,9 @@ package com.example.android.login;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -23,19 +19,18 @@ import java.util.Calendar;
 /**
  * Created by medha on 17/11/15.
  */
-public class ExtendPeriod
-{
+public class ExtendPeriod {
     Context context;
     AlertDialog.Builder alert;
     LayoutInflater factory;
-    public ExtendPeriod(final Context context, final int type)
-    {
+
+    public ExtendPeriod(final Context context, final int type) {
 
         this.context = context;
         factory = LayoutInflater.from(context);
         alert = new AlertDialog.Builder(context);
-        final View textEntryView = factory.inflate(R.layout.edittext1,null);
-        final AutoCompleteTextView days = (AutoCompleteTextView)textEntryView.findViewById(R.id.days);
+        final View textEntryView = factory.inflate(R.layout.edittext1, null);
+        final AutoCompleteTextView days = (AutoCompleteTextView) textEntryView.findViewById(R.id.days);
         alert.setView(textEntryView);
         alert.setTitle("Enter No Of Days To Extend");
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -53,8 +48,7 @@ public class ExtendPeriod
                             int mid = new MemberDatabase(context).getMemberIdbyName(RecycleAdapter.memberName);
                             new MemberDatabase(context).extendperiodbyMid(mid, no);
                         }
-                        if(type == 2)
-                        {
+                        if (type == 2) {
                             int mid = new MemberDatabase(context).getMemberIdbyName(MemberDescription.name);
                             new MemberDatabase(context).extendperiodbyMid(mid, no);
                             String value = new MemberDatabase(context).getStartmonth(mid);
@@ -64,8 +58,8 @@ public class ExtendPeriod
                                 Calendar cal = Calendar.getInstance();
                                 cal.setTime(Sdate);
                                 day = cal.get(Calendar.DAY_OF_MONTH);
+                            } catch (Exception e) {
                             }
-                            catch (Exception e){}
                             MemberDescription.startmval.setText(Integer.toString(day));
                         }
                     }
@@ -85,11 +79,10 @@ public class ExtendPeriod
 
     }
 
-    public void show(){
+    public void show() {
 
         alert.show();
     }
-
 
 
 }

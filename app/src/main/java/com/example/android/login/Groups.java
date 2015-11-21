@@ -2,15 +2,12 @@ package com.example.android.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class Groups extends AppCompatActivity {
 
@@ -27,11 +24,11 @@ public class Groups extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        name  = intent.getStringExtra("grpname");
+        name = intent.getStringExtra("grpname");
         getSupportActionBar().setTitle(name);
         recycleAdapter = new RecycleAdapter(this);
         recycleAdapter.setPosition(5);
-        recyclerView = (RecyclerView)findViewById(R.id.recycle_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recycleAdapter);
         recycleAdapter.setgrpname(name);
@@ -48,8 +45,7 @@ public class Groups extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if(id == R.id.delete)
-        {
+        if (id == R.id.delete) {
             int grpid = new GroupDatabase(getApplicationContext()).getgrpId(name);
             new MessMemberGroupDatabase(getApplicationContext()).deletebyGrp(grpid);
             new GroupDatabase(getApplicationContext()).deletebyName(name);

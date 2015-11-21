@@ -14,13 +14,13 @@ public class Rate {
     //Constructors
 
     public Rate() {
-        this.category="";
-        amount=0;
+        this.category = "";
+        amount = 0;
     }
-    public Rate(String category,int amount)
-    {
-        this.amount=amount;
-        this.category=category;
+
+    public Rate(String category, int amount) {
+        this.amount = amount;
+        this.category = category;
     }
 
     public String getCategory() {

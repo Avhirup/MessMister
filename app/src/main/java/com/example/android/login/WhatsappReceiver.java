@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class WhatsappReceiver extends BroadcastReceiver {
     public WhatsappReceiver() {
-        Log.e("Whatsapp","whatsapp constructor");
+        Log.e("Whatsapp", "whatsapp constructor");
     }
 
     @Override
