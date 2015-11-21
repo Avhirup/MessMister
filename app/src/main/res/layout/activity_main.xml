@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="0dp"
-                android:text="forgot password?"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="16sp" />

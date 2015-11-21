@@ -84,6 +84,21 @@ public class MemberDescription extends AppCompatActivity {
             }
             catch (Exception e){}
 
+        int day1 = 0,month1 = 0,yr = 0;
+        try {
+            Date jdate = Date.valueOf(stdate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(jdate);
+            day1 = cal.get(Calendar.DAY_OF_MONTH);
+            month1 = cal.get(Calendar.MONTH);
+            yr = cal.get(Calendar.YEAR);
+        }
+
+        catch (Exception e){}
+
+        month1 = month1+1;
+        String join = Integer.toString(yr) +"-"+Integer.toString(month1+1)+"-"+Integer.toString(day1);
+
         int isactive = memberDatabase.getMemberIsActive(mid);
         String status;
         if(isactive==0)
@@ -96,7 +111,7 @@ public class MemberDescription extends AppCompatActivity {
         pvalue.setText(pstatus);
         amtval.setText(Integer.toString(dueamt));
         startmval.setText(Integer.toString(day));
-        jdateval.setText(stdate);
+        jdateval.setText(join);
 
         phoneButton = (ImageButton)findViewById(R.id.phoneButton);
         phoneButton.setOnClickListener(new View.OnClickListener() {

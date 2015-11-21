@@ -162,8 +162,8 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues val1 = new ContentValues();
         val1.put(MessMember_name,"Avhirup");
-        val1.put(MessMember_start_date,"2015-10-18");
-        val1.put(MessMember_startof_month, "2015-10-15");
+        val1.put(MessMember_start_date,"2015-9-18");
+        val1.put(MessMember_startof_month, "2015-9-15");
         val1.put(MessMember_is_active,1);
         val1.put(MessMember_rate_id,1);
         val1.put(MessMember_due_amt,500);
@@ -175,8 +175,8 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues val2 = new ContentValues();
         val2.put(MessMember_name,"Rohan");
-        val2.put(MessMember_start_date,"2015-10-15");
-        val2.put(MessMember_startof_month, "2015-10-10");
+        val2.put(MessMember_start_date,"2015-9-15");
+        val2.put(MessMember_startof_month, "2015-9-10");
         val2.put(MessMember_is_active,1);
         val2.put(MessMember_rate_id,1);
         val2.put(MessMember_due_amt,800);
