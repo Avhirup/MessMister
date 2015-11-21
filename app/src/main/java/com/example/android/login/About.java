@@ -61,6 +61,11 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
             d.closeDrawer(GravityCompat.START);
             return true;
         }
+        else if(menuItem.getItemId() == R.id.nothing)
+        {
+            d.closeDrawer(GravityCompat.START);
+            return true;
+        }
         d.closeDrawer(GravityCompat.START);
         startActivity(intent);
         finish();

@@ -116,6 +116,11 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
         {
             intent = new Intent(this, About.class);
         }
+        else if(menuItem.getItemId() == R.id.nothing)
+        {
+            d.closeDrawer(GravityCompat.START);
+            return true;
+        }
         d.closeDrawer(GravityCompat.START);
         startActivity(intent);
         finish();

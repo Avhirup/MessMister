@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class NotificationService extends IntentService {
     MemberDatabase memberDatabase=null;
-    private final static int PERIOD=10*60*1000;
+    private final static int PERIOD= 2 * 1000;
 
     public NotificationService() {
         super("NotificationService");
@@ -20,45 +20,53 @@ public class NotificationService extends IntentService {
     }
 
     public  void notificationGenerator() {
-        memberDatabase=new MemberDatabase(this);
+        while(true) {
+            memberDatabase = new MemberDatabase(this);
 
-        Cursor cursor = memberDatabase.getlateMembers();  //modification made
-        cursor.moveToFirst();
-        Log.e("In Notification","Notification Cursor");
-        while (!cursor.isAfterLast()) {
-            int memberid=Integer.parseInt(cursor.getString(0));
-            String membername = cursor.getString(1);
-            String dueamount = cursor.getString(6);
-
-
-            NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
-            notification.setAutoCancel(true);
-            notification.setTicker("Late :" + membername);
-            notification.setSmallIcon(R.drawable.businessman267);
-            notification.setContentTitle("MEMBER: " + membername);
-            notification.setContentText("Due Amount: " + dueamount);
+            Cursor cursor = memberDatabase.getMember();  //modification made
+            cursor.moveToFirst();
+            Log.e("In Notification", "Notification Cursor");
+            while (!cursor.isAfterLast()) {
+                int memberid = Integer.parseInt(cursor.getString(0));
+                String membername = cursor.getString(1);
+                String dueamount = cursor.getString(6);
 
 
-            Intent intent = new Intent();
-            intent.setAction("SNOOZE");
-            intent.putExtra("memberid",memberid);
-            PendingIntent snoozeIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            notification.addAction(new NotificationCompat.Action(R.drawable.alarm16, "Snooze", snoozeIntent));
+                NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
+                notification.setAutoCancel(true);
+                notification.setTicker("Late :" + membername);
+                notification.setSmallIcon(R.drawable.businessman267);
+                notification.setContentTitle("MEMBER: " + membername);
+                notification.setContentText("Due Amount: " + dueamount);
 
 
-            Intent whatsapp = new Intent();
-            whatsapp.setAction("WHATSAPPACTION");
-            PendingIntent pendingwhatsappIntent = PendingIntent.getBroadcast(this, 12345, whatsapp, PendingIntent.FLAG_UPDATE_CURRENT);
-            notification.addAction(R.drawable.whatsapp16, "Whatsapp", pendingwhatsappIntent);
+                Intent intent = new Intent();
+                intent.setAction("SNOOZE");
+                intent.putExtra("memberid", memberid);
+                PendingIntent snoozeIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                notification.addAction(new NotificationCompat.Action(R.drawable.alarm16, "Snooze", snoozeIntent));
 
-            notification.setAutoCancel(true);
-            android.app.Notification n = notification.build();
-            NotificationManagerCompat.from(this).notify(0, n);
 
-            cursor.moveToNext();
+                Intent whatsapp = new Intent();
+                whatsapp.setAction("WHATSAPPACTION");
+                PendingIntent pendingwhatsappIntent = PendingIntent.getBroadcast(this, 12345, whatsapp, PendingIntent.FLAG_UPDATE_CURRENT);
+                notification.addAction(R.drawable.whatsapp16, "Whatsapp", pendingwhatsappIntent);
 
+                notification.setAutoCancel(true);
+                android.app.Notification n = notification.build();
+                NotificationManagerCompat.from(this).notify(0, n);
+
+                cursor.moveToNext();
+
+                try {
+                    Thread.sleep(PERIOD);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
             try {
-                Thread.sleep(PERIOD);
+                Thread.sleep(10 * 60 * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
