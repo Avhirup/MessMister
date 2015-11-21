@@ -252,6 +252,15 @@ public class MemberDatabase  {
         return a;
     }
 
+    public int allMemberCount()
+    {
+        int count = 0;
+        Cursor cursor = this.getMember();
+        count = cursor.getCount();
+
+                return count;
+    }
+
 
 }
 

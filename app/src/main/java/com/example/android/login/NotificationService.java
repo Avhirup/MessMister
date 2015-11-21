@@ -8,15 +8,17 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 
 public class NotificationService extends IntentService {
     MemberDatabase memberDatabase=null;
     private final static int PERIOD= 2 * 1000;
-
     public NotificationService() {
         super("NotificationService");
         Log.e("In Notification Service", "Database Starting");
         Log.e("In Notification Service","Database Started");
+
     }
 
     public  void notificationGenerator() {
@@ -26,6 +28,7 @@ public class NotificationService extends IntentService {
             Cursor cursor = memberDatabase.getMember();  //modification made
             cursor.moveToFirst();
             Log.e("In Notification", "Notification Cursor");
+            int j = 0;
             while (!cursor.isAfterLast()) {
                 int memberid = Integer.parseInt(cursor.getString(0));
                 String membername = cursor.getString(1);
@@ -53,8 +56,8 @@ public class NotificationService extends IntentService {
                 notification.addAction(R.drawable.whatsapp16, "Whatsapp", pendingwhatsappIntent);
 
                 notification.setAutoCancel(true);
-                android.app.Notification n = notification.build();
-                NotificationManagerCompat.from(this).notify(0, n);
+                android.app.Notification n= notification.build();
+                NotificationManagerCompat.from(this).notify(j, n);
 
                 cursor.moveToNext();
 
@@ -63,14 +66,14 @@ public class NotificationService extends IntentService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                j++;
             }
             try {
                 Thread.sleep(10 * 60 * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            j = 0;
         }
     }
 
