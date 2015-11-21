@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/all_extend"
         android:title="Extend Period"/>
     <item
-        android:id="@+id/add"
+        android:id="@+id/all_call"
         android:title="Call"/>
     <item
-        android:id="@+id/edit"
+        android:id="@+id/all_add"
         android:title="Add Fees">
     </item>
 

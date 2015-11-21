@@ -4,4 +4,7 @@
     tools:context="com.example.android.login.homepage">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_add" android:title="Add New member"
+        android:orderInCategory="100" app:showAsAction="always"
+        android:icon="@drawable/ic_person_add_white_24dp"/>
 </menu>

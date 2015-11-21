@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="  Log In To MessMister" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".Signup"
-            android:label="Sign Up" >
+            android:label="  Sign Up For MessMister" >
         </activity>
         <activity
             android:name=".homepage"
@@ -77,7 +77,6 @@
             android:label="@string/title_activity_create_bill" >
         </activity>
 
-
         <receiver
             android:name=".NotificationReceiver"
             android:enabled="true"
@@ -102,6 +101,14 @@
         </receiver>
 
         <activity android:name=".MemberDescription" >
+        </activity>
+        <activity
+            android:name=".Groups"
+            android:label="@string/title_activity_groups"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.login.Members" />
         </activity>
     </application>
 

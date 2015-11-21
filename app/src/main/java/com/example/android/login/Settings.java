@@ -69,27 +69,6 @@ public class Settings extends AppCompatActivity {
             if(position == 0)
             {
 
-                final View textEntryView = factory.inflate(R.layout.edittext1, null);
-                final TextInputLayout input = (TextInputLayout)textEntryView.findViewById(R.id.group_name);
-                alert.setView(input);
-                alert.setTitle("Create New Group");
-                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        groupDatabase = new GroupDatabase(getBaseContext());
-                        String group_name = input.getEditText().getText().toString();
-                        Log.e("helper",group_name);
-                        MemberGroup group = new MemberGroup(group_name);
-                        groupDatabase.add(group);
-                    }
-                });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                        dialog.cancel();
-                    }
-                });
-                alert.show();
             }
             else if(position == 1)
             {

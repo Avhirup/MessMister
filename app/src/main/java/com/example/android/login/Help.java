@@ -74,23 +74,12 @@ public class Help extends AppCompatActivity implements NavigationView.OnNavigati
         {
             intent = new Intent(this, Members.class);
         }
-        else if(menuItem.getItemId() == R.id.item3)
-        {
-            intent = new Intent(this, Staff.class);
-        }
-        else if(menuItem.getItemId() == R.id.item4)
-        {
-            intent = new Intent(this, Bills.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item5)
         {
             intent = new Intent(this, Balance.class);
         }
-        else if(menuItem.getItemId() == R.id.item6)
-        {
-            d.closeDrawer(GravityCompat.START);
-            return true;
-        }
+
         else if(menuItem.getItemId() == R.id.item7)
         {
             intent = new Intent(this, About.class);

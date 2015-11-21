@@ -16,7 +16,7 @@ public class NotificationService extends IntentService {
         super("NotificationService");
     }
 
-    public  void notificationGenerator() {
+  /*  public  void notificationGenerator() {
         Cursor cursor = getDueMember();
         while (!cursor.isAfterLast()) {
 
@@ -57,12 +57,12 @@ public class NotificationService extends IntentService {
             }
 
         }
-    }
+    }*/
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        notificationGenerator();
+        //notificationGenerator();
     }
 
 

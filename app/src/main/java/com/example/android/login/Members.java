@@ -38,7 +38,8 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     NavigationView navigationView;
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
-    private int selectionId;
+    Menu menu;
+    MenuItem menuItem;
     TabLayout tabLayout;
     ViewPager viewPager;
 
@@ -55,16 +56,16 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
         drawerToggle.syncState();
         navigationView = (NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
-        if(savedInstanceState == null)
-            selectionId = R.id.item1;
-        else
-            selectionId = savedInstanceState.getInt("selection");
+
         tabLayout = (TabLayout)findViewById(R.id.t_layout);
         viewPager = (ViewPager)findViewById(R.id.pager);
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setTabsFromPagerAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        menu = navigationView.getMenu();
+        menuItem = menu.findItem(R.id.item2);
+        menuItem.setChecked(true);
 
     }
 
@@ -96,7 +97,6 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Intent intent = null;
         menuItem.setChecked(true);
-        selectionId = menuItem.getItemId();
         if(menuItem.getItemId() == R.id.item1)
         {
             intent = new Intent(this, homepage.class);
@@ -106,22 +106,12 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
             d.closeDrawer(GravityCompat.START);
             return true;
         }
-        else if(menuItem.getItemId() == R.id.item3)
-        {
-            intent = new Intent(this, Staff.class);
-        }
-        else if(menuItem.getItemId() == R.id.item4)
-        {
-            intent = new Intent(this, Bills.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item5)
         {
             intent = new Intent(this, Balance.class);
         }
-        else if(menuItem.getItemId() == R.id.item6)
-        {
-            intent = new Intent(this, Help.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item7)
         {
             intent = new Intent(this, About.class);
@@ -135,7 +125,7 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("selection", selectionId);
+
     }
     @Override
     public void onBackPressed() {
@@ -167,12 +157,8 @@ public class Members extends AppCompatActivity implements NavigationView.OnNavig
 
         @Override
         public Fragment getItem(int position) {
-            MemberFragment memberFragment;
-            if(getPageTitle(position).toString().equals("LATE"))
-                memberFragment = MemberFragment.newInstance(position + 1);
-            else
-                memberFragment = MemberFragment.newInstance(position + 1);
-            return  memberFragment;
+             return MemberFragment.newInstance(position + 1);
+
         }
 
         @Override

@@ -127,4 +127,5 @@
     </string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">OK</string>
+    <string name="title_activity_groups">Groups</string>
 </resources>

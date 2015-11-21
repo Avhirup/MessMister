@@ -26,20 +26,7 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp"
-            app:tabGravity="center"
-            app:tabMode="scrollable"
-            app:tabIndicatorColor="@color/accentPink"
-            android:background="@color/primaryBlue"
-            android:id="@+id/t_layout"
-            app:tabMinWidth="100dp"
-            app:tabSelectedTextColor="@color/cardview_light_background"
-            app:tabTextColor="@color/cardview_light_background"
-            >
-        </android.support.design.widget.TabLayout>
+
 
 
 

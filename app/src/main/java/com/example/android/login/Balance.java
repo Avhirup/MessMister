@@ -2,7 +2,13 @@ package com.example.android.login;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +23,11 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
     NavigationView navigationView;
-    private int selectionId;
+    TabLayout tabLayout;
+    MenuItem menuItem;
+    Menu menu;
+    ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +40,15 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
         drawerToggle.syncState();
         navigationView = (NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
-        if(savedInstanceState == null)
-            selectionId = R.id.item1;
-        else
-            selectionId = savedInstanceState.getInt("selection");
+        tabLayout = (TabLayout)findViewById(R.id.t_layout);
+        viewPager = (ViewPager)findViewById(R.id.pager);
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setTabsFromPagerAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        menu = navigationView.getMenu();
+        menuItem = menu.findItem(R.id.item5);
+        menuItem.setChecked(true);
     }
 
     @Override
@@ -64,7 +79,6 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Intent intent = null;
         menuItem.setChecked(true);
-        selectionId = menuItem.getItemId();
         if(menuItem.getItemId() == R.id.item1)
         {
             intent = new Intent(this, homepage.class);
@@ -73,23 +87,13 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
         {
             intent = new Intent(this, Members.class);
         }
-        else if(menuItem.getItemId() == R.id.item3)
-        {
-            intent = new Intent(this, Staff.class);
-        }
-        else if(menuItem.getItemId() == R.id.item4)
-        {
-            intent = new Intent(this, Bills.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item5)
         {
             d.closeDrawer(GravityCompat.START);
             return true;
         }
-        else if(menuItem.getItemId() == R.id.item6)
-        {
-            intent = new Intent(this, Help.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item7)
         {
             intent = new Intent(this, About.class);
@@ -103,7 +107,7 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("selection", selectionId);
+
     }
 
     @Override
@@ -113,4 +117,36 @@ public class Balance extends AppCompatActivity implements NavigationView.OnNavig
         else
             super.onBackPressed();
     }
+
+    public class PagerAdapter extends FragmentStatePagerAdapter
+    {
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+
+
+        @Override
+        public Fragment getItem(int position) {
+             return BalanceFragment.newInstance(position + 1);
+
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0)
+                return "MONTH VIEW";
+            else
+                return "YEAR VIEW";
+        }
+
+
+    }
+
 }

@@ -16,7 +16,8 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
     NavigationView navigationView;
-    private int selectionId;
+    MenuItem menuItem;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,32 +31,13 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
         drawerToggle.syncState();
         navigationView = (NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
+        menu = navigationView.getMenu();
+        menuItem = menu.findItem(R.id.item7);
+        menuItem.setChecked(true);
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent =  new Intent(this, Settings.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -69,22 +51,11 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
         {
             intent = new Intent(this, Members.class);
         }
-        else if(menuItem.getItemId() == R.id.item3)
-        {
-            intent = new Intent(this, Staff.class);
-        }
-        else if(menuItem.getItemId() == R.id.item4)
-        {
-            intent = new Intent(this, Bills.class);
-        }
         else if(menuItem.getItemId() == R.id.item5)
         {
             intent = new Intent(this, Balance.class);
         }
-        else if(menuItem.getItemId() == R.id.item6)
-        {
-            intent = new Intent(this, Help.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item7)
         {
             d.closeDrawer(GravityCompat.START);
@@ -100,7 +71,6 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("selection", selectionId);
     }
 
     @Override

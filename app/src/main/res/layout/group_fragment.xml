@@ -19,11 +19,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_margin="24dp">
+                android:layout_margin="8dp"
+                android:paddingTop="16dp">
+
+                <ImageButton
+                    android:id="@+id/add_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_add_black_24dp"
+                    android:background="@color/cardview_light_background"/>
 
                 <TextView
                     android:layout_marginLeft="32dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill"
@@ -31,12 +41,7 @@
                     android:textIsSelectable="true"
                     android:text="Add New Group"/>
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:src="@drawable/ic_add_black_24dp"
-                    android:background="@color/cardview_light_background"/>
+
 
             </LinearLayout>
 
@@ -45,15 +50,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_margin="16dp">
+                android:layout_margin="8dp">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:id="@+id/close"
+                    android:layout_marginLeft="16dp"
                     android:background="@color/cardview_light_background"
                     android:src="@drawable/ic_close_black_24dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
                     />
 
                 <EditText
@@ -61,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="2"
+                    android:id="@+id/editText"
                     android:layout_marginRight="16dp"
                     android:hint="Enter Group Name"/>
 
@@ -68,7 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:paddingTop="8dp"
+                    android:paddingTop="16dp"
+                    android:id="@+id/done"
                     android:src="@drawable/ic_done_black_24dp"
                     android:background="@color/cardview_light_background"/>
 

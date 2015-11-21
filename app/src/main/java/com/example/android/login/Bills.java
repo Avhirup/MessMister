@@ -75,23 +75,12 @@ public class Bills extends AppCompatActivity implements NavigationView.OnNavigat
         {
             intent = new Intent(this, Members.class);
         }
-        else if(menuItem.getItemId() == R.id.item3)
-        {
-            intent = new Intent(this, Staff.class);
-        }
-        else if(menuItem.getItemId() == R.id.item4)
-        {
-            d.closeDrawer(GravityCompat.START);
-            return true;
-        }
+
         else if(menuItem.getItemId() == R.id.item5)
         {
             intent = new Intent(this, Balance.class);
         }
-        else if(menuItem.getItemId() == R.id.item6)
-        {
-            intent = new Intent(this, Help.class);
-        }
+
         else if(menuItem.getItemId() == R.id.item7)
         {
             intent = new Intent(this, About.class);

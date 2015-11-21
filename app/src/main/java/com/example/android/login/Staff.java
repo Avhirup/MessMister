@@ -74,23 +74,12 @@ public class Staff extends AppCompatActivity implements NavigationView.OnNavigat
         {
             intent = new Intent(this, Members.class);
         }
-        else if(selectionId == R.id.item3)
-        {
-            d.closeDrawer(GravityCompat.START);
-            return true;
-        }
-        else if(selectionId == R.id.item4)
-        {
-            intent = new Intent(this, Bills.class);
-        }
+
         else if(selectionId == R.id.item5)
         {
             intent = new Intent(this, Balance.class);
         }
-        else if(selectionId == R.id.item6)
-        {
-            intent = new Intent(this, Help.class);
-        }
+
         else if(selectionId == R.id.item7)
         {
             intent = new Intent(this, About.class);

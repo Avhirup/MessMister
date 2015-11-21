@@ -22,7 +22,7 @@
             android:inputType="textCapWords"
             android:layout_marginTop="16dp"
             android:id="@+id/member_fee_name"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:hint="Name"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -41,7 +41,7 @@
             android:inputType="number"
             android:layout_marginTop="16dp"
             android:id="@+id/amount_paid"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:hint="amount"/>
 
     </android.support.design.widget.TextInputLayout>

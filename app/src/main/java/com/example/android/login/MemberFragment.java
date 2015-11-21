@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ViewSwitcher;
 
 /**
  * Created by medha on 14/11/15.
@@ -40,19 +43,59 @@ public class MemberFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view;
-        if(position == 4)
-            view = inflater.inflate(R.layout.group_fragment, container, false);
-        else
-        {
-        view = inflater.inflate(R.layout.member_list, container, false);
         recycleAdapter = new RecycleAdapter(getContext());
         position = getArguments().getInt(ARG_SECTION_NUMBER);
         recycleAdapter.setPosition(position);
+        if(position == 4)
+        {
+            view = inflater.inflate(R.layout.group_fragment, container, false);
+            setViewSwitcher(view);
+        }
+        else
+        {
+        view = inflater.inflate(R.layout.member_list, container, false);}
+
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(recycleAdapter);}
+        recyclerView.setAdapter(recycleAdapter);
         return view;
 
+    }
+
+    public void setViewSwitcher(View view)
+    {
+        final ViewSwitcher viewSwitcher= (ViewSwitcher)view.findViewById(R.id.viewSwitcher1);
+        ImageButton imageButton1= (ImageButton)view.findViewById(R.id.add_button);
+        final EditText editText=(EditText)view.findViewById(R.id.editText);
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewSwitcher.showNext();
+            }
+        });
+        ImageButton imageButton2= (ImageButton)view.findViewById(R.id.close);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("");
+                viewSwitcher.showPrevious();
+            }
+        });
+        ImageButton imageButton3 = (ImageButton)view.findViewById(R.id.done);
+        imageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MemberGroup group;
+               GroupDatabase groupDatabase = new GroupDatabase(getContext());
+                String group_name = editText.getText().toString();
+                if(!group_name.equals("")) {
+                    group = new MemberGroup(group_name);
+                    groupDatabase.add(group);
+                }
+                editText.setText("");
+                viewSwitcher.showPrevious();
+            }
+        });
     }
 
 
