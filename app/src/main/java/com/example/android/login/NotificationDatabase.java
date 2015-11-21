@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by manjush on 12-11-2015.
@@ -36,10 +37,22 @@ public class NotificationDatabase {
                         " set " +
                         loginDatabaseHelper.Notification_notifyOn  + " = " + "\"" + notification.getNotifyOn()+"\"" +
                         " where " +
-                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() +
+                        loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + "and" +
                         loginDatabaseHelper.Notification_mid + " = " + notification.getMember_id() +
                         ";";
         db.execSQL(query);
+    }
+
+    public void updateNotification(Notification notification)
+    {
+        String query = " update " + loginDatabaseHelper.TABLE_Notification +
+                " set " +
+                loginDatabaseHelper.Notification_notifyOn  + " = " + "\"" + notification.getNotifyOn()+"\"" +","+
+                loginDatabaseHelper.Notification_id + " = " + notification.getNotification_id() + "," +
+                loginDatabaseHelper.Notification_mid + " = " + notification.getMember_id() +
+                ";";
+        db.execSQL(query);
+
     }
 
     public void  delete(int nid)
@@ -53,7 +66,7 @@ public class NotificationDatabase {
         db.execSQL(query);
     }
 
-    public  int getNotificatioId(int mid)
+    public  int getNotificationId(int mid)
     {
         String query = "select * from " + loginDatabaseHelper.TABLE_Notification +
                 " where "+ loginDatabaseHelper.Notification_mid+"="+mid+";";
@@ -98,11 +111,28 @@ public class NotificationDatabase {
 
     }
 
+
     public Cursor getNotificationTable()
     {
         String query="select * from "+ LoginDatabaseHelper.TABLE_Notification +" ;";
         Cursor cursor=db.rawQuery(query,null);
         return  cursor;
+    }
+
+    public String getNotifyOn(int memberid)
+    {
+        String query="select * from "+loginDatabaseHelper.TABLE_Notification+" where _mid = "+memberid;
+        Cursor cursor=db.rawQuery(query, null);
+        if( cursor != null && cursor.moveToFirst() ){
+            String str=cursor.getString(2);
+            cursor.close();
+            return str;
+        }
+        else
+        {
+            Log.e("Error:","No Values");
+        }
+        return "10-10-2010";
     }
 
 }

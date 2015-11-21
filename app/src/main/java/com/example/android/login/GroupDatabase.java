@@ -100,4 +100,29 @@ public class GroupDatabase {
         return grouplist;
     }
 
+    public ArrayList<Integer> getgrpIdlist(ArrayList<String> s)
+    {
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        Cursor cursor;
+        for(int i = 0 ; i<s.size(); i++)
+        {
+            String query = " select " + loginDatabaseHelper.Group_groupid +
+                    " from "+ loginDatabaseHelper.TABLE_Group +
+                    " where " + loginDatabaseHelper.Group_groupName + " = "+ "\"" +s.get(i) + "\";";
+
+            cursor = db.rawQuery(query,null);
+            if(cursor==null)
+                Log.e("he","in array cursor null");
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast())
+            {
+
+                a.add(cursor.getInt(0));
+                cursor.moveToNext();
+            }
+
+        }
+        return  a;
+    }
+
 }

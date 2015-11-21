@@ -6,23 +6,29 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
 
 public class NotificationService extends IntentService {
-
+    MemberDatabase memberDatabase=null;
     private final static int PERIOD=10*60*1000;
 
     public NotificationService() {
         super("NotificationService");
+        Log.e("In Notification Service", "Database Starting");
+        Log.e("In Notification Service","Database Started");
     }
 
-  /*  public  void notificationGenerator() {
-        Cursor cursor = getDueMember();
-        while (!cursor.isAfterLast()) {
+    public  void notificationGenerator() {
+        memberDatabase=new MemberDatabase(this);
 
-            String memberid = "";
-            String membername = "";
-            String dueamount = "";
+        Cursor cursor = memberDatabase.getlateMembers();  //modification made
+        cursor.moveToFirst();
+        Log.e("In Notification","Notification Cursor");
+        while (!cursor.isAfterLast()) {
+            int memberid=Integer.parseInt(cursor.getString(0));
+            String membername = cursor.getString(1);
+            String dueamount = cursor.getString(6);
 
 
             NotificationCompat.Builder notification = new NotificationCompat.Builder(this);
@@ -35,6 +41,7 @@ public class NotificationService extends IntentService {
 
             Intent intent = new Intent();
             intent.setAction("SNOOZE");
+            intent.putExtra("memberid",memberid);
             PendingIntent snoozeIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             notification.addAction(new NotificationCompat.Action(R.drawable.alarm16, "Snooze", snoozeIntent));
 
@@ -57,12 +64,18 @@ public class NotificationService extends IntentService {
             }
 
         }
-    }*/
+    }
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        //notificationGenerator();
+       try
+       {
+           notificationGenerator();
+       }catch (Exception e)
+       {
+           Log.e("HELPER",e+"");
+       }
     }
 
 

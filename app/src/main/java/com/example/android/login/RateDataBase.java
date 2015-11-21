@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by medha on 27/10/15.
  */
@@ -102,4 +104,43 @@ public class RateDataBase {
         return a;
     }
 
+    public int getrateId(String category)
+    {
+        String query = "select * from " + loginDatabaseHelper.TABLE_Rate +
+                " where "+ loginDatabaseHelper.Rate_category+" = "+ "\"" + category + "\"" + ";";
+        Cursor cursor = db.rawQuery(query,null);
+
+
+        int a =0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(0);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        return a;
+    }
+
+    public ArrayList<String> getcategoryNames()
+    {
+        ArrayList<String> grouplist = new ArrayList<String>();
+        String query =" select * from " + loginDatabaseHelper.TABLE_Rate + ";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            grouplist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return grouplist;
+    }
 }
