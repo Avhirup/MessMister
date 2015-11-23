@@ -21,8 +21,10 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
 
     public Context context1;
     ValuesAdapter valuesAdapter;
+    TextView title;
+    TextView total;
     RecyclerView recyclerView;
-    List<String> list = new ArrayList<>();
+    List<String> list;
     int position;
 
     LayoutInflater inflater;
@@ -45,13 +47,20 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
 
+        title.setText(list.get(position));
+        total.setText(new IncomeDatabase(context1).getTotal(list.get(position)));
+        valuesAdapter= new ValuesAdapter(context1);
+        valuesAdapter.setPosition(list.get(position));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context1));
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setAdapter(valuesAdapter);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return list.size();
     }
 
     @Override
@@ -66,6 +75,10 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
     }
 
     public void setList() {
+        if(position == 1)
+            list = new IncomeDatabase(context1).getMonth();
+        else
+            list = new IncomeDatabase(context1).getYear();
 
     }
 
@@ -77,13 +90,10 @@ public  class BalanceAdapter  extends RecyclerView.Adapter<BalanceAdapter.viewHo
 
 
             super(itemView);
-            valuesAdapter= new ValuesAdapter(context1);
-            valuesAdapter.setPosition(position);
+            title = (TextView)itemView.findViewById(R.id.title);
+            total = (TextView)itemView.findViewById(R.id.total);
             recyclerView = (RecyclerView)itemView.findViewById(R.id.recycle_list);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context1));
-            recyclerView.setHasFixedSize(false);
-            recyclerView.setAdapter(valuesAdapter);
-            Log.e("ops",recyclerView.getScrollState() + "");
+
 
 
         }

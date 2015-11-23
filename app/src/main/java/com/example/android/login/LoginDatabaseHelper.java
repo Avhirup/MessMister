@@ -124,16 +124,18 @@ public class LoginDatabaseHelper extends SQLiteOpenHelper {
         String query9= "create table " + TABLE_Income + " ( "+
                 Income_date + " TEXT , " +
                 Income_tag  + " TEXT , " +
-                Income_amount + "INTEGER );";
+                Income_amount + " INTEGER );";
 
         db.execSQL(query9);
 
         String query4= "create table " + TABLE_Expense + " ( "+
                 Expense_date + " TEXT , " +
                 Expense_tag  + " TEXT , " +
-                Expense_amount + "INTEGER );";
+                Expense_amount + " INTEGER );";
 
         db.execSQL(query4);
+        db.execSQL("create table months(_id text);");
+        db.execSQL("create table years(_id text);");
 
     }
 

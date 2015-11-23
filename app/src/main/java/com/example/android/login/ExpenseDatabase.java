@@ -26,7 +26,7 @@ public class ExpenseDatabase {
 
     public void add(Expense expense) {
         ContentValues value = new ContentValues();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date());
 
         String query="insert into "+LoginDatabaseHelper.TABLE_Expense+
