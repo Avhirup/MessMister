@@ -170,7 +170,7 @@ public class MyDialog
     public void getExpenseValues()
     {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_dropdown_item_1line, new MemberDatabase(context).getAllMembers());
+                android.R.layout.simple_dropdown_item_1line, new ExpenseDatabase(context).getAllExpenses());
 
         member_fee_name.setAdapter(adapter);
 

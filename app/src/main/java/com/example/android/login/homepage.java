@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout d;
     ActionBarDrawerToggle drawerToggle;
     NavigationView navigationView;
+    RecycleAdapter recycleAdapter;
+    RecyclerView late;
     com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
 
 
@@ -47,6 +50,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         menuItem.setChecked(true);
         loginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB", null, 1);
         sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
+        setAdapters();
 
         //Sending Broadcast
         //Intent intent = new Intent();
@@ -149,5 +153,9 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     }
 
+    public  void setAdapters()
+    {
+
+    }
 
 }

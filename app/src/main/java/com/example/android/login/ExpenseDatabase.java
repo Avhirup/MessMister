@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -39,6 +40,25 @@ public class ExpenseDatabase {
     public Cursor getExpense()
     {
         String query="select * from "+LoginDatabaseHelper.TABLE_Expense+" ;";
-        return db.rawQuery(query,null);
+        Cursor cursor =  db.rawQuery(query,null);
+        return cursor;
+    }
+
+    public ArrayList<String> getAllExpenses()
+    {
+        ArrayList<String> memberlist = new ArrayList<String>();
+        String query = "select * from " + loginDatabaseHelper.TABLE_Expense+";";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            memberlist.add(cursor.getString(1));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return memberlist;
     }
 }
