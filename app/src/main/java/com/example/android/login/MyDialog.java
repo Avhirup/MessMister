@@ -99,6 +99,7 @@ public class MyDialog
                             if (mdueamt != 0) {
                                 dueamt = mdueamt - paidamt;
                                 memberDatabase.setDueamt(mid, dueamt);
+                                new IncomeDatabase(context).add(new Income(name +" paid", paidamt));
                             } else {
                                 toast.show();
                             }

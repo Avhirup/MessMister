@@ -8,11 +8,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar toolbar;
@@ -21,6 +25,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
     RecycleAdapter recycleAdapter;
     RecyclerView late;
+    RecyclerView today;
+    ValuesAdapter valuesAdapter;
     com.getbase.floatingactionbutton.FloatingActionsMenu floatingActionsMenu;
 
 
@@ -50,6 +56,8 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         menuItem.setChecked(true);
         loginDatabaseHelper = new LoginDatabaseHelper(this, "LOGIN_DB", null, 1);
         sqLiteDatabase = loginDatabaseHelper.getWritableDatabase();
+        late = (RecyclerView)findViewById(R.id.recycle_list);
+        today=(RecyclerView)findViewById(R.id.recycle_list2);
         setAdapters();
 
         //Sending Broadcast
@@ -155,7 +163,17 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     public  void setAdapters()
     {
-
+            late.setLayoutManager(new LinearLayoutManager(this));
+            recycleAdapter = new RecycleAdapter(this);
+            recycleAdapter.setPosition(1);
+            late.setAdapter(recycleAdapter);
+            today.setLayoutManager(new LinearLayoutManager(this));
+            valuesAdapter= new ValuesAdapter(this);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(new Date());
+            valuesAdapter.setPosition(date);
+            valuesAdapter.setBool(false);
+            today.setAdapter(valuesAdapter);
     }
 
 }

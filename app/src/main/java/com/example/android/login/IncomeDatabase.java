@@ -168,6 +168,28 @@ public class IncomeDatabase {
     }
 
 
+    public List<pair> getToday(String date) {
+        List<pair> array_list = new ArrayList<>();
+        Log.e("date", date);
+        // String query = "select _tag, _amount from Income where _date between \"2015-11-01\" and \"2015-11-31\";";
+        String query = "Select _tag, sum(_amount) from Income where _date = \"" + date + "\" group by _tag " + "union " +  "Select _tag, sum(_amount) from Expense where _date = \"" + date + "\"  group by _tag; ";
+        Cursor cursor = db.rawQuery(query, null);
+        Log.e("columns", cursor.getColumnCount() + "");
+        Log.e("rows", cursor.getCount() + "");
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+
+                array_list.add(new pair(cursor.getString(0), cursor.getInt(1)));
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        }
+        Log.e("size of array", array_list.size() + "");
+        return array_list;
+    }
+
     }
 
 

@@ -21,6 +21,7 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
     TextView amount;
     List<pair> list;
     String position;
+    Boolean aBoolean = true;
 
     LayoutInflater inflater;
 
@@ -65,8 +66,16 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
         this.position = position;
     }
 
+    public void setBool(Boolean aBoolean)
+    {
+        this.aBoolean = aBoolean;
+    }
+
     public void setList() {
+            if(aBoolean)
             this.list = new IncomeDatabase(context1).getTuples(position);
+            else
+                this.list = new IncomeDatabase(context1).getToday(position);
     }
 
     class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
