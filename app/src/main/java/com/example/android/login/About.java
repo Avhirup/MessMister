@@ -34,6 +34,7 @@ public class About extends AppCompatActivity  implements  NavigationView.OnNavig
         menu = navigationView.getMenu();
         menuItem = menu.findItem(R.id.item7);
         menuItem.setChecked(true);
+        //
 
     }
 
