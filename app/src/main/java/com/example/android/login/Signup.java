@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Signup extends AppCompatActivity {
 
@@ -38,7 +39,10 @@ public class Signup extends AppCompatActivity {
                 if (hasFocus) {
                     button.show();
                 } else if (myEditText.getText().toString().equals("") || rpass.getText().toString().equals("") || name.getText().toString().equals(""))
+
+                {
                     button.hide();
+                }
             }
         });
         setupUI(findViewById(R.id.parent));
@@ -99,6 +103,10 @@ public class Signup extends AppCompatActivity {
             startActivity(intent);
             db.close();
             finish();
+        }
+        else
+        {
+            Toast.makeText(this,"Passwords Did Not Match!", Toast.LENGTH_SHORT).show();
         }
 
     }
