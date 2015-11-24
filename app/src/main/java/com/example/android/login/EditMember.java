@@ -51,6 +51,7 @@ public class EditMember extends AppCompatActivity {
     int rid,mid;
     public static String ratecategory;
     public static String r_category;
+    public String mem_name,name1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,9 @@ public class EditMember extends AppCompatActivity {
         dayspin = (Spinner)findViewById(R.id.dayspin);
 
         Intent intent = getIntent();
-        String mem_name  = intent.getStringExtra("name");
+         mem_name  = intent.getStringExtra("name");
+        name1 = mem_name;
+        Log.e("Increate name",mem_name);
         CharSequence mname =mem_name;
         name.setText(mname);
 
@@ -111,6 +114,7 @@ public class EditMember extends AppCompatActivity {
             ratecategory = null;
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
+        Log.e("Increate name1",mem_name);
     }
 
     @Override
@@ -125,13 +129,14 @@ public class EditMember extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
+        Log.e("" +
+                "name*1",mem_name);
         int id = item.getItemId();
         if(id == R.id.action_done) {
             // Log.e("kk","jj");
 
 
-
+            Log.e("Increate namedone",mem_name);
             String mname = name.getText().toString();
             String memphone = phone.getText().toString();
             Log.e("mphone",memphone);
@@ -155,7 +160,7 @@ public class EditMember extends AppCompatActivity {
             m.setRate_id(rate_id);
             Log.e("before",m.getPhone());
             memberDatabase.edit(m);
-            Log.e("after",memberDatabase.getPhone(1));
+            Log.e("after",memberDatabase.getPhone(mid));
             //Log.e("b",);
             //int mid = memberDatabase.getMemberId(m);
             //Log.d("getid", Integer.toString(mid));
@@ -213,11 +218,18 @@ public class EditMember extends AppCompatActivity {
 
 
             Log.e("done","done");
-            NavUtils.navigateUpFromSameTask(this);
+            //NavUtils.navigateUpFromSameTask(this);
+            Intent intent = new Intent(this, MemberDescription.class);
+            intent.putExtra("name", mname);
+            startActivity(intent);
+            finish();
+
         }
 
         if(id == R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+            //NavUtils.navigateUpFromSameTask(this);
+            finish();
+
         }
 
 

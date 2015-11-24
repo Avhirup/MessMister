@@ -34,7 +34,7 @@ public class GroupDatabase {
     {
         boolean check;
         try {
-            String query = " delete from" + loginDatabaseHelper.TABLE_Group + " where " + loginDatabaseHelper.Group_groupid + " = " + id ;
+            String query = " delete from " + loginDatabaseHelper.TABLE_Group + " where " + loginDatabaseHelper.Group_groupid + " = " + id ;
             db.execSQL(query);
             check = true;
         }
@@ -156,4 +156,38 @@ public class GroupDatabase {
 
         return a;
     }
+
+    public int getgrpId(String name)
+    {
+        String query = " select * from " +  loginDatabaseHelper.TABLE_Group +
+                " where " + loginDatabaseHelper.Group_groupName + " = " + "\"" + name + "\";" ;
+
+        Cursor cursor = db.rawQuery(query,null);
+        int a = 0;
+        if(cursor==null)
+            Log.e("he","in array cursor null");
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+
+            a=cursor.getInt(0);
+
+            //Log.e("Member table",tuple);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return a;
+
+    }
+
+    public void deletebyName(String name)
+    {
+
+            String query = " delete from " + loginDatabaseHelper.TABLE_Group +
+                    " where " + loginDatabaseHelper.Group_groupName + " = " +"\"" +  name +"\"" ;
+            db.execSQL(query);
+
+    }
 }
+
+

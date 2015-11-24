@@ -7,13 +7,14 @@ package com.example.android.login;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
-
+import java.util.ArrayList;
 
 
 /**
@@ -24,17 +25,31 @@ public class ExtendPeriod
     Context context;
     AlertDialog.Builder alert;
     LayoutInflater factory;
-    public ExtendPeriod(Context context)
+    public ExtendPeriod(final Context context, final int type)
     {
+
         this.context = context;
         factory = LayoutInflater.from(context);
         alert = new AlertDialog.Builder(context);
         final View textEntryView = factory.inflate(R.layout.edittext1,null);
+        final AutoCompleteTextView days = (AutoCompleteTextView)textEntryView.findViewById(R.id.days);
         alert.setView(textEntryView);
         alert.setTitle("Enter No Of Days To Extend");
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
+                        String n = days.getText().toString();
+                        int no = Integer.parseInt(n);
+                        if (type == 0) {
+                            int grpid = new GroupDatabase(context).getgrpId(RecycleAdapter.grpname);
+                            ArrayList<Integer> midlist = new MessMemberGroupDatabase(context).getmidlist(grpid);
+                            new MemberDatabase(context).extendperiod(midlist, no);
+                        }
+
+                        if (type == 1) {
+                            int mid = new MemberDatabase(context).getMemberIdbyName(RecycleAdapter.memberName);
+                            new MemberDatabase(context).extendperiodbyMid(mid, no);
+                        }
                     }
                 }
         );
@@ -56,5 +71,7 @@ public class ExtendPeriod
 
         alert.show();
     }
+
+
 
 }

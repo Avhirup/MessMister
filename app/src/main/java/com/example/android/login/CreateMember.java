@@ -69,6 +69,7 @@ public class CreateMember extends AppCompatActivity {
         }
         if(ratecategory!=null)
             ratecategory = null;
+
         loginDatabaseHelper =new LoginDatabaseHelper(this,"LOGIN_DB",null,1);
         sqLiteDatabase=loginDatabaseHelper.getWritableDatabase();
     }
@@ -89,85 +90,88 @@ public class CreateMember extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.action_done) {
             // Log.e("kk","jj");
-            memberDatabase = new MemberDatabase(this);
-            memberGroupDatabase = new MessMemberGroupDatabase(this);
-            groupDatabase = new GroupDatabase(this);
-            rateDataBase  = new RateDataBase(this);
-            name = (AutoCompleteTextView)findViewById(R.id.name);
-            phone = (AutoCompleteTextView)findViewById(R.id.phone);
-            dayspin = (Spinner)findViewById(R.id.dayspin);
+            try {
+                memberDatabase = new MemberDatabase(this);
+                memberGroupDatabase = new MessMemberGroupDatabase(this);
+                groupDatabase = new GroupDatabase(this);
+                rateDataBase = new RateDataBase(this);
+                name = (AutoCompleteTextView) findViewById(R.id.name);
+                phone = (AutoCompleteTextView) findViewById(R.id.phone);
+                dayspin = (Spinner) findViewById(R.id.dayspin);
 
 
-            String mname = name.getText().toString();
-            String mphone = phone.getText().toString();
+                String mname = name.getText().toString();
+                String mphone = phone.getText().toString();
+                String start_date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day);
+                if (mname != null && !mname.isEmpty()) {
+                    int day1 = dayspin.getSelectedItemPosition() + 1;
+                    String startof_month = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day1);
 
-            int day1 = dayspin.getSelectedItemPosition()+1;
-            String start_date = Integer.toString(year)+ "-" + Integer.toString(month) +"-"+Integer.toString(day1);
+                    int rate_id = rateDataBase.getrateId(ratecategory);
 
-            int rate_id = rateDataBase.getrateId(ratecategory);
+                    m = new MessMember();
+                    m.setName(mname);
+                    m.setStart_date(start_date);
+                    m.setStartof_month(startof_month);
+                    m.setDue_amount(0);
+                    m.setHas_paid(true);
+                    m.setIs_active(true);
+                    m.setIs_late(false);
+                    m.setPhone(mphone);
+                    m.setRate_id(rate_id);
 
-            m = new MessMember();
-            m.setName(mname);
-            m.setStart_date(start_date);
-            m.setStartof_month(start_date);
-            m.setDue_amount(0);
-            m.setHas_paid(true);
-            m.setIs_active(true);
-            m.setIs_late(false);
-            m.setPhone(mphone);
-            m.setRate_id(rate_id);
+                    memberDatabase.add(m);
+                    int mid = memberDatabase.getMemberId(m);
+                    Log.d("getid", Integer.toString(mid));
 
-            memberDatabase.add(m);
-            int mid = memberDatabase.getMemberId(m);
-            Log.d("getid", Integer.toString(mid));
+                    grpidlist = new ArrayList<Integer>(groupDatabase.getgrpIdlist(selectedItms));
+                    int a;
+                    for (int i = 0; i < grpidlist.size(); i++) {
+                        try {
+                            a = grpidlist.get(i).intValue();
+                            Log.d("in loop", Integer.toString(a));
+                            memberGroup = new MessMemberGroup(mid, a);
+                            memberGroupDatabase.add(memberGroup);
+                        } catch (Exception e) {
+                        }
 
-            grpidlist = new ArrayList<Integer>(groupDatabase.getgrpIdlist(selectedItms));
-            int a;
-            for(int i=0 ; i<grpidlist.size();i++)
-            {
-                try{
-                    a = grpidlist.get(i).intValue();
-                    Log.d("in loop", Integer.toString(a));
-                    memberGroup = new MessMemberGroup(mid,a);
-                    memberGroupDatabase.add(memberGroup);
+                    }
+
+
+                    String q = "select * from " + loginDatabaseHelper.TABLE_MessMember + ";";
+                    Cursor cursor = sqLiteDatabase.rawQuery(q, null);
+                    if (cursor == null)
+                        Log.e("he", "in array cursor null");
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+
+                        String tuple = cursor.getString(0) + " " + cursor.getString(1) + "  " + cursor.getString(2) + " " + cursor.getString(3) + "  " + cursor.getString(4) + "  " +
+                                cursor.getString(5) + "  " + cursor.getString(6) + "  " + cursor.getString(7) + "  " + cursor.getString(8) + "  " + cursor.getString(9) + " " + cursor.getString(10);
+
+                        Log.e("Member table", tuple);
+                        cursor.moveToNext();
+                    }
+                    cursor.close();
+                    String qt = "select * from " + loginDatabaseHelper.TABLE_MessMember_Group + ";";
+                    Cursor cursor1 = sqLiteDatabase.rawQuery(qt, null);
+                    if (cursor1 == null)
+                        Log.e("he", "in array cursor null");
+                    cursor1.moveToFirst();
+                    while (!cursor1.isAfterLast()) {
+
+                        String tuple1 = Integer.toString(cursor1.getInt(0));
+                        String tuple = Integer.toString(cursor1.getInt(0)) + " " + Integer.toString(cursor1.getInt(1));
+                        Log.e("Membergroup mid", tuple1);
+                        Log.e("Membergroup table", tuple);
+                        cursor1.moveToNext();
+                    }
+                    cursor1.close();
                 }
-                catch(Exception e){}
 
             }
+            catch (Exception e){}
+                Log.e("done", "done");
 
-
-            String q = "select * from " + loginDatabaseHelper.TABLE_MessMember + ";";
-            Cursor cursor = sqLiteDatabase.rawQuery(q,null);
-            if(cursor==null)
-                Log.e("he","in array cursor null");
-            cursor.moveToFirst();
-            while(!cursor.isAfterLast())
-            {
-
-                String tuple=cursor.getString(0)+" "+cursor.getString(1)+"  "+cursor.getString(2) +" "+ cursor.getString(3)+"  "+cursor.getString(4)+"  "+
-                        cursor.getString(5)+"  "+cursor.getString(6)+"  "+cursor.getString(7)+"  "+cursor.getString(8)+"  "+cursor.getString(9) +" "+cursor.getString(10);
-
-                Log.e("Member table",tuple);
-                cursor.moveToNext();
-            }
-            cursor.close();
-            String qt = "select * from " + loginDatabaseHelper.TABLE_MessMember_Group + ";";
-            Cursor cursor1 = sqLiteDatabase.rawQuery(qt,null);
-            if(cursor1==null)
-                Log.e("he","in array cursor null");
-            cursor1.moveToFirst();
-            while(!cursor1.isAfterLast())
-            {
-
-                String tuple1=Integer.toString(cursor1.getInt(0));
-                String tuple=Integer.toString(cursor1.getInt(0))+ " " +Integer.toString(cursor1.getInt(1));
-                Log.e("Membergroup mid",tuple1);
-                Log.e("Membergroup table",tuple);
-                cursor1.moveToNext();
-            }
-            cursor1.close();
-
-            Log.e("done","done");
             NavUtils.navigateUpFromSameTask(this);
         }
 
@@ -202,7 +206,7 @@ public class CreateMember extends AppCompatActivity {
 
 
     public static class Groupdialog extends DialogFragment {
-
+        int flg;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -214,6 +218,10 @@ public class CreateMember extends AppCompatActivity {
             String gname = null;
             ArrayList<String> grpnames = new ArrayList<String>(groupDatabase.getGroupNames());
             final CharSequence [] names = grpnames.toArray(new CharSequence[grpnames.size()]);
+            final boolean [] checkval = new boolean[grpnames.size()];
+
+
+
             AlertDialog.Builder builder1 = builder.setTitle("Add Groups")
                     .setMultiChoiceItems(names,null,new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
@@ -250,6 +258,7 @@ public class CreateMember extends AppCompatActivity {
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
+
                         }
                     });
 

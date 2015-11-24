@@ -47,6 +47,7 @@ public class MyDialog
         toast = Toast.makeText(context, text, duration);
         member_fee_name.setThreshold(0);
 
+
         if (type == 0)
             getMemberValues();
         else if(type == 1)
