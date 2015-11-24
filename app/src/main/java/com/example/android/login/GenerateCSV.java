@@ -38,7 +38,7 @@ public class GenerateCSV {
                 Log.e(TAG, "mkdirs returned: " + bReturn);
             }
             try {
-                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), sFileName);
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), sFileName);
                 file.createNewFile();
                 String outputLocation= file.getAbsolutePath().toString();
                 Log.e(TAG,outputLocation);
