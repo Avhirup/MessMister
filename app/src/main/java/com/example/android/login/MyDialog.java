@@ -2,6 +2,7 @@ package com.example.android.login;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,6 +108,7 @@ public class MyDialog
                         } catch (Exception e) {
                         }
 
+                        return;
                     }
                 }
 

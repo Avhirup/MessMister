@@ -62,6 +62,12 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+    }
+
+
     public void setPosition(String position) {
         this.position = position;
     }
