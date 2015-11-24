@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             cursor.close();
             finish();
+        }
+        else
+        {
+            Toast.makeText(this, "Incorrect Username Or Password!", Toast.LENGTH_SHORT).show();
         }
 
 
