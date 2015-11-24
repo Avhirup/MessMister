@@ -211,7 +211,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     }
                     else if(id == R.id.group_remove)
                     {
-                        Log.e("membername",RecycleAdapter.memberName);
+
                         Log.e("grpname",RecycleAdapter.grpname);
                         int mid = new MemberDatabase(context1).getMemberIdbyName(RecycleAdapter.memberName);
 

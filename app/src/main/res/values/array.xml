@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="genderItems">
-        <item>Add new group</item>
         <item>Add new Rate</item>
     </string-array>
 

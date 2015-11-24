@@ -68,10 +68,6 @@ public class Settings extends AppCompatActivity {
 
             if(position == 0)
             {
-
-            }
-            else if(position == 1)
-            {
                 final View textEntryView = factory.inflate(R.layout.edittext2, null);
                 alert.setView(textEntryView);
                 alert.setTitle("Create New Rate");
@@ -81,7 +77,7 @@ public class Settings extends AppCompatActivity {
                         TextInputLayout amount=(TextInputLayout)textEntryView.findViewById(R.id.rate_layout2);
                         String category=rate_name.getEditText().getText().toString();
                         int amnt=Integer.parseInt(amount.getEditText().getText().toString());
-                        Rate rate=new Rate(category,amnt);
+                        Rate rate=new Rate(category + " ("+amnt + ")",amnt);
                         rateDataBase=new RateDataBase(getBaseContext());
                         rateDataBase.add(rate);
 
