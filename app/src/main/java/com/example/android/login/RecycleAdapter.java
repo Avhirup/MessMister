@@ -83,8 +83,6 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
     {
         if(position == 1) {
            this.list = new MemberDatabase(context1).getlateMemberslist();
-           // this.list.add("Manjusha");
-           // this.list.add("Medha");
 
         }
         else if(position == 2)
