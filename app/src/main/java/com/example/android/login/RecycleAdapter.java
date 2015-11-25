@@ -101,7 +101,6 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
         {
             this.list = new MemberDatabase(context1).getNamesbyidlist(new MessMemberGroupDatabase(context1).getmidlist(new GroupDatabase(context1).getgrpId(grpname)));
 
-
         }
 
 
@@ -150,6 +149,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
             });
             imageButton=(ImageButton)itemView.findViewById(R.id.menu_button);
             imageButton.setOnClickListener(this);
+
 
         }
 
@@ -213,7 +213,10 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                         int mid = new MemberDatabase(context1).getMemberIdbyName(meberName);
 
                         int grpid = new GroupDatabase(context1).getgrpId(group_name);
-                        new MessMemberGroupDatabase(context1).delete(mid,grpid);
+                        new MessMemberGroupDatabase(context1).delete(mid, grpid);
+                        list.remove(list.indexOf(meberName));
+                        notifyDataSetChanged();
+
 
 
                        /* RecycleAdapter.position = 5;
