@@ -189,7 +189,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
                     }
                     else if(id == R.id.all_add || id == R.id.late_add)
                     {
-                        MyDialog addFee = new MyDialog(context1, 0);
+                        MyDialog addFee = new MyDialog(context1, 0, null);
                         addFee.show();
                     }
                     else if(id == R.id.late_paid)

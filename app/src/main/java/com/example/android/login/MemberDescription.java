@@ -163,7 +163,7 @@ public class MemberDescription extends AppCompatActivity {
 
         if(id == R.id.action_add_fees)
         {
-            MyDialog addFee = new MyDialog(this, 0);
+            MyDialog addFee = new MyDialog(this, 0, null);
             addFee.show();
         }
 

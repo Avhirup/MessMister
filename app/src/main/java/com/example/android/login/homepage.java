@@ -143,14 +143,14 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     public void addFee(View view) {
 
         floatingActionsMenu.toggle();
-        MyDialog addFee = new MyDialog(this, 0);
+        MyDialog addFee = new MyDialog(this, 0, today);
         addFee.show();
 
     }
     public void addIncome(View view) {
 
         floatingActionsMenu.toggle();
-        MyDialog addFee = new MyDialog(this, 1);
+        MyDialog addFee = new MyDialog(this, 1, today);
         addFee.show();
 
 
@@ -158,7 +158,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     public void addExpense(View view) {
 
         floatingActionsMenu.toggle();
-        MyDialog addFee = new MyDialog(this, 2);
+        MyDialog addFee = new MyDialog(this, 2, today);
         addFee.show();
 
     }

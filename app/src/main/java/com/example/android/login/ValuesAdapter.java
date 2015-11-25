@@ -68,6 +68,8 @@ public  class ValuesAdapter  extends RecyclerView.Adapter<ValuesAdapter.viewHold
     }
 
 
+
+
     public void setPosition(String position) {
         this.position = position;
     }
