@@ -47,7 +47,7 @@ public class ExpenseDatabase {
     public ArrayList<String> getAllExpenses()
     {
         ArrayList<String> memberlist = new ArrayList<String>();
-        String query = "select * from " + loginDatabaseHelper.TABLE_Expense+";";
+        String query = "select distinct _tag from " + loginDatabaseHelper.TABLE_Expense+";";
         Cursor cursor = db.rawQuery(query,null);
         if(cursor==null)
             Log.e("he","in array cursor null");
@@ -55,7 +55,7 @@ public class ExpenseDatabase {
         while(!cursor.isAfterLast())
         {
 
-            memberlist.add(cursor.getString(1));
+            memberlist.add(cursor.getString(0));
             cursor.moveToNext();
         }
         cursor.close();

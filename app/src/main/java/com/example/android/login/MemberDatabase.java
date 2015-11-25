@@ -94,14 +94,14 @@ public class MemberDatabase {
 
     public ArrayList<String> getAllMembers() {
         ArrayList<String> memberlist = new ArrayList<String>();
-        String query = "select * from " + loginDatabaseHelper.TABLE_MessMember + ";";
+        String query = "select distinct _name from " + loginDatabaseHelper.TABLE_MessMember + ";";
         Cursor cursor = db.rawQuery(query, null);
         if (cursor == null)
             Log.e("he", "in array cursor null");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
 
-            memberlist.add(cursor.getString(1));
+            memberlist.add(cursor.getString(0));
             cursor.moveToNext();
         }
         cursor.close();
