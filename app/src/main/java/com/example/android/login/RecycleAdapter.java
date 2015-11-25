@@ -159,7 +159,7 @@ public  class RecycleAdapter  extends RecyclerView.Adapter<RecycleAdapter.viewHo
 
         public void createPopup(View view)
         {
-            int values[] = {0, R.menu.late_members_menu,R.menu.all_member_menu,R.menu.all_member_menu,R.menu.group_menu,R.menu.group_member_menu};
+            int values[] = {0, R.menu.late_members_menu,R.menu.all_member_menu,R.menu.group_menu,0,R.menu.group_member_menu};
             PopupMenu popupMenu = new PopupMenu(context1, imageButton);
             popupMenu.inflate(values[position]);
             popupMenu.show();
